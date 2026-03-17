@@ -1,0 +1,1144 @@
+{
+  "banner": {
+    "announcement": "2026年AX教育設計ロードマップを確認する"
+  },
+  "nav": {
+    "partners": "AXパートナーズ",
+    "education": "AI教育",
+    "cases": "導入事例",
+    "about": "会社紹介",
+    "blog": "ブログ",
+    "contact": "お問い合わせ"
+  },
+  "hero": {
+    "title1": "Redefine the",
+    "title2": "Real AI. Real Work.",
+    "subtitle1": "戦略ではなく実行で、",
+    "subtitle2": "をビジネス成果につなげます。",
+    "cta1": "AX導入のお問い合わせ",
+    "cta2": "AI事例集を受け取る",
+    "scroll": "Scroll Down",
+    "clickToTalk": "クリックして会話",
+    "preparing": "準備中...",
+    "speaking": "話し中...",
+    "ttsError": "音声生成失敗",
+    "ttsErrorDesc": "しばらくしてからもう一度お試しください。",
+    "ttsText": "こんにちは。Yanadoo AXへようこそ。どの業務をAIに変えてみましょうか？"
+  },
+  "clients": {
+    "subtitle": "大企業、スタートアップ、実務組織まで",
+    "highlight": "\"実際に使われるAI\"",
+    "title": " を作るチーム",
+    "cta": "導入相談"
+  },
+  "news": {
+    "title1": "Yanadoo AX",
+    "title2": "の",
+    "title3": "実践 ",
+    "title4": " ストーリー",
+    "viewAll": "すべてのニュースを見る"
+  },
+  "ax": {
+    "intro": {
+      "title1": "AXは",
+      "title2": "ツールではなく",
+      "title3": "システム",
+      "title4": "です",
+      "subtitle": "AI Experienceを一時的な導入ではなく、\n組織に根付くシステムに変換します。",
+      "box1": "Yanadoo AX",
+      "box2": "はこの問題を",
+      "box3": "12週間以内に構造的に",
+      "box4": "解決します。",
+      "box5": "診断から定着まで、最初から最後まで一緒にいます。"
+    },
+    "framework": {
+      "title": "Yanadoo AXのAX Framework",
+      "subtitle": "持続可能なAI転換のための4段階実行フレームワーク"
+    },
+    "philosophy": {
+      "title": "Yanadoo AXのAX哲学",
+      "subtitle": "私たちはこう違います"
+    },
+    "diff1": {
+      "title": "成果が出る段階まで責任を持ちます",
+      "subtitle": "PoCを超えて、",
+      "desc": "運用・拡張可能な業務システムとして完成させます。"
+    },
+    "diff2": {
+      "title": "技術ではなく、運用構造を設計します",
+      "subtitle": "ツール導入ではなく、",
+      "desc": "業務アーキテクチャを再定義します。"
+    },
+    "diff3": {
+      "title": "一時的な構築ではなく、組織能力を作ります",
+      "subtitle": "システムと共に、",
+      "desc": "運用・改善能力まで内製化します。"
+    },
+    "changing": "すでにこのように変わっています",
+    "impact1": {
+      "value": "500+",
+      "label": "教育修了生"
+    },
+    "impact2": {
+      "value": "98%",
+      "label": "再契約率"
+    },
+    "impact3": {
+      "value": "50+",
+      "label": "AIプロジェクト"
+    },
+    "step1": {
+      "tagline": "私たちはツールではなく、ビジネスから見ます。",
+      "subtitle": "AX Discovery Sprint",
+      "expandedSubtitle": "私たちはツールではなく、ビジネスから見ます。",
+      "detail1": "全社AX成熟度診断およびレベリング",
+      "detail2": "実務者AI活用現況精密分析",
+      "detail3": "業務フロー構造解剖およびマッピング",
+      "detail4": "ROI中心自動化機会導出",
+      "output1": "AX機会マップ",
+      "output2": "ターゲット部署＆業務選定",
+      "output3": "12週間プロジェクト範囲"
+    },
+    "step2": {
+      "tagline": "すべての会社に同じAXロードマップはありません。",
+      "subtitle": "AX Blueprint Design",
+      "expandedSubtitle": "教育＋構築＋実習が結合した設計",
+      "detail1": "企業別AX 12週間転換単位ロードマップ策定",
+      "detail2": "部署単位AX適用シナリオ設計",
+      "detail3": "教育＋構築統合型カリキュラム設計",
+      "detail4": "AX運用アーキテクチャ構造設計",
+      "output1": "12週間実行ロードマップ",
+      "output2": "部署別AXシナリオ",
+      "output3": "システム設計案"
+    },
+    "step3": {
+      "tagline": "私たちは代わりに作りません。\n一緒に作りながら、チームが自分で作れるようにします。",
+      "subtitle": "Co-Building &\nLive Implementation",
+      "expandedSubtitle": "実務教育とシステム構築の同時実行",
+      "detail1": "業務プロセス再設計＆自動化構築",
+      "detail2": "AI Agent・n8n・Dify・VibeCoding基盤システム実装",
+      "detail3": "RAG・LLM・RPA・内部システム統合",
+      "detail4": "運用可能な現場カスタマイズ構築",
+      "output1": "実際に運用されるAIシステム",
+      "output2": "実務者主導運用構造"
+    },
+    "step4": {
+      "tagline": "AXの完成は、「私たちがいなくても動く時」です。",
+      "subtitle": "Adoption & Scale",
+      "expandedSubtitle": "AXの完成は、「私たちがいなくても動く時」です。",
+      "detail1": "実務者運用ガイド＆標準マニュアル提供",
+      "detail2": "社内AX Champion育成および運用体系構築",
+      "detail3": "継続改善のための高度化ロードマップ策定",
+      "output1": "自立可能なAX運用体系",
+      "output2": "拡張可能な自動化資産"
+    },
+    "part3": {
+      "title1": "AI導入ではなく、",
+      "title2": "「業務構造」",
+      "title3": "を変えます",
+      "subtitle1": "Yanadoo AXはコンサルティングで終わりません。",
+      "subtitle2": "実務で実際に使われるシステムまで責任を持ちます。"
+    },
+    "testimonial1": {
+      "title": "手作業から評価自動化プロセスへ",
+      "subtitle": "HRリソースが80%以上削減されました",
+      "quote": "以前は複数のシステムに分散した評価データを手作業で集計しなければならず、業績データの重複や漏れが頻繁に発生していました。これにより評価の正確性も大幅に低下していました。しかし、導入後はすべての評価データを一つの統合プラットフォームで自動化されたプロセスで管理できるようになり、HRチームのリソースを80%以上削減することができました。",
+      "role": "本グループ チームリード",
+      "company": "本グループ",
+      "employees": "従業員数 360+"
+    },
+    "testimonial2": {
+      "title": "AI導入後、業務処理時間50%短縮",
+      "subtitle": "チーム全体が自動化システムを直接運用しています",
+      "quote": "今は誰にも聞かずに、私たちが直接修正します。AIシステムが業務プロセスに完全に溶け込んで、チームメンバー全員が活用しています。単純な繰り返し業務から解放されたので、創造的な仕事にもっと集中できるようになりました。",
+      "role": "プラットフォーム企画チームリード",
+      "company": "テックスタートアップ",
+      "employees": "従業員数 150+"
+    },
+    "testimonial3": {
+      "title": "コンサルティングではなく実際のシステム構築",
+      "subtitle": "PoCで終わらない本当のAXを体験しました",
+      "quote": "PoCコンサルティングとは全く違います。報告書だけもらって終わるのではなく、実際に動くシステムを一緒に作りました。今もそのシステムを私たちのチームが直接運用し改善しています。",
+      "role": "DX担当マネージャー",
+      "company": "製造企業",
+      "employees": "従業員数 500+"
+    },
+    "testimonial4": {
+      "title": "AIが業務システムになった初めての経験",
+      "subtitle": "初めてAIが「実務」に適用された感じでした",
+      "quote": "初めてAIが「業務システム」になった感じでした。単にAIを使ってみるのではなく、私たちのチームの業務方式自体が変わりました。今はAIなしでは仕事をするのが難しいほどです。",
+      "role": "コマース運営チームリード",
+      "company": "Eコマース企業",
+      "employees": "従業員数 200+"
+    }
+  },
+  "cta": {
+    "title1": "AIイノベーション、",
+    "title2": "今",
+    "title3": "始めましょう",
+    "subtitle": "Yanadoo AXと一緒なら、\nAIは「導入」ではなく「成果」になります。",
+    "button1": "無料相談を申し込む",
+    "button2": "サービス紹介書ダウンロード"
+  },
+  "footer": {
+    "desc": "AI Experienceを革新するYanadoo AXです。\n企業のAI導入から活用まで全過程を共にします。",
+    "company": "株式会社 Yanadoo AX",
+    "bizno": "事業者番号：557-86-03716",
+    "ceo": "代表取締役：カン・ミンソ、キム・ドギョン",
+    "address": "住所：ソウル市永登浦区陽山路91 リードワンセンター914号",
+    "services": "サービス",
+    "consulting": "AIコンサルティング",
+    "education": "AI教育",
+    "solutions": "AIソリューション",
+    "companyMenu": "会社",
+    "aboutUs": "会社紹介",
+    "blog": "ブログ",
+    "copyright": "© Copyrights by Yanadoo AX. All Rights Reserved.",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約"
+  },
+  "blog": {
+    "title": "ブログ",
+    "subtitle": "AIイノベーションとビジネスインサイトを共有します",
+    "heroTitle": "AIインサイト、企業の明日を決定します",
+    "heroSubtitle": "単なる情報提供を超え、実践的なビジネス適用事例を通じて未来の競争力を確保しましょう。",
+    "readMore": "詳しく見る",
+    "error": "ブログの読み込み中にエラーが発生しました。",
+    "empty": "まだ登録された記事がありません。",
+    "notFound": "記事が見つかりません。",
+    "backToList": "一覧に戻る",
+    "minRead": "分で読了",
+    "categoryAll": "すべて"
+  },
+  "cases": {
+    "heroTitle": "AIの導入、どこから始めるべきかお悩みですか？",
+    "heroSubtitle": "導入失敗率を下げる戦略から、構築後の運用最適化まで、先を行く企業のAXロードマップをご確認ください。",
+    "downloadCta": "AI事例集ダウンロード",
+    "readMore": "詳しく見る",
+    "error": "事例の読み込み中にエラーが発生しました。",
+    "empty": "まだ登録された事例がありません。",
+    "ctaTitle1": "Yanadoo AXと一緒に",
+    "ctaTitle2": "ビジネスをAX化しましょう",
+    "ctaButton": "導入お問い合わせ",
+    "service1": "AI統合管理プラットフォーム「GenSteam 近日公開」",
+    "service2": "AI教育サービス「The Class AI」",
+    "service3": "AI知識コンテンツ「ブログ」",
+    "goTo": "見る",
+    "kpi1Label": "運用中のエージェント数",
+    "kpi1Desc": "運用中のAIエージェント＆自動化システム",
+    "kpi2Label": "再契約率",
+    "kpi2Desc": "プロジェクト再契約率",
+    "kpi3Label": "End-to-End比率",
+    "kpi3Desc": "Full-cycle AXプロジェクト比率（戦略→構築→運用）"
+  },
+  "edu": {
+    "badge": "AI企業教育",
+    "headline": "Yanadoo AXの企業教育は\n「業務が変わる教育」です。",
+    "subtext": "理論で終わる教育はしません。\n実践AI Thinkingで業務を再設計し、\nAIで繰り返し業務を自動化して成果を出しましょう。",
+    "ctaPrimary": "AI専門家に問い合わせる",
+    "ctaSecondary": "カリキュラムを受け取る",
+    "chartTitle": "AI能力変化",
+    "chartBefore": "教育前",
+    "chartAfter": "教育後",
+    "chartMetric1": "AI理解度",
+    "chartMetric2": "ツール活用力",
+    "chartMetric3": "プロンプト能力",
+    "chartMetric4": "業務適用力",
+    "chartSummary": "平均AI能力向上",
+    "flipCard": {
+      "title": "お問い合わせを受け付けました！",
+      "description": "AI専門家がすぐにご連絡いたします。\nカスタムカリキュラムをご用意いたします。",
+      "backButton": "チャートに戻る"
+    },
+    "socialProofTitle": "数字で証明される教育成果",
+    "metricSatisfaction": "平均教育満足度",
+    "metricRepurchase": "再購入/深化教育希望",
+    "metricStudents": "累計企業教育受講生",
+    "partnersTitle": "AI教育パートナー",
+    "testimonialWindowTitle": "お客様の声",
+    "testimonial1": {
+      "quote": "漠然としていたAI導入が、私たちの会社の具体的なガイドラインとして確立されました。",
+      "description": "教育前はAIが何かは分かっていても、実際の業務にどう取り入れるべきか分からなかったのですが、Yanadoo AX教育を通じて部署ごとにカスタマイズされた活用ガイドラインを作ることができました。",
+      "author": "金融業界D社 HR担当者",
+      "role": "AI企業教育修了"
+    },
+    "testimonial2": {
+      "quote": "会社に合わせたカスタムカリキュラムを作成していただくだけでなく、きめ細やかな学習コーチングと受講管理が大きな魅力だと思います。",
+      "description": "全社員を対象としたオンライン教育から始まり、持株会社の社員を対象に、現在はすべての系列会社にまで教育を拡大しました。",
+      "author": "大企業持株会社 HR総括",
+      "role": "AI全社教育実施"
+    },
+    "testimonial3": {
+      "quote": "最初のミーティングからわずか1ヶ月半でこれほど大きなイベントを開催できたのは、積極的なサポートと努力、能力のおかげでした。",
+      "description": "今回のハッカソンを成功に導くのに大きな助けをいただきました。優秀な専門コーチと講師の手配、漏れのない物品準備、運営チームの迅速な業務処理が印象的でした。",
+      "author": "ポスコ人材創造院 キム・ドゥファン リーダー",
+      "role": "AIハッカソン運営"
+    },
+    "testimonial4": {
+      "quote": "AI教育後、チーム全体の業務効率が目に見えて向上しました。繰り返し作業が50%以上減りました。",
+      "description": "単にツールの使い方を教えるだけでなく、実際の業務にすぐ適用できるワークフローを一緒に設計していただいたので、教育直後から成果が出ました。",
+      "author": "Eコマース M社 運営チーム長",
+      "role": "AI業務自動化教育"
+    },
+    "testimonial5": {
+      "quote": "経営陣から実務者まで、AIに対する共通の理解と言語ができました。",
+      "description": "全社的なAIリテラシー教育を通じて部署間のコミュニケーションが円滑になり、AIプロジェクト推進時の合意が早くなりました。組織文化自体が変わるきっかけになりました。",
+      "author": "製造業S社 DX推進団長",
+      "role": "AIリテラシー全社教育"
+    },
+    "problem1": {
+      "title": "どこから使えばいいかわからない",
+      "subtitle": "AI導入の方向性が定まらない",
+      "quote": "ChatGPTは使っているけど…業務にどう使えばいいかわからないです。",
+      "detail1": "ツールはあるけど、業務と連携できていない",
+      "detail2": "個人使用からチーム/組織使用へ拡張できていない"
+    },
+    "problem2": {
+      "title": "ツールは使っているけど、30%しか活用できていない",
+      "subtitle": "機能は多いけど、実際はコピペレベル",
+      "quote": "GPT、Gemini使ってはいるけど…質問を投げてコピペするだけです。",
+      "detail1": "プロンプトの原理、GPTs、自動化機能を十分に活用できていない",
+      "detail2": "「生産性ツール」ではなく「検索代替」レベルでしか使用していない"
+    },
+    "problem3": {
+      "title": "データを入れるのが一番難しい",
+      "subtitle": "AIに仕事を任せる方法がわからない",
+      "quote": "資料は多いけど…これをどうやって入れればAIが仕事してくれるの？",
+      "detail1": "ドキュメント、Excel、Notion、マニュアルを連携する方法がわからない",
+      "detail2": "結局人がまた整理することになる"
+    },
+    "problem4": {
+      "title": "個人使用から組織使用へ移行できない",
+      "subtitle": "各自使って、共有されず、システムにならない",
+      "quote": "何人かは上手く使っているけど…チーム全体の生産性は変わらないです。",
+      "detail1": "個人のノウハウに依存している状態",
+      "detail2": "業務プロセスに構造的に組み込まれていない"
+    },
+    "problem5": {
+      "title": "成果が見えず、うやむやになる",
+      "subtitle": "教育や導入効果を証明できない",
+      "quote": "AI導入したけど…それで何がどれくらい良くなったの？",
+      "detail1": "ROI、時間短縮、処理量改善が測定されていない",
+      "detail2": "結局流行のように消えてしまう"
+    },
+    "problemCommon": {
+      "label": "これらの問題の共通原因",
+      "before": "AIを「ツール」として学ぶだけで、「",
+      "highlight": "業務構造",
+      "after": "」を変えないからです。"
+    },
+    "painpoint1": {
+      "question": "セキュリティ事故が心配ですか？",
+      "solution": "AIガバナンス戦略策定",
+      "description": "企業データセキュリティとAI活用倫理体系を同時に構築します。"
+    },
+    "painpoint2": {
+      "question": "部署ごとに必要な能力が違いますか？",
+      "solution": "職種別カスタマイズThinking Process",
+      "description": "マーケティング、営業、HR、開発など各部署の特性に最適化されたカリキュラムを提供します。"
+    },
+    "painpoint3": {
+      "question": "教育効果を測定するのが難しいですか？",
+      "solution": "データ基盤AI-Q能力診断レポート",
+      "description": "教育前後の能力変化を6つの指標で定量化し可視化します。"
+    },
+    "program1": {
+      "step": "Step 1",
+      "title": "AI Thinking Process",
+      "subtitle": "AIに仕事を任せられる方法で、業務を再設計します",
+      "description": "現場の問題をそのまま持ってくるのではなく、\nこの業務をAIにどう任せられるかから再定義します。",
+      "detail1": "どのデータをどのように入力すべきか",
+      "detail2": "どの仕事はAIができ、どの仕事は人がすべきか",
+      "detail3": "どこまで自動化できるか",
+      "conclusion": "この基準を先に立てて、\nAIで実際に動く業務構造とシナリオを設計します。"
+    },
+    "program2": {
+      "step": "Step 2",
+      "title": "職務別カスタム実務",
+      "subtitle": "部署ごとに異なる業務を、それぞれの方法で自動化します",
+      "description": "営業、マーケティング、経営支援など部署別に\n実際の業務フローに合ったAIワークフローを構築します。",
+      "detail1": "営業：顧客データ分析および提案書自動生成",
+      "detail2": "マーケティング：コンテンツ企画からパフォーマンス分析まで",
+      "detail3": "経営支援：レポート、議事録、スケジュール管理自動化",
+      "conclusion": "各部署のKPIに直結する\n実務型自動化シナリオを設計します。"
+    },
+    "program3": {
+      "step": "Step 3",
+      "title": "AIガバナンス＆セキュリティ",
+      "subtitle": "AI活用の「企業標準」を確立します",
+      "description": "単にツールを使うのではなく、\n安全に活用できる体系を構築します。",
+      "detail1": "企業データセキュリティガイドライン策定",
+      "detail2": "AI活用倫理体系および政策設計",
+      "detail3": "部署別権限およびアクセス管理体系",
+      "conclusion": "持続可能なAI活用のための\nガバナンスフレームワークを提供します。"
+    },
+    "process1": {
+      "step": "01",
+      "title": "事前診断",
+      "subtitle": "AI-Q能力診断",
+      "description": "教育から始めません。\nまずチームと組織のAI活用レベルを診断し、\nどこをどう変えるべきかを明確にします。"
+    },
+    "process2": {
+      "step": "02",
+      "title": "戦略策定",
+      "subtitle": "カスタマイズカリキュラム設計",
+      "description": "診断結果に基づき、\n私たちの組織に最も効果的な教育戦略とカリキュラムを設計します。\n部署別、職務別、目標別に完全に異なる構成になります。"
+    },
+    "process3": {
+      "step": "03",
+      "title": "カスタマイズ教育",
+      "subtitle": "職務・職級別実務教育実施",
+      "description": "共通講義ではなく、\n各自の実際の業務にすぐ使う実習中心の教育を行います。\n教育課程で実際の自動化と業務構造を一緒に作ります。"
+    },
+    "process4": {
+      "step": "04",
+      "title": "事後評価",
+      "subtitle": "成果分析およびガバナンスガイド",
+      "description": "教育終了後、\n能力変化と業務成果を数値で分析し、\n継続的に運用できるAI活用ガイドと体系を提供します。"
+    },
+    "enterprise": {
+      "headline1": "大規模組織ほど",
+      "headline2": "AI導入は戦略的に"
+    },
+    "core": {
+      "whyDifferent1": "なぜYanadoo AXの教育は",
+      "whyDifferent2": "結果が違うのでしょうか？",
+      "answer": "教育ではなく、組織転換システムだからです。",
+      "mostFocus": "多くのAI教育は「上手に教えること」に集中します。",
+      "ngaFocus1": "Yanadoo AXは",
+      "ngaFocus2": "「業務が実際に変わる構造を作ること」",
+      "ngaFocus3": "に集中します。",
+      "transition": "だからこのように設計しました。",
+      "enterpriseSecurity": "企業のセキュリティを守り、生産性を最大化",
+      "enterpriseSecurityDesc1": "単に「GPTを上手に使う方法」を教えません。",
+      "enterpriseSecurityDesc2": "自社のデータをどう安全に活用するか、",
+      "enterpriseSecurityDesc3": "どんな原則で管理するかの「企業標準」を確立します。",
+      "enterpriseKpi": "部署別KPIに直結する実務型ワークフロー",
+      "enterpriseKpiDesc1": "マーケティング、人事、営業まで。",
+      "enterpriseKpiDesc2": "各部署の成果（ROI）を出すカスタムカリキュラムを提供します。"
+    },
+    "coreProgram": {
+      "step1": {
+        "title": "AI Thinking Process",
+        "subtitle": "AIに仕事を任せられる方法で、業務を再設計します",
+        "description": "現場の問題をそのまま持ってくるのではなく、\nこの業務をAIにどう任せられるかから再定義します。",
+        "hover1": "どのデータをどう入れるべきか",
+        "hover2": "どの仕事はAIができ、どの仕事は人がすべきか",
+        "hover3": "どこまで自動化できるか",
+        "conclusion": "この基準を先に立て、\nAIで実際に動く業務構造とシナリオを設計します。"
+      },
+      "step2": {
+        "title": "職務別カスタム実務",
+        "subtitle": "部署ごとに異なる業務を、それぞれの方法で自動化します",
+        "description": "営業、マーケティング、経営支援など部署別に\n実際の業務フローに合ったAIワークフローを構築します。",
+        "hover1": "営業：顧客データ分析および提案書自動生成",
+        "hover2": "マーケティング：コンテンツ企画からパフォーマンス分析まで",
+        "hover3": "経営支援：報告書、議事録、日程管理自動化",
+        "conclusion": "各部署のKPIに直結する\n実務型自動化シナリオを設計します。"
+      },
+      "step3": {
+        "title": "AI Governance & Security",
+        "subtitle": "AI活用の「企業標準」を確立します",
+        "description": "単にツールを使うのではなく、\n安全に活用できる体系を構築します。",
+        "hover1": "企業データセキュリティガイドライン策定",
+        "hover2": "AI活用倫理体系および政策設計",
+        "hover3": "部署別権限およびアクセス管理体系",
+        "conclusion": "持続可能なAI活用のための\nガバナンスフレームワークを提供します。"
+      }
+    },
+    "evidence": {
+      "headline1": "Yanadoo",
+      "headline2": "AI",
+      "headline3": "は教育前後で",
+      "headline4": "各企業",
+      "headline5": "、各チーム、各メンバーの",
+      "headline5Mobile": "各チーム、各メンバーの",
+      "headline6": "AI活用能力",
+      "headline7": "を",
+      "headline8": "定量的に測定",
+      "measurePrefix": "定量的に",
+      "measureHighlight": "測定",
+      "headline9": "します",
+      "subheadline": "単純な満足度調査ではありません。",
+      "description1": "コア6指標を基に、Yanadoo AX独自の",
+      "description2": "教育前後の変化分析レポートを提供します。",
+      "metric1": "AI理解度",
+      "metric2": "ツール活用熟練度",
+      "metric3": "業務適用率",
+      "metric4": "自動化活用レベル",
+      "metric5": "業務生産性変化",
+      "metric6": "組織拡散貢献度",
+      "avgImprovement": "平均AI能力向上",
+      "productivity": "業務生産性向上",
+      "spreadRate": "組織拡散率"
+    },
+    "aiq": {
+      "avgScore": "全社平均AI-Q",
+      "participants": "名",
+      "examStatus": "受験状況",
+      "aiTalent": "AI人材",
+      "total": "全体",
+      "distribution": "能力分布",
+      "sixMetrics": "AI-Q 6大能力指標",
+      "companyBasis": "*全社基準",
+      "beforeAfter": "教育前後の能力変化",
+      "avgGrowth": "平均 +54% 成長",
+      "aiUnderstanding": "AI理解度",
+      "toolProficiency": "ツール活用熟練度",
+      "workApplication": "業務適用率",
+      "automationLevel": "自動化活用",
+      "productivityChange": "生産性変化",
+      "orgSpread": "組織拡散"
+    },
+    "instructor": {
+      "headline1": "ソウル大・KAIST・延世大",
+      "headline2": "出身、修士・博士級AI専門家が",
+      "headline3": "御社の業務に合った",
+      "headline4": "実践AI教育",
+      "headline5": "を直接設計します。",
+      "videoTitle1": "AI専門家の",
+      "videoTitle2": "講演映像"
+    },
+    "footerCta": {
+      "subtitle": "10人のスタートアップから600人以上の大企業まで",
+      "headline1": "組織の規模に合った",
+      "headline2": "最適なソリューションを提供します",
+      "description": "今すぐYanadoo AXの専門家にご相談ください"
+    },
+    "instructor1": {
+      "name": "キム・ドギョン",
+      "title": "AX Director",
+      "cred1": "延世大コンピュータサイエンス・延世大AI博士課程",
+      "cred2": "現ソウル大AI講師",
+      "cred3": "AX & AIコンサルティング戦略総括"
+    },
+    "instructor2": {
+      "name": "カン・ミンソ",
+      "title": "AX Tech Director",
+      "cred1": "KAIST AI博士・前Harvard・SK",
+      "cred2": "現ソウル大AI専門家課程講師",
+      "cred3": "AIコンテンツマーケティング & AX戦略総括"
+    },
+    "instructor3": {
+      "name": "イ・ウォンソク",
+      "title": "Lead AX Engineer",
+      "cred1": "延世大機械工学・延世大AI大学院修博統合",
+      "cred2": "EBS n8n自動化専門講師",
+      "cred3": "企業AX自動化アーキテクチャ総括"
+    },
+    "instructor4": {
+      "name": "カン・テジュン",
+      "title": "AI Researcher",
+      "cred1": "民族史観高・延世大・AI修士・AI博士課程",
+      "cred2": "韓国語LLM・テキスト生成・EBS AI講師",
+      "cred3": "LangGram言語モデル開発"
+    },
+    "instructor5": {
+      "name": "イ・ビョンフン",
+      "title": "AI Engineer (Data & Modeling)",
+      "cred1": "延世大医科大学工学修士（医療AI・時系列）",
+      "cred2": "データモデリング・前処理・AIパイプライン・EBS講師",
+      "cred3": "企業データ基盤AIシステム構築担当"
+    },
+    "instructor6": {
+      "name": "イ・ヨンジュ",
+      "title": "AI Content Strategist",
+      "cred1": "ソウル大・ソウル大病院CRC",
+      "cred2": "Prompt Engineering",
+      "cred3": "AIコンテンツ戦略 & 企画"
+    }
+  },
+  "axp": {
+    "badge": "AX Partners Program",
+    "hero": {
+      "title1": "6ヶ月のコンサルティングではなく、",
+      "title2": "12週間の",
+      "title3": "「成果サイクル」",
+      "title4": "を作りましょう。",
+      "subtitle1": "Yanadoo AX Partnersは",
+      "subtitle2": "12週間単位で「実際に動く」業務システムを構築し、",
+      "subtitle3": "成果を確認した後、次の12週間に拡張します。",
+      "emphasis": "PoCではなく、運用される構造を作ります。",
+      "keypoint1": "12週間実行プログラム",
+      "keypoint2": "初期1-2週間 業務構造診断",
+      "keypoint3": "KPIベースの成果設計",
+      "cta1": "無料AX診断申請",
+      "cta2": "成功事例を見る",
+      "h1": {
+        "line1": "6ヶ月のコンサルティングではなく、",
+        "line2": {
+          "before": "12週間の",
+          "after": "を作りましょう。"
+        },
+        "highlight": "「成果サイクル」"
+      },
+      "h2": {
+        "line1": "Yanadoo AX Partnersは",
+        "line2": "12週間単位で「実際に動く」業務システムを構築し、",
+        "line3": "成果を確認した後、次の12週間に拡張します。"
+      },
+      "subCopy": "PoCではなく、運用される構造を作ります。",
+      "keyPoint1": "12週間実行プログラム",
+      "keyPoint2": "初期1-2週間 業務構造診断",
+      "keyPoint3": "KPIベースの成果設計",
+      "ctaDiagnosis": "無料AX診断申請",
+      "ctaCases": "成功事例を見る"
+    },
+    "roadmap": {
+      "step1": {
+        "title": "診断",
+        "desc1": "現業構造分析および",
+        "desc2": "自動化優先順位導出"
+      },
+      "step2": {
+        "title": "設計",
+        "desc1": "AIエージェントおよび",
+        "desc2": "ワークフローアーキテクチャ"
+      },
+      "step3": {
+        "title": "構築",
+        "desc1": "実際の運用環境で",
+        "desc2": "MVP構築およびテスト"
+      },
+      "step4": {
+        "title": "定着",
+        "desc1": "KPI検証および",
+        "desc2": "運用プロセス内製化"
+      }
+    },
+    "problem": {
+      "headline": "AIを導入したのに、働き方が変わらないなら？",
+      "item1": "ChatGPTは使っているのに、レポートはまだ手作業です。",
+      "item2": "PoCは成功したのに、現場は何も変わりません。",
+      "item3": "自動化を作った人がいないと、業務が止まります。",
+      "item4": "AI予算は使っているのに、ROIを説明できません。",
+      "highlight": {
+        "before": "このうち",
+        "count": "2つ以上",
+        "mid": "なら、AI転換ではなく",
+        "experience": "「AI体験」",
+        "after": "段階です。"
+      }
+    },
+    "solution": {
+      "headline": {
+        "line1": "AX Partnersはコンサルティングではなく、",
+        "highlight": "業務システムを変える実行プログラム",
+        "suffix": "です。"
+      },
+      "card1": {
+        "title": "ROI基準で自動化課題を選定",
+        "desc": "投資対効果の高い業務から"
+      },
+      "card2": {
+        "title": "3ヶ月以内に成果が出る業務から構築",
+        "desc": "早い成果で組織の信頼を確保"
+      },
+      "card3": {
+        "title": "実際に運用されるワークフローを実装",
+        "desc": "PoCではなく実使用システム"
+      },
+      "card4": {
+        "title": "Slack / Notion / Google / ERP連携",
+        "desc": "既存ツールと自然に統合"
+      },
+      "card5": {
+        "title": "実務チームが直接運用できる構造で移管",
+        "desc": "内製化中心の設計"
+      },
+      "bottom1": "レポートではなく、システム",
+      "bottom2": "を残します。"
+    },
+    "thinking": {
+      "badge": "Our Unique Methodology",
+      "title": "Yanadoo AX Thinking Process",
+      "subtitle1": "ほとんどのAIプロジェクトが失敗する理由は技術ではありません。",
+      "subtitle2": "「どの仕事をAIに任せるか定義せずに始めるから」",
+      "subtitle3": "です。",
+      "philosophy1": "AI時代の競争力は",
+      "philosophy2": "AIをどれだけ上手く使うかではなく、",
+      "philosophy3": "何をAIに任せるか決める能力",
+      "philosophy4": "です。",
+      "step1": {
+        "name": "OBSERVE",
+        "title": "観察",
+        "desc": "業務を全て分解"
+      },
+      "step2": {
+        "name": "CLASSIFY",
+        "title": "分類",
+        "desc": "自動化 / AI協業 / 人間領域の分類"
+      },
+      "step3": {
+        "name": "DESIGN",
+        "title": "設計",
+        "desc": "構造設計"
+      },
+      "step4": {
+        "name": "ITERATE",
+        "title": "反復",
+        "desc": "作りながら継続改善"
+      }
+    },
+    "classification": {
+      "header": {
+        "line1": "私たちは仕事を",
+        "highlight": "「4つのタイプ」",
+        "line2": "に分けて始めます",
+        "desc1": "すべてを自動化しません。",
+        "desc2": "ある作業は自動化し、ある作業はAIと協業し、",
+        "desc3": "ある作業は人が続けなければなりません。",
+        "desc4": "この区分がAX成否を分けます。"
+      },
+      "title": "私たちは「何を自動化すべきか」より",
+      "subtitle": "「何を自動化してはいけないか」",
+      "suffix": "から定義します。",
+      "card1": {
+        "badge": "Human-Only Zone",
+        "title": "人間領域",
+        "desc": "戦略と判断は、人の領域として残します。",
+        "tag1": "反復少ない",
+        "tag2": "判断重要",
+        "tag3": "AIは分析のみ",
+        "detail": "交渉、戦略策定、業績評価など高度な判断が必要な領域"
+      },
+      "card2": {
+        "badge": "AI + Human Workflow",
+        "title": "AI協業",
+        "desc": "AIが初稿を作り、人が最終判断します。",
+        "tag1": "反復は多い",
+        "tag2": "判断は必要",
+        "tag3": "AI + 承認構造",
+        "detail": "レポート作成、提案書初稿、顧客対応などAI Agent + 承認ワークフロー"
+      },
+      "card3": {
+        "badge": "Quick Assist",
+        "title": "効率化",
+        "desc": "頻繁ではないが、面倒な作業は素早く処理します。",
+        "tag1": "不定期",
+        "tag2": "規則的",
+        "tag3": "ボタン一つで完了",
+        "detail": "フォーム作成、データ整理などボタンベースの自動初稿生成"
+      },
+      "card4": {
+        "badge": "100%自動化領域",
+        "title": "完全自動化",
+        "desc": "反復的で規則的な作業は、システムが処理します。",
+        "tag1": "毎日反復",
+        "tag2": "規則明確",
+        "tag3": "人の介入なし",
+        "detail": "通知発送、データ収集、レポート生成などn8n + スケジュールベースの完全自動化"
+      },
+      "guide": {
+        "title": "チームの業務をこのように分類します",
+        "desc": "この2つを見れば、この仕事がどこに行くべきかすぐ分かります。",
+        "freq": "反復頻度",
+        "freq1": "毎日",
+        "freq2": "毎週",
+        "freq3": "毎月",
+        "freq4": "不定期",
+        "complexity": "判断複雑度",
+        "complexity1": "規則ベース",
+        "complexity2": "経験必要",
+        "complexity3": "専門判断",
+        "complexity4": "創造的判断"
+      },
+      "philosophy1": "私たちは",
+      "philosophy2": "「何を自動化するか」",
+      "philosophy3": "より、",
+      "philosophy4": "「何を自動化してはいけないか」から定義します。",
+      "bottom1": "これが私たちの方法です。",
+      "bottom2": "むやみに自動化せず、",
+      "bottom3": "仕事の性質から再設計します。"
+    },
+    "12week": {
+      "badge": "12-Week Execution Cycle",
+      "title1": "AXは",
+      "title2": "「一部署基準」",
+      "title3": "で",
+      "title4": "12週間単位で進行する転換プログラムです",
+      "step1": {
+        "title": "能力診断＆業務解剖",
+        "badge": "AX診断",
+        "week": "1–2週",
+        "quote": "「何を、誰が、どこまでできるか」",
+        "check1": "AI活用レベル診断",
+        "check2": "業務フロー分解",
+        "check3": "ROI優先順位選定",
+        "output": "👉 AX診断レポート"
+      },
+      "step2": {
+        "title": "構造設計＆実習準備",
+        "badge": "自動化設計",
+        "week": "3–4週",
+        "quote": "「これはAI、これは自動化、これは人が」",
+        "check1": "業務構造再設計",
+        "check2": "ワークフロー設計",
+        "check3": "実習課題選定",
+        "output": "👉 システム設計図"
+      },
+      "step3": {
+        "title": "一緒に作る自動化",
+        "badge": "Co-Building",
+        "badge2": "核心段階",
+        "week": "5–8週",
+        "quote": "「見て → 真似して → 直接やる」",
+        "check1": "実務者と一緒に構築",
+        "check2": "AI Agent / n8n実装",
+        "check3": "Slack, Notion連携",
+        "output": "👉 自動化システム"
+      },
+      "step4": {
+        "title": "運用定着＆自立",
+        "badge": "内製化",
+        "week": "9–12週",
+        "quote": "「私たちがいなくても動く時」",
+        "check1": "運用安定化",
+        "check2": "成果測定＆改善",
+        "check3": "社内ガイド整理",
+        "output": "👉 運用体系 + ガイド"
+      },
+      "bottom": "12週間が終われば、「実際に動くもの」が必ず一つ残ります。"
+    },
+    "venn": {
+      "title1": "AX Partnersは",
+      "title2": "「システム」",
+      "title3": "と",
+      "title4": "「人」",
+      "title5": "を同時に変えます",
+      "process": {
+        "_value": "Process",
+        "desc1": "12週間サイクル +",
+        "desc2": "Thinking Process"
+      },
+      "system": {
+        "_value": "System",
+        "desc1": "実際に動く",
+        "desc2": "自動化 / AIワークフロー"
+      },
+      "people": {
+        "_value": "People",
+        "desc1": "思考方式、設計能力、",
+        "desc2": "運用能力"
+      },
+      "center1": "Sustainable",
+      "bottom": "3つの要素が一緒に変わってこそ、",
+      "bottom2": "持続可能なAX",
+      "bottom3": "になります。"
+    },
+    "case": {
+      "title1": "結果",
+      "title2": "で証明します",
+      "category1": "運営/企画",
+      "company1": "A社",
+      "result1": "87%削減",
+      "headline1": "毎週8時間 → 1時間",
+      "desc1": "企画チームレポート自動化。レポートドキュメント自動生成およびデータ可視化自動適用。",
+      "category2": "カスタマーサポート",
+      "company2": "B社",
+      "result2": "応答5秒以内",
+      "headline2": "顧客対応自動化＆知識ベースRAG",
+      "desc2": "社内文書ベースRAGチャットボットで24時間対応体系構築、単純問い合わせ90%自動対応。",
+      "category3": "経営/管理",
+      "company3": "C社",
+      "result3": "3日 → リアルタイム",
+      "headline3": "月次財務整理",
+      "desc3": "ERP/精算/売上データ自動収集でリアルタイム財務ダッシュボード自動更新、集計業務完全除去。",
+      "viewMore": "詳しく見る",
+      "moreButton": "事例をもっと見る"
+    },
+    "diff": {
+      "title1": "AX Partnersは",
+      "title2": "何が違うのか？",
+      "header": {
+        "category": "区分",
+        "general": "一般コンサルティング / SI",
+        "ax": "AX Partners"
+      },
+      "row1": {
+        "category": "目標",
+        "general": "問題分析",
+        "ax": "業務構造転換"
+      },
+      "row2": {
+        "category": "開始",
+        "general": "要件定義",
+        "ax": "業務観察＆能力診断"
+      },
+      "row3": {
+        "category": "進行方式",
+        "general": "外注開発",
+        "ax": "実務者と一緒に作るCo-Building"
+      },
+      "row4": {
+        "category": "成果物",
+        "general": "レポート / 成果物",
+        "ax": "運用されるシステム + 内部能力"
+      },
+      "row5": {
+        "category": "運用主体",
+        "general": "外注 / 特定担当者",
+        "ax": "チーム全体"
+      },
+      "row6": {
+        "category": "拡張性",
+        "general": "再度外注",
+        "ax": "内部で自ら拡張"
+      },
+      "row7": {
+        "category": "結果",
+        "general": "PoC / 一回性",
+        "ax": "運用 + 内製化 + 再利用"
+      }
+    },
+    "cta": {
+      "title1": "AI、今回は",
+      "title2": "「ちゃんと」",
+      "title3": "使いましょう。",
+      "subtitle": "12週間以内に、一部署を「AIと働く組織」に変えてみてください。",
+      "button1": "無料AX診断申請",
+      "button2": "お問い合わせ",
+      "form": {
+        "title": {
+          "diagnosis": "無料AX診断申請",
+          "contact": "お問い合わせ"
+        },
+        "desc": {
+          "diagnosis": "12週間実行プログラムのための業務構造診断",
+          "contact": "ご質問を残していただければ担当者がご連絡いたします。"
+        },
+        "company": {
+          "_value": "企業/機関名 *",
+          "placeholder": "例：Yanadoo AX"
+        },
+        "name": {
+          "_value": "担当者氏名 *",
+          "placeholder": "例：山田太郎"
+        },
+        "phone": {
+          "_value": "連絡先 *",
+          "placeholder": "例：090-1234-5678"
+        },
+        "email": {
+          "_value": "メールアドレス *",
+          "placeholder": "例：example@company.com"
+        },
+        "message": {
+          "_value": "お問い合わせ内容",
+          "placeholder": "お問い合わせ内容をご入力ください"
+        },
+        "privacy": "個人情報の収集および利用に同意します。 *",
+        "submit": "送信する"
+      }
+    }
+  },
+  "form": {
+    "contact": {
+      "title": "お問い合わせ",
+      "heading": "企業教育のお問い合わせ",
+      "desc1": "Yanadoo AXは、様々な企業の教育課題をカスタマイズ教育のノウハウで解決してきました。",
+      "desc2": "以下の情報をご記入いただければ、迅速にご連絡し、お悩み解決のお手伝いをいたします。",
+      "company": {
+        "_value": "企業名",
+        "placeholder": "企業/機関名"
+      },
+      "companyType": {
+        "_value": "企業タイプ",
+        "placeholder": "選択",
+        "large": "大企業",
+        "mid": "中堅企業",
+        "small": "中小企業",
+        "startup": "スタートアップ",
+        "public": "公共機関",
+        "edu": "教育機関",
+        "other": "その他"
+      },
+      "name": {
+        "_value": "お名前",
+        "placeholder": "山田太郎"
+      },
+      "phone": {
+        "_value": "連絡先",
+        "placeholder": "090-0000-0000"
+      },
+      "department": {
+        "_value": "部署名",
+        "placeholder": "人事部"
+      },
+      "position": {
+        "_value": "役職",
+        "placeholder": "課長"
+      },
+      "email": {
+        "_value": "会社メール",
+        "placeholder": "example@company.com"
+      },
+      "topic": {
+        "_value": "お問い合わせ内容",
+        "placeholder": "選択",
+        "basic": "AI基礎教育",
+        "genai": "生成AI活用",
+        "automation": "AI業務自動化",
+        "strategy": "AI戦略コンサルティング",
+        "custom": "カスタム教育",
+        "other": "その他"
+      },
+      "visitPath": {
+        "_value": "訪問経路",
+        "placeholder": "選択してください",
+        "search": "検索エンジン (Google, Yahoo等)",
+        "social": "SNS",
+        "referral": "紹介",
+        "news": "ニュース/記事",
+        "previous": "以前の教育参加",
+        "other": "その他"
+      },
+      "message": {
+        "_value": "(任意) その他のお問い合わせ内容",
+        "desc": "ご希望の教育内容と対象者を含めて詳細にご説明いただければ、より効率的で正確なご相談が可能です。",
+        "placeholder": "お問い合わせ内容をご入力ください"
+      },
+      "privacy": {
+        "_value": "(必須) 個人情報収集同意",
+        "desc": "相談およびサービス提供のための個人情報収集に同意します。"
+      },
+      "marketing": {
+        "_value": "(任意) マーケティング受信同意",
+        "desc": "マーケティング受信に同意いただくと、教育設計に役立つニュースレターやイベント情報をいち早くお届けします。"
+      },
+      "submit": "送信する",
+      "submitting": "送信中...",
+      "success": {
+        "title": "お問い合わせを受け付けました",
+        "desc": "早急にご連絡いたします。"
+      },
+      "error": {
+        "title": "エラーが発生しました",
+        "desc": "しばらくしてからもう一度お試しください。"
+      }
+    },
+    "diagnosis": {
+      "title": "無料AX診断申請",
+      "subtitle": "12週間実行プログラムのための業務構造診断",
+      "step1": "基本情報",
+      "step2": "現状診断",
+      "step3": "日程と予算",
+      "company": {
+        "_value": "企業/機関名 *",
+        "placeholder": "例：Yanadoo AX"
+      },
+      "employeeCount": {
+        "_value": "従業員規模 *",
+        "placeholder": "選択してください",
+        "1-10": "1-10名",
+        "11-50": "11-50名",
+        "51-200": "51-200名",
+        "201-500": "201-500名",
+        "501+": "501名以上"
+      },
+      "name": {
+        "_value": "担当者氏名 *",
+        "placeholder": "例：山田太郎"
+      },
+      "phone": {
+        "_value": "連絡先 *",
+        "placeholder": "例：090-1234-5678"
+      },
+      "email": {
+        "_value": "メールアドレス *",
+        "placeholder": "例：example@company.com"
+      },
+      "department": {
+        "_value": "部署名 *",
+        "placeholder": "例：企画部"
+      },
+      "position": {
+        "_value": "役職 *",
+        "placeholder": "例：部長"
+      },
+      "aiStatus": {
+        "_value": "現在のAI導入状況 *",
+        "placeholder": "現在の状況を選択してください",
+        "not_started": "まだAI導入前",
+        "exploring": "ChatGPT等を個人的に使用中",
+        "poc_done": "PoC/パイロット完了",
+        "partial": "一部業務にAI適用中",
+        "expanding": "全社拡大検討中"
+      },
+      "painPoints": {
+        "_value": "現在抱えている問題点 * (複数選択可)",
+        "manual_reports": "レポート手作業",
+        "poc_failure": "PoC後の現場適用失敗",
+        "person_dependent": "担当者依存",
+        "no_roi": "ROI測定不可",
+        "tool_fragmentation": "AIツール断片化",
+        "training_gap": "社員AI能力不足"
+      },
+      "targetAreas": {
+        "_value": "自動化希望領域 * (複数選択可)",
+        "document": "文書/レポート自動化",
+        "data_analysis": "データ分析自動化",
+        "customer_service": "顧客対応自動化",
+        "workflow": "業務プロセス自動化",
+        "internal_knowledge": "社内ナレッジ管理",
+        "marketing": "マーケティング/コンテンツ生成"
+      },
+      "budget": {
+        "_value": "予算範囲 *",
+        "placeholder": "選択してください",
+        "under_30m": "3,000万円未満",
+        "30m_50m": "3,000万円〜5,000万円",
+        "50m_100m": "5,000万円〜1億円",
+        "over_100m": "1億円以上",
+        "undecided": "未定/要相談"
+      },
+      "timeline": {
+        "_value": "希望開始時期 *",
+        "placeholder": "選択してください",
+        "asap": "即時開始可能",
+        "1month": "1ヶ月以内",
+        "3months": "1-3ヶ月以内",
+        "6months": "3-6ヶ月以内",
+        "exploring": "時期未定/検討中"
+      },
+      "additionalInfo": {
+        "_value": "追加伝達事項 (任意)",
+        "placeholder": "現在抱えている具体的な問題や期待する結果があれば自由にお書きください。"
+      },
+      "privacy": {
+        "_value": "個人情報の収集および利用に同意します。 *",
+        "desc": "収集された情報はAX診断および相談目的のみに使用されます。"
+      },
+      "prev": "戻る",
+      "next": "次へ",
+      "submit": "診断申請する",
+      "submitting": "送信中...",
+      "success": {
+        "title": "AX診断申請が完了しました",
+        "desc": "担当者が1-2日以内にご連絡いたします。"
+      },
+      "error": {
+        "title": "エラーが発生しました",
+        "desc": "しばらくしてからもう一度お試しください。"
+      }
+    },
+    "validation": {
+      "company": "企業/機関名を入力してください",
+      "companyType": "企業タイプを選択してください",
+      "name": "お名前を入力してください",
+      "phone": "連絡先を入力してください",
+      "department": "部署名を入力してください",
+      "position": "役職を入力してください",
+      "email": "正しいメールアドレスを入力してください",
+      "topic": "お問い合わせ内容を選択してください",
+      "visitPath": "訪問経路を選択してください",
+      "privacy": "個人情報収集に同意してください",
+      "employeeCount": "従業員規模を選択してください",
+      "aiStatus": "現在のAI導入状況を選択してください",
+      "painPoints": "最低1つ以上選択してください",
+      "targetAreas": "最低1つ以上選択してください",
+      "budget": "予算範囲を選択してください",
+      "timeline": "希望開始時期を選択してください"
+    }
+  }
+}
