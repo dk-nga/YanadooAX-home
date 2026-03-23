@@ -11,10 +11,10 @@
     "contact": "お問い合わせ"
   },
   "hero": {
-    "title1": "Redefine the",
-    "title2": "Real AI. Real Work.",
-    "subtitle1": "戦略ではなく実行で、",
-    "subtitle2": "をビジネス成果につなげます。",
+    "title1": "AIはもはや選択ではありません。",
+    "title2": "生存戦略です。",
+    "subtitle1": "時間を減らす企業ではなく、",
+    "subtitle2": "時間を生産量に変える企業が生き残ります",
     "cta1": "AX導入のお問い合わせ",
     "cta2": "AI事例集を受け取る",
     "scroll": "Scroll Down",
@@ -178,7 +178,22 @@
     "title3": "始めましょう",
     "subtitle": "Yanadoo AXと一緒なら、\nAIは「導入」ではなく「成果」になります。",
     "button1": "無料相談を申し込む",
-    "button2": "サービス紹介書ダウンロード"
+    "button2": "サービス紹介書ダウンロード",
+    "form": {
+      "eyebrow": "FREE DIAGNOSIS",
+      "title1": "自社に合う\nAX構造を",
+      "title2": "すぐに相談してみましょう",
+      "description": "現在の組織状況と目標をもとに、\nどこからAI転換を始めるべきかを素早く整理します。",
+      "point1": "申請後24時間以内に担当者がご連絡",
+      "point2": "組織状況に合わせた相談ポイントを整理",
+      "point3": "導入前の段階でもそのまま相談可能",
+      "stat1": "初回連絡",
+      "stat2": "個別相談",
+      "stat3": "相談費用",
+      "formTitle": "無料相談申請",
+      "formDescription": "まずは必須情報だけ残していただければ、早急にご連絡いたします。",
+      "submit": "無料相談を申し込む"
+    }
   },
   "footer": {
     "desc": "AI Experienceを革新するYanadoo AXです。\n企業のAI導入から活用まで全過程を共にします。",

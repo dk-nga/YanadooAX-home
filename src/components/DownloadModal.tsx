@@ -27,7 +27,7 @@ export function DownloadModal({
 
   return (
     <Dialog open={resolvedOpen} onOpenChange={resolvedOnOpenChange}>
-      <DialogContent className="border-orange-100 sm:max-w-[560px]">
+      <DialogContent className="border-orange-100 bg-white shadow-2xl sm:max-w-[560px]">
         <DialogHeader>
           <DialogTitle>서비스 소개서 다운로드</DialogTitle>
         </DialogHeader>

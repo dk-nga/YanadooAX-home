@@ -3,6 +3,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Search, Compass, Users2, Rocket, ArrowRight, ChevronDown } from "lucide-react";
+import { HeroMetricsMarquee } from "@/components/HeroMetricsMarquee";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import step1Image from "@/assets/step1-discover.png";
@@ -870,7 +871,7 @@ const AXSystemSection = () => {
   return (
     <section ref={sectionRef} id="partners" className="relative bg-background">
       {/* Part 1: Framework Introduction */}
-      <div className="h-screen flex items-center relative overflow-hidden overflow-x-hidden snap-start snap-always">
+      <div className="relative flex min-h-screen items-center overflow-hidden overflow-x-hidden pb-32 snap-start snap-always md:pb-40">
         {/* Animated decorative background curves */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
           <defs>
@@ -981,9 +982,11 @@ const AXSystemSection = () => {
           </motion.div>
         </div>
         
+        <HeroMetricsMarquee className="absolute inset-x-0 bottom-10 z-20 pb-0 md:bottom-12" />
+
         {/* Scroll indicator - moved outside container, at absolute bottom */}
         <motion.div 
-          className="absolute bottom-1 left-1/2 -translate-x-1/2 flex flex-col items-center"
+          className="absolute bottom-2 left-1/2 z-30 -translate-x-1/2 flex flex-col items-center"
         >
           <div className="flex h-8 w-5 justify-center rounded-full border-2 border-slate-300/70 bg-white/20 pt-1.5">
             <motion.div 

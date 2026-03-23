@@ -13,7 +13,7 @@ export function AXDiagnosisModal({
 }: AXDiagnosisModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="border-orange-100 sm:max-w-[560px]">
+      <DialogContent className="border-orange-100 bg-white shadow-2xl sm:max-w-[560px]">
         <DialogHeader>
           <DialogTitle>AX 무료 진단</DialogTitle>
         </DialogHeader>

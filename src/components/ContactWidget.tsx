@@ -7,8 +7,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 import { AXDiagnosisModal } from "@/components/AXDiagnosisModal";
+import {
+  companyTypeOptions,
+  getFullContactSchema,
+  submitContactInquiry,
+  topicOptions,
+  visitPathOptions,
+} from "@/components/contact-form-shared";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,54 +28,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useContactWidget } from "@/contexts/ContactWidgetContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { createClient } from "@/lib/supabase/client";
-
-const getContactSchema = (t: (key: string) => string) =>
-  z.object({
-    company: z.string().min(1, t("form.validation.company")).max(100),
-    companyType: z.string().min(1, t("form.validation.companyType")),
-    name: z.string().min(1, t("form.validation.name")).max(50),
-    phone: z.string().min(1, t("form.validation.phone")).max(20),
-    department: z.string().min(1, t("form.validation.department")).max(50),
-    position: z.string().min(1, t("form.validation.position")).max(50),
-    email: z.string().email(t("form.validation.email")).max(255),
-    topic: z.string().min(1, t("form.validation.topic")),
-    visitPath: z.string().min(1, t("form.validation.visitPath")),
-    message: z.string().max(2000).optional(),
-    privacyAgree: z.boolean().refine((value) => value === true, {
-      message: t("form.validation.privacy"),
-    }),
-    marketingAgree: z.boolean().optional(),
-  });
-
-type ContactFormData = z.infer<ReturnType<typeof getContactSchema>>;
-
-const companyTypeOptions = [
-  { value: "대기업", labelKey: "form.contact.companyType.large" },
-  { value: "중견기업", labelKey: "form.contact.companyType.mid" },
-  { value: "중소기업", labelKey: "form.contact.companyType.small" },
-  { value: "스타트업", labelKey: "form.contact.companyType.startup" },
-  { value: "공공기관", labelKey: "form.contact.companyType.public" },
-  { value: "교육기관", labelKey: "form.contact.companyType.edu" },
-  { value: "기타", labelKey: "form.contact.companyType.other" },
-];
-
-const topicOptions = [
-  { value: "AI 기초 교육", labelKey: "form.contact.topic.basic" },
-  { value: "생성형 AI 활용", labelKey: "form.contact.topic.genai" },
-  { value: "AI 업무 자동화", labelKey: "form.contact.topic.automation" },
-  { value: "AI 전략 컨설팅", labelKey: "form.contact.topic.strategy" },
-  { value: "맞춤형 교육", labelKey: "form.contact.topic.custom" },
-  { value: "기타", labelKey: "form.contact.topic.other" },
-];
-
-const visitPathOptions = [
-  { value: "검색엔진", labelKey: "form.contact.visitPath.search" },
-  { value: "소셜미디어", labelKey: "form.contact.visitPath.social" },
-  { value: "지인추천", labelKey: "form.contact.visitPath.referral" },
-  { value: "뉴스/기사", labelKey: "form.contact.visitPath.news" },
-  { value: "이전교육참여", labelKey: "form.contact.visitPath.previous" },
-  { value: "기타", labelKey: "form.contact.visitPath.other" },
-];
 
 function stripLocalePrefix(pathname: string) {
   const normalized = pathname.replace(/^\/(ko|ja)(?=\/|$)/, "");
@@ -109,7 +67,7 @@ export function ContactWidget() {
     return () => window.clearInterval(intervalId);
   }, [isOpen]);
 
-  const contactSchema = useMemo(() => getContactSchema(t), [t]);
+  const contactSchema = useMemo(() => getFullContactSchema(t), [t]);
   const {
     control,
     formState: { errors },
@@ -138,10 +96,12 @@ export function ContactWidget() {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from("inquiries").insert({
-        inquiry_type: "contact",
-        company: data.company,
-        company_type: data.companyType,
+      await submitContactInquiry({
+        supabase,
+        data: {
+          inquiry_type: "contact",
+          company: data.company,
+          company_type: data.companyType,
         name: data.name,
         phone: data.phone,
         department: data.department,
@@ -149,16 +109,13 @@ export function ContactWidget() {
         email: data.email,
         topic: data.topic,
         visit_path: data.visitPath,
-        message: data.message || null,
-        privacy_agreed: data.privacyAgree,
-        marketing_agreed: data.marketingAgree || false,
-        source_url: window.location.href,
-        user_agent: navigator.userAgent,
+          message: data.message || null,
+          privacy_agreed: data.privacyAgree,
+          marketing_agreed: data.marketingAgree || false,
+          source_url: window.location.href,
+          user_agent: navigator.userAgent,
+        },
       });
-
-      if (error) {
-        throw error;
-      }
 
       toast.success(t("form.contact.success.title"), {
         description: t("form.contact.success.desc"),
@@ -275,7 +232,7 @@ export function ContactWidget() {
                   <div className="grid grid-cols-2 gap-2 md:gap-4">
                     <div>
                       <label className="text-xs text-gray-700 md:text-sm">
-                        {t("form.contact.company")} <span className="text-red-500">*</span>
+                        {t("form.contact.company._value")} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         {...register("company")}
@@ -288,7 +245,7 @@ export function ContactWidget() {
 
                     <div>
                       <label className="text-xs text-gray-700 md:text-sm">
-                        {t("form.contact.companyType")} <span className="text-red-500">*</span>
+                        {t("form.contact.companyType._value")} <span className="text-red-500">*</span>
                       </label>
                       <Controller
                         name="companyType"
@@ -320,7 +277,7 @@ export function ContactWidget() {
                   <div className="grid grid-cols-2 gap-2 md:gap-4">
                     <div>
                       <label className="text-xs text-gray-700 md:text-sm">
-                        {t("form.contact.name")} <span className="text-red-500">*</span>
+                        {t("form.contact.name._value")} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         {...register("name")}
@@ -333,7 +290,7 @@ export function ContactWidget() {
 
                     <div>
                       <label className="text-xs text-gray-700 md:text-sm">
-                        {t("form.contact.phone")} <span className="text-red-500">*</span>
+                        {t("form.contact.phone._value")} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         {...register("phone")}
@@ -348,7 +305,7 @@ export function ContactWidget() {
                   <div className="grid grid-cols-2 gap-2 md:gap-4">
                     <div>
                       <label className="text-xs text-gray-700 md:text-sm">
-                        {t("form.contact.department")} <span className="text-red-500">*</span>
+                        {t("form.contact.department._value")} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         {...register("department")}
@@ -361,7 +318,7 @@ export function ContactWidget() {
 
                     <div>
                       <label className="text-xs text-gray-700 md:text-sm">
-                        {t("form.contact.position")} <span className="text-red-500">*</span>
+                        {t("form.contact.position._value")} <span className="text-red-500">*</span>
                       </label>
                       <Input
                         {...register("position")}
@@ -375,7 +332,7 @@ export function ContactWidget() {
 
                   <div>
                     <label className="text-xs text-gray-700 md:text-sm">
-                      {t("form.contact.email")} <span className="text-red-500">*</span>
+                      {t("form.contact.email._value")} <span className="text-red-500">*</span>
                     </label>
                     <Input
                       {...register("email")}
@@ -389,7 +346,7 @@ export function ContactWidget() {
 
                   <div>
                     <label className="text-xs text-gray-700 md:text-sm">
-                      {t("form.contact.topic")} <span className="text-red-500">*</span>
+                      {t("form.contact.topic._value")} <span className="text-red-500">*</span>
                     </label>
                     <Controller
                       name="topic"
@@ -419,7 +376,7 @@ export function ContactWidget() {
 
                   <div>
                     <label className="text-xs text-gray-700 md:text-sm">
-                      {t("form.contact.visitPath")} <span className="text-red-500">*</span>
+                      {t("form.contact.visitPath._value")} <span className="text-red-500">*</span>
                     </label>
                     <Controller
                       name="visitPath"
@@ -448,7 +405,7 @@ export function ContactWidget() {
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-700 md:text-sm">{t("form.contact.message")}</label>
+                    <label className="text-xs text-gray-700 md:text-sm">{t("form.contact.message._value")}</label>
                     <p className="mt-1 text-[11px] leading-5 text-gray-500 md:text-xs">
                       {t("form.contact.message.desc")}
                     </p>
@@ -475,7 +432,7 @@ export function ContactWidget() {
                             />
                             <span className="text-xs leading-5 text-gray-700 md:text-sm">
                               <span className="font-medium">
-                                {t("form.contact.privacy")} <span className="text-red-500">*</span>
+                                {t("form.contact.privacy._value")}
                               </span>
                               <span className="mt-0.5 block text-gray-500">{t("form.contact.privacy.desc")}</span>
                             </span>
@@ -496,7 +453,7 @@ export function ContactWidget() {
                             className="mt-0.5 data-checked:border-[#282640] data-checked:bg-[#282640]"
                           />
                           <span className="text-xs leading-5 text-gray-700 md:text-sm">
-                            <span className="font-medium">{t("form.contact.marketing")}</span>
+                            <span className="font-medium">{t("form.contact.marketing._value")}</span>
                             <span className="mt-0.5 block text-gray-500">{t("form.contact.marketing.desc")}</span>
                           </span>
                         </label>
