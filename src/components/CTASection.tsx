@@ -26,7 +26,7 @@ export function CTASection() {
   return (
     <section
       id="about"
-      className="relative flex min-h-dvh items-center overflow-hidden overflow-x-hidden pt-10 pb-0 md:pt-14"
+      className="relative flex min-h-dvh items-center overflow-hidden overflow-x-hidden pt-10 pb-10 md:pt-14 md:pb-14 lg:pb-0"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(248,181,41,0.12),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(196,0,255,0.10),_transparent_36%),linear-gradient(180deg,_#f8f6f2_0%,_#ffffff_48%,_#f6f3ff_100%)]" />
       <motion.div
@@ -46,7 +46,7 @@ export function CTASection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ amount: 0.5, once: false }}
+          viewport={{ amount: 0.25, once: true }}
         >
           <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
             <motion.div

@@ -54,8 +54,8 @@ export function HeroMetricsMarquee({ className }: { className?: string }) {
                   key={`${item.value}-${item.label}-${index}`}
                   className="group flex min-w-[220px] items-center gap-4 rounded-full border border-[#282640]/8 bg-white/78 px-4 py-3 shadow-[0_12px_30px_rgba(40,38,64,0.06)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-0.5 md:min-w-[280px] md:px-5"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,rgba(248,181,41,0.18)_0%,rgba(196,0,255,0.14)_100%)] ring-1 ring-[#C400FF]/10 md:h-14 md:w-14">
-                    <span className="bg-gradient-to-r from-[#282640] via-[#6A2FCB] to-[#C400FF] bg-clip-text text-lg font-black tracking-tight text-transparent md:text-xl">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(135deg,rgba(248,181,41,0.18)_0%,rgba(196,0,255,0.14)_100%)] ring-1 ring-[#C400FF]/10 md:h-14 md:w-14">
+                    <span className="bg-gradient-to-r from-[#282640] via-[#6A2FCB] to-[#C400FF] bg-clip-text text-[13px] font-semibold leading-none tracking-[-0.02em] text-transparent md:text-[15px]">
                       {item.value}
                     </span>
                   </div>

@@ -57,10 +57,8 @@ export function HeroAnimation({
                 <span style={{ color: "hsl(220, 20%, 15%)" }}>A</span>
                 <span
                   style={{
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    background: "linear-gradient(135deg, #F8B529 0%, #C400FF 100%)",
-                    backgroundClip: "text",
+                    color: "#C400FF",
+                    textShadow: "0 0 24px rgba(248,181,41,0.18)",
                   }}
                 >
                   X

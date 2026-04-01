@@ -8,12 +8,14 @@ type AnimatedSectionProps = {
   children: ReactNode;
   className?: string;
   showScrollIndicator?: boolean;
+  persistVisible?: boolean;
 };
 
 export function AnimatedSection({
   children,
   className = "",
   showScrollIndicator = false,
+  persistVisible = false,
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useScrollContainer();
@@ -23,10 +25,10 @@ export function AnimatedSection({
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.7, 0.85], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.15, 0.7, 0.85], [0.95, 1, 1, 0.92]);
-  const y = useTransform(scrollYProgress, [0, 0.15, 0.7, 0.85], [60, 0, 0, -100]);
-  const blur = useTransform(scrollYProgress, [0.7, 0.85], [0, 8]);
+  const opacity = useTransform(scrollYProgress, [0, 0.15, 0.7, 0.85], persistVisible ? [0, 1, 1, 1] : [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.15, 0.7, 0.85], persistVisible ? [0.95, 1, 1, 1] : [0.95, 1, 1, 0.92]);
+  const y = useTransform(scrollYProgress, [0, 0.15, 0.7, 0.85], persistVisible ? [60, 0, 0, 0] : [60, 0, 0, -100]);
+  const blur = useTransform(scrollYProgress, [0.7, 0.85], persistVisible ? [0, 0] : [0, 8]);
 
   return (
     <motion.div

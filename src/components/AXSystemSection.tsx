@@ -2,8 +2,9 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Search, Compass, Users2, Rocket, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { HeroMetricsMarquee } from "@/components/HeroMetricsMarquee";
+import { InteractiveDemoSection } from "@/components/InteractiveDemoSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import step1Image from "@/assets/step1-discover.png";
@@ -11,18 +12,14 @@ import step2Image from "@/assets/step2-design.png";
 import step3Image from "@/assets/step3-build.png";
 import step4Image from "@/assets/step4-stick.png";
 
-const step3dImages = [step1Image.src, step2Image.src, step3Image.src, step4Image.src];
-
 const getSteps = (t: (key: string) => string) => [
   {
     number: "01",
-    stepLabel: "STEP",
-    icon: Search,
     title: "Discover",
     subtitle: t("ax.step1.subtitle"),
     tagline: t("ax.step1.tagline"),
-    description: t("ax.step1.subtitle"),
     color: "#C400FF",
+    image: step1Image.src,
     expandedContent: {
       subtitle: t("ax.step1.expandedSubtitle"),
       details: [
@@ -37,13 +34,11 @@ const getSteps = (t: (key: string) => string) => [
   },
   {
     number: "02",
-    stepLabel: "STEP",
-    icon: Compass,
     title: "Design",
     subtitle: t("ax.step2.subtitle"),
     tagline: t("ax.step2.tagline"),
-    description: t("ax.step2.subtitle"),
     color: "#282640",
+    image: step2Image.src,
     expandedContent: {
       subtitle: t("ax.step2.expandedSubtitle"),
       details: [
@@ -58,13 +53,11 @@ const getSteps = (t: (key: string) => string) => [
   },
   {
     number: "03",
-    stepLabel: "STEP",
-    icon: Users2,
     title: "Build Together",
     subtitle: "Co-Building & Live Implementation",
     tagline: t("ax.step3.tagline"),
-    description: t("ax.step3.subtitle"),
     color: "#FF6B35",
+    image: step3Image.src,
     expandedContent: {
       subtitle: t("ax.step3.expandedSubtitle"),
       details: [
@@ -79,13 +72,11 @@ const getSteps = (t: (key: string) => string) => [
   },
   {
     number: "04",
-    stepLabel: "STEP",
-    icon: Rocket,
     title: "Make It Stick",
     subtitle: t("ax.step4.subtitle"),
     tagline: t("ax.step4.tagline"),
-    description: t("ax.step4.subtitle"),
     color: "#10B981",
+    image: step4Image.src,
     expandedContent: {
       subtitle: t("ax.step4.expandedSubtitle"),
       details: [
@@ -145,13 +136,11 @@ const getTestimonials = (t: (key: string) => string) => [
 // Step type definition
 type StepType = {
   number: string;
-  stepLabel: string;
-  icon: typeof Search;
   title: string;
   subtitle: string;
   tagline: string;
-  description: string;
   color: string;
+  image: string;
   expandedContent: {
     subtitle: string;
     details: string[];
@@ -217,18 +206,12 @@ const CurlyQuote = ({ className, isOpen = true }: { className?: string; isOpen?:
   </svg>
 );
 
-// Testimonial Slider Component - Full width case study style with fixed height
+// Testimonial tabs component - selectable by role
 const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
+  const activeTestimonial = testimonials[activeIndex];
   
   return (
     <motion.div 
@@ -238,42 +221,39 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Full-width dark container with slide-up hanging effect */}
       <motion.div 
-        className="relative bg-foreground rounded-2xl md:rounded-3xl overflow-hidden"
+        className="relative overflow-hidden rounded-2xl border border-stone-300/70 bg-white/92 shadow-[0_30px_90px_rgba(24,24,33,0.08)] backdrop-blur-sm md:rounded-3xl"
         initial={{ y: 60, rotateX: 5 }}
         animate={isInView ? { y: 0, rotateX: 0 } : { y: 60, rotateX: 5 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         style={{ transformPerspective: 1000 }}
       >
-        <div className="flex h-full">
-          {/* Left side - Number selector (inside container) */}
-          <div className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-1 md:gap-2 z-20">
-            {testimonials.map((_, index) => (
-              <motion.button
-                key={index}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.08),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.08),transparent_24%)]" />
+
+        <div className="relative z-10 border-b border-stone-200/80 px-4 py-4 md:px-8 md:py-5">
+          <div className="flex flex-wrap gap-2">
+            {testimonials.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center text-[9px] md:text-xs font-bold transition-all duration-300 ${
+                aria-pressed={activeIndex === index}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
                   activeIndex === index
-                    ? 'bg-gradient-to-r from-[#F8B529] to-[#C400FF] text-white'
-                    : 'bg-background/20 text-background/60 hover:bg-background/30'
+                    ? "border-transparent bg-[linear-gradient(135deg,#282640,#C400FF)] text-white shadow-[0_12px_24px_rgba(95,63,156,0.24)]"
+                    : "border-stone-200 bg-white text-foreground/75 hover:border-[#C400FF]/20 hover:text-[#6b33c7]"
                 }`}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
               >
-                {index + 1}
-              </motion.button>
+                {item.role}
+              </button>
             ))}
           </div>
-          
-          {/* Center - Quote content (fixed height container) */}
-          <div className="flex-1 pl-9 md:pl-24 pr-3 md:pr-8 lg:pr-[300px] py-4 md:py-16 flex flex-col justify-center relative">
-            {/* Quote decoration - top curly quote */}
+        </div>
+
+        <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="relative px-5 py-8 md:px-8 md:py-12 lg:pr-10">
             <motion.div 
-              className="absolute top-2 left-9 md:left-24"
+              className="absolute left-5 top-5 md:left-8 md:top-7"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -281,8 +261,7 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
               <CurlyQuote className="w-5 h-5 md:w-16 md:h-16 text-[#C400FF]/30" isOpen={true} />
             </motion.div>
             
-            {/* Fixed height content area */}
-            <div className="relative z-10 min-h-[140px] md:h-[220px] flex flex-col justify-center">
+            <div className="relative z-10 min-h-[220px] pt-8 md:min-h-[260px] md:pt-12">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -290,27 +269,33 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute inset-0 flex flex-col justify-center"
+                  className="flex flex-col justify-center"
                 >
-                  {/* Title & Subtitle */}
-                  <h3 className="text-sm md:text-2xl lg:text-3xl font-black text-background mb-0.5 md:mb-2 leading-tight">
-                    {testimonials[activeIndex].title}
+                  <div className="mb-5 flex flex-wrap items-center gap-3">
+                    <span className="rounded-full border border-[#C400FF]/15 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 px-3 py-1 text-xs font-bold tracking-[0.18em] text-[#6b33c7] uppercase">
+                      {activeTestimonial.role}
+                    </span>
+                    <span className="text-sm font-medium text-muted-foreground">
+                      {activeTestimonial.company} · {activeTestimonial.employeeCount}
+                    </span>
+                  </div>
+
+                  <h3 className="mb-1 text-xl font-black leading-tight text-foreground md:mb-2 md:text-3xl lg:text-4xl">
+                    {activeTestimonial.title}
                   </h3>
-                  <p className="text-xs md:text-xl font-bold bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent mb-2 md:mb-4">
-                    {testimonials[activeIndex].subtitle}
+                  <p className="mb-4 bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-base font-bold text-transparent md:text-xl">
+                    {activeTestimonial.subtitle}
                   </p>
                   
-                  {/* Full quote - fixed height with line clamp */}
-                  <p className="text-background/70 text-[10px] md:text-base leading-relaxed line-clamp-3 md:line-clamp-4 max-w-2xl">
-                    {testimonials[activeIndex].quote}
+                  <p className="max-w-3xl text-sm leading-relaxed text-foreground/72 md:text-lg md:leading-9">
+                    {activeTestimonial.quote}
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
             
-            {/* Quote decoration - bottom curly quote */}
             <motion.div 
-              className="absolute bottom-2 right-3 md:right-[300px]"
+              className="absolute bottom-3 right-4 md:bottom-5 md:right-6"
               initial={{ opacity: 0, y: -20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
               transition={{ duration: 0.6, delay: 0.5 }}
@@ -319,15 +304,13 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
             </motion.div>
           </div>
           
-          {/* Right side - Mac-style window card */}
           <motion.div 
-            className="hidden lg:flex absolute right-12 top-8 w-[320px] z-10"
+            className="hidden border-l border-stone-200/80 bg-[linear-gradient(180deg,#faf9fc,#f6f3fb)] p-6 lg:flex"
             initial={{ opacity: 0, y: 40, x: 20 }}
             animate={isInView ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y: 40, x: 20 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="relative w-full bg-[#f5f5f7] rounded-xl shadow-2xl overflow-hidden">
-              {/* Mac-style title bar */}
+            <div className="relative w-full overflow-hidden rounded-2xl bg-[#f5f5f7] shadow-[0_22px_50px_rgba(40,38,64,0.14)]">
               <div className="flex items-center gap-2 px-4 py-3 bg-[#e8e8ec] border-b border-[#d1d1d6]">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -336,19 +319,18 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
                 </div>
                 <div className="flex-1 text-center">
                   <span className="text-xs text-[#6e6e73] font-medium">
-                    {testimonials[activeIndex].company}
+                    {activeTestimonial.company}
                   </span>
                 </div>
-                <div className="w-[52px]" /> {/* Spacer for symmetry */}
+                <div className="w-[52px]" />
               </div>
               
-              {/* Image content */}
               <div className="h-[180px] overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.img 
                     key={activeIndex}
-                    src={testimonials[activeIndex].image} 
-                    alt={testimonials[activeIndex].company}
+                    src={activeTestimonial.image} 
+                    alt={activeTestimonial.company}
                     className="w-full h-full object-cover"
                     initial={{ opacity: 0, scale: 1.1 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -358,7 +340,6 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
                 </AnimatePresence>
               </div>
               
-              {/* Company info footer */}
               <div className="p-4 bg-white border-t border-[#e8e8ec]">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -370,12 +351,12 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
                     className="flex items-center justify-between gap-3"
                   >
                     <div>
-                      <p className="font-bold text-foreground text-sm">{testimonials[activeIndex].role}</p>
-                      <p className="text-xs text-muted-foreground">{testimonials[activeIndex].employeeCount}</p>
+                      <p className="font-bold text-foreground text-sm">{activeTestimonial.role}</p>
+                      <p className="text-xs text-muted-foreground">{activeTestimonial.employeeCount}</p>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 flex items-center justify-center flex-shrink-0">
                       <span className="text-xs font-bold bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent">
-                        {testimonials[activeIndex].company.slice(0, 2)}
+                        {activeTestimonial.company.slice(0, 2)}
                       </span>
                     </div>
                   </motion.div>
@@ -385,19 +366,20 @@ const TestimonialSlider = ({ testimonials }: { testimonials: TestimonialType[] }
           </motion.div>
         </div>
         
-        {/* Mobile company info - more compact */}
-        <div className="lg:hidden px-3 py-2.5 md:p-5 bg-background border-t border-border">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0">
+        <div className="border-t border-stone-200/80 bg-[linear-gradient(180deg,#ffffff,#faf8fd)] px-4 py-4 lg:hidden">
+          <div className="flex items-center gap-3">
+            <div className="h-11 w-11 overflow-hidden rounded-xl flex-shrink-0 md:h-14 md:w-14">
               <img 
-                src={testimonials[activeIndex].image} 
-                alt={testimonials[activeIndex].company}
+                src={activeTestimonial.image} 
+                alt={activeTestimonial.company}
                 className="w-full h-full object-cover"
               />
             </div>
             <div>
-              <p className="font-bold text-foreground text-[11px] md:text-sm">{testimonials[activeIndex].role}</p>
-              <p className="text-[10px] md:text-xs text-muted-foreground">{testimonials[activeIndex].employeeCount}</p>
+              <p className="font-bold text-foreground text-sm">{activeTestimonial.role}</p>
+              <p className="text-xs text-muted-foreground">
+                {activeTestimonial.company} · {activeTestimonial.employeeCount}
+              </p>
             </div>
           </div>
         </div>
@@ -502,332 +484,233 @@ const FloatingOrb = ({ color, size, position }: { color: string; size: string; p
   />
 );
 
-// Row step card for mobile (4 rows on one screen) with background image
-const RowStepCard = ({ step, index }: { step: StepType; index: number }) => {
-  return (
-    <div className="relative rounded-xl overflow-hidden mx-2">
-      {/* Background image */}
-      {step3dImages[index] && (
-        <div className="absolute inset-0">
-          <img 
-            src={step3dImages[index]!} 
-            alt=""
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-20 h-20 object-contain opacity-15"
-          />
-          <div 
-            className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/70"
-          />
-        </div>
-      )}
-      
-      {/* Content */}
-      <div className="relative z-10 flex items-center gap-3 py-3 px-3">
-        {/* Left: Small icon */}
-        {step3dImages[index] && (
-          <img 
-            src={step3dImages[index]!} 
-            alt={step.title} 
-            className="w-12 h-12 object-contain flex-shrink-0"
-          />
-        )}
-        
-        {/* Right: Content */}
-        <div className="flex-1 min-w-0">
-          {/* Title badge */}
-          <span 
-            className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold mb-1"
-            style={{ backgroundColor: `${step.color}20`, color: step.color }}
-          >
-            {step.title}
-          </span>
-
-          {/* Main title */}
-          <h3 className="text-sm font-bold leading-tight text-foreground line-clamp-1 mb-0.5">
-            {step.description.split('\n')[0]}
-          </h3>
-
-          {/* Details - inline */}
-          <p className="text-muted-foreground text-[10px] leading-snug line-clamp-2">
-            {step.expandedContent.details.slice(0, 2).join(' · ')}
-          </p>
-
-          {/* Outputs tags */}
-          <div className="flex flex-wrap gap-1 mt-1.5">
-            {step.expandedContent.outputs.slice(0, 2).map((output, idx) => (
-              <span
-                key={idx}
-                className="px-1.5 py-0.5 rounded-full text-[9px] font-medium border"
-                style={{ 
-                  borderColor: `${step.color}40`,
-                  color: step.color,
-                  backgroundColor: `${step.color}10`
-                }}
-              >
-                {output}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Mobile: All 4 steps in vertical rows on one screen
-const MobileAllSteps = ({ steps }: { steps: StepType[] }) => {
+const DiscoverySprintSection = ({
+  steps,
+  activeIndex,
+  onSelect,
+}: {
+  steps: StepType[];
+  activeIndex: number;
+  onSelect: (index: number) => void;
+}) => {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const activeStep = steps[activeIndex];
+  const firstColumn = activeStep.expandedContent.details.slice(0, 2);
+  const secondColumn = activeStep.expandedContent.details.slice(2);
 
   return (
-    <motion.div 
+    <div
       ref={ref}
-      className="h-screen w-full flex flex-col relative overflow-hidden snap-start snap-always md:hidden"
-      style={{ backgroundColor: 'hsl(var(--background))' }}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      className="relative min-h-screen overflow-hidden bg-background pb-16 pt-6 md:pb-24 md:pt-12"
     >
-      {/* Animated decorative background curves - same as Part 1 */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+      <svg className="absolute inset-0 h-full w-full pointer-events-none" preserveAspectRatio="none">
         <defs>
-          <linearGradient id="mobileCurveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#C400FF" stopOpacity="0.12" />
-            <stop offset="100%" stopColor="#282640" stopOpacity="0.12" />
+          <linearGradient id="discoveryCurve" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#F8B529" stopOpacity="0.08" />
+            <stop offset="100%" stopColor="#C400FF" stopOpacity="0.1" />
           </linearGradient>
         </defs>
         <motion.path
-          d="M -50 300 Q 200 100 400 200 T 800 150"
-          stroke="url(#mobileCurveGradient)"
+          d="M -100 160 Q 420 60 820 220 T 1500 140"
+          stroke="url(#discoveryCurve)"
           strokeWidth="1.5"
           fill="none"
           initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2 }}
-        />
-        <motion.path
-          d="M -50 500 Q 250 350 450 400 T 850 350"
-          stroke="url(#mobileCurveGradient)"
-          strokeWidth="1"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 2, delay: 0.3 }}
+          animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
         />
       </svg>
-      
-      {/* Floating orbs */}
-      <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-[#C400FF]/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full bg-[#282640]/10 blur-3xl pointer-events-none" />
 
-      {/* All 4 step cards stacked vertically with arrows between */}
-      <div className="flex-1 flex flex-col justify-center pt-14 pb-6 px-2 relative z-10">
-        {steps.map((step, index) => (
-          <div key={step.number}>
-            <RowStepCard step={step} index={index} />
-            {/* Double down arrow between cards */}
-            {index < steps.length - 1 && (
-              <div className="flex justify-center py-1">
-                <div className="flex flex-col items-center text-muted-foreground/40">
-                  <ChevronDown className="w-4 h-4 -mb-2" />
-                  <ChevronDown className="w-4 h-4" />
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+      <div className="absolute left-[-120px] top-8 h-64 w-64 rounded-full bg-[#F8B529]/10 blur-3xl" />
+      <div className="absolute right-[-100px] top-24 h-72 w-72 rounded-full bg-[#C400FF]/10 blur-3xl" />
 
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
-      >
-        <div className="flex h-6 w-4 justify-center rounded-full border-2 border-slate-300/70 bg-white/20 pt-1">
-          <motion.div 
-            className="h-1 w-1 rounded-full bg-slate-400/70"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          />
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-// Full-screen step component with clean, minimal design (Desktop only)
-const FullScreenStep = ({ step, index }: { step: StepType; index: number }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.5 });
-  
-  // Alternate direction: even indices come from left, odd from right
-  const isFromRight = index % 2 !== 0;
-  
-  return (
-    <div 
-      ref={ref}
-      className="h-screen w-full hidden md:flex items-center relative overflow-hidden snap-start snap-always"
-      style={{ backgroundColor: 'hsl(var(--background))' }}
-    >
-      {/* Large background step number - positioned behind content */}
-      <div 
-        className="absolute inset-0 flex items-center justify-center select-none pointer-events-none overflow-hidden"
-      >
-        <div className="flex items-baseline gap-2 md:gap-4" style={{ color: 'hsl(var(--foreground)/0.06)' }}>
-          <span className="text-[150px] md:text-[250px] lg:text-[350px] font-black leading-none tracking-tighter">
-            {step.number}
-          </span>
-          <span className="text-[40px] md:text-[70px] lg:text-[100px] font-bold tracking-[0.1em]">
-            STEP
-          </span>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        <div className={`grid lg:grid-cols-2 gap-8 lg:gap-20 items-center`}>
-          {/* Content side */}
-          <motion.div
-            className={isFromRight ? 'lg:order-1' : 'lg:order-1'}
-            initial={{ opacity: 0, x: isFromRight ? -60 : -60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isFromRight ? -60 : -60 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            {/* 3D Icon Image or regular icon */}
-            <motion.div 
-              className="mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              {step3dImages[index] ? (
-                <img 
-                  src={step3dImages[index]!} 
-                  alt={step.title} 
-                  className="w-20 h-20 md:w-24 md:h-24 object-contain"
-                />
-              ) : (
-                <div className="w-14 h-14 rounded-xl border-2 border-foreground/10 flex items-center justify-center">
-                  <step.icon className="w-6 h-6 text-foreground/60" />
-                </div>
-              )}
-            </motion.div>
-
-            {/* Title badge */}
-            <motion.div 
-              className="mb-3"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-            >
-              <span 
-                className="inline-block px-4 py-1.5 rounded-full text-sm font-bold"
-                style={{ backgroundColor: `${step.color}15`, color: step.color }}
-              >
-                {step.title}
-              </span>
-            </motion.div>
-            
-            {/* Main title */}
-            <motion.h2 
-              className="text-2xl sm:text-3xl md:text-5xl font-black mb-4 leading-[1.1] text-foreground whitespace-pre-line"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {step.description}
-            </motion.h2>
-
-            {/* Tagline */}
-            <motion.p 
-              className={`text-muted-foreground mb-6 italic whitespace-pre-line ${
-                step.tagline.length > 40 ? 'text-sm md:text-base lg:text-lg' : 'text-base md:text-lg lg:text-xl'
-              }`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-            >
-              &quot;{step.tagline}&quot;
-            </motion.p>
-            
-            {/* Details */}
-            <motion.div 
-              className="space-y-2 text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              {step.expandedContent.details.slice(0, 3).map((detail, idx) => (
-                <p key={idx} className="text-base md:text-lg leading-relaxed">
-                  {detail}
-                </p>
-              ))}
-            </motion.div>
-
-            {/* Outputs tags */}
-            <motion.div 
-              className="flex flex-wrap gap-2 mt-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              {step.expandedContent.outputs.map((output, idx) => (
-                <span
-                  key={idx}
-                  className="px-3 py-1.5 rounded-full text-sm font-medium border"
-                  style={{ 
-                    borderColor: `${step.color}40`,
-                    color: step.color,
-                    backgroundColor: `${step.color}08`
-                  }}
-                >
-                  {output}
-                </span>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Image side */}
-          <motion.div
-            className={isFromRight ? 'lg:order-2' : 'lg:order-2'}
-            initial={{ opacity: 0, x: isFromRight ? 60 : 60 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isFromRight ? 60 : 60 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          >
-            <div className="relative">
-              <img 
-                src={step.expandedContent.image}
-                alt={step.title}
-                className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover grayscale"
-              />
+      <div className="container relative z-10 mx-auto px-4 md:px-6">
+        <motion.div
+          className="mx-auto max-w-6xl"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="mb-8 text-center md:mb-10">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C400FF]/15 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 px-4 py-2">
+              <span className="text-sm font-bold text-[#C400FF]">{t("ax.discovery.badge")}</span>
             </div>
-          </motion.div>
-        </div>
-      </div>
+            <h3 className="text-[1.45rem] font-black leading-tight text-foreground md:text-4xl">
+              <span className="whitespace-nowrap">{t("ax.discovery.title")}</span>
+            </h3>
+            <p className="mx-auto mt-3 max-w-2xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
+              {t("ax.discovery.subtitle")}
+            </p>
+          </div>
 
-      {/* Step indicator dots - right side */}
-      <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3">
-        {[0, 1, 2, 3].map((i) => (
-          <motion.div 
-            key={i}
-            className={`w-2 h-2 rounded-full transition-all duration-500`}
-            style={{ 
-              backgroundColor: i === index ? step.color : 'hsl(var(--muted-foreground)/0.2)',
-              transform: i === index ? 'scale(1.5)' : 'scale(1)'
-            }}
-          />
-        ))}
-      </div>
+          <div className="mb-6 grid grid-cols-2 gap-3 md:mb-8 md:grid-cols-4">
+            {steps.map((step, index) => {
+              const isActive = index === activeIndex;
 
-      {/* Scroll indicator - show on all steps including last */}
-      <motion.div 
-        className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center"
-      >
-        <div className="flex h-8 w-5 justify-center rounded-full border-2 border-slate-300/70 bg-white/20 pt-1.5">
-          <motion.div 
-            className="h-1 w-1 rounded-full bg-slate-400/70"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          />
-        </div>
-      </motion.div>
+              return (
+                <button
+                  key={step.number}
+                  type="button"
+                  onClick={() => onSelect(index)}
+                  className={`group relative min-w-0 overflow-hidden rounded-[24px] border bg-white/80 p-4 text-left shadow-sm transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C400FF]/40 md:rounded-[28px] md:p-5 ${
+                    isActive
+                      ? "border-stone-300/80 shadow-[0_24px_60px_rgba(98,88,139,0.12)]"
+                      : "border-stone-200/80 hover:-translate-y-1 hover:border-stone-300/80"
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  <div
+                    className={`absolute inset-0 transition-opacity duration-300 ${
+                      isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                    }`}
+                    style={{
+                      background: `linear-gradient(135deg, ${step.color}10 0%, rgba(255,255,255,0.9) 55%, rgba(255,255,255,0.98) 100%)`,
+                    }}
+                  />
+                  <div className="relative z-10">
+                    <div className="mb-5 flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-xs font-semibold tracking-[0.24em] text-muted-foreground">
+                          STEP {step.number}
+                        </p>
+                        <p
+                          className="mt-1 text-lg font-bold"
+                          style={{ color: isActive ? step.color : "hsl(var(--foreground))" }}
+                        >
+                          {step.title}
+                        </p>
+                      </div>
+                      <span
+                        className="mt-1 inline-flex h-3.5 w-3.5 rounded-full border-2 border-white shadow-sm"
+                        style={{ backgroundColor: isActive ? step.color : "rgba(120,120,140,0.24)" }}
+                      />
+                    </div>
+
+                    <div className="relative flex h-36 items-end justify-center overflow-hidden rounded-[22px] border border-stone-200/80 bg-[#fcfbfa]">
+                      <div
+                        className="absolute inset-y-0 right-0 w-1/2"
+                        style={{
+                          background: isActive
+                            ? `linear-gradient(135deg, transparent 10%, ${step.color}20 100%)`
+                            : "linear-gradient(135deg, transparent 10%, rgba(120,120,140,0.08) 100%)",
+                        }}
+                      />
+                      <img
+                        src={step.image}
+                        alt={step.subtitle}
+                        className={`relative z-10 h-28 w-auto object-contain transition-transform duration-300 ${
+                          isActive ? "scale-105" : "scale-100 opacity-85"
+                        }`}
+                      />
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="overflow-hidden rounded-[32px] border border-stone-300/70 bg-white/90 shadow-[0_30px_90px_rgba(24,24,33,0.06)] backdrop-blur-sm">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep.number}
+                className="grid gap-0 lg:grid-cols-[1.05fr_1fr]"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.28, ease: "easeOut" }}
+              >
+                <div className="relative overflow-hidden border-b border-stone-200/80 p-7 md:p-10 lg:border-b-0 lg:border-r">
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${activeStep.color}08 0%, rgba(255,255,255,0.92) 48%, rgba(255,255,255,1) 100%)`,
+                    }}
+                  />
+                  <div className="absolute right-[-44px] top-6 h-40 w-40 rounded-full border border-stone-300/40" />
+                  <div className="absolute bottom-[-70px] left-[-30px] h-40 w-40 rounded-full bg-[#f7f4fb]" />
+
+                  <div className="relative z-10">
+                    <div className="mb-6 flex items-center gap-3">
+                      <span
+                        className="rounded-full px-3 py-1 text-xs font-bold tracking-[0.2em]"
+                        style={{ backgroundColor: `${activeStep.color}14`, color: activeStep.color }}
+                      >
+                        STEP {activeStep.number}
+                      </span>
+                      <span className="text-sm font-medium text-muted-foreground">{activeStep.title}</span>
+                    </div>
+
+                    <h3 className="max-w-md whitespace-pre-line text-3xl font-black leading-[1.05] text-foreground md:text-5xl">
+                      {activeStep.subtitle}
+                    </h3>
+
+                    <p className="mt-5 max-w-lg whitespace-pre-line text-base leading-relaxed text-muted-foreground md:text-lg">
+                      {activeStep.expandedContent.subtitle}
+                    </p>
+
+                    <p className="mt-4 max-w-lg whitespace-pre-line text-sm leading-relaxed text-foreground/70 md:text-base">
+                      {activeStep.tagline}
+                    </p>
+
+                    <div className="mt-8 flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        className="rounded-xl border px-5 py-3 text-sm font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
+                        style={{
+                          borderColor: `${activeStep.color}45`,
+                          color: "hsl(var(--foreground))",
+                          backgroundColor: `${activeStep.color}08`,
+                        }}
+                      >
+                        {activeStep.expandedContent.outputs[0]}
+                      </button>
+                      <div className="flex flex-wrap gap-2">
+                        {activeStep.expandedContent.outputs.slice(1).map((output) => (
+                          <span
+                            key={output}
+                            className="rounded-full border px-3 py-1.5 text-xs font-medium"
+                            style={{
+                              borderColor: `${activeStep.color}30`,
+                              color: activeStep.color,
+                              backgroundColor: `${activeStep.color}0D`,
+                            }}
+                          >
+                            {output}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid content-start gap-0 p-7 md:p-10">
+                  {[
+                    { title: firstColumn[0], body: firstColumn.slice(1).join(" ") },
+                    {
+                      title: secondColumn[0] ?? activeStep.expandedContent.outputs[1],
+                      body:
+                        secondColumn.slice(1).join(" ") ||
+                        activeStep.expandedContent.outputs.join(" · "),
+                    },
+                  ].map((item, index) => (
+                    <div
+                      key={`${activeStep.number}-${index}`}
+                      className={`py-5 ${index === 0 ? "border-b border-stone-200/80" : ""}`}
+                    >
+                      <h4 className="text-2xl font-bold leading-tight text-foreground">{item.title}</h4>
+                      <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                        {item.body}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
@@ -835,6 +718,7 @@ const FullScreenStep = ({ step, index }: { step: StepType; index: number }) => {
 const AXSystemSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   // Translated differentiators
   const translatedDifferentiators = [
@@ -871,7 +755,7 @@ const AXSystemSection = () => {
   return (
     <section ref={sectionRef} id="partners" className="relative bg-background">
       {/* Part 1: Framework Introduction */}
-      <div className="relative flex min-h-screen items-center overflow-hidden overflow-x-hidden pb-32 snap-start snap-always md:pb-40">
+      <div className="relative flex min-h-screen flex-col items-center overflow-hidden overflow-x-hidden pb-24 md:pb-28">
         {/* Animated decorative background curves */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
           <defs>
@@ -919,7 +803,7 @@ const AXSystemSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
             {/* Framework badge */}
             <motion.div 
@@ -933,8 +817,11 @@ const AXSystemSection = () => {
               className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black mb-6 leading-[1.1]"
               variants={itemVariants}
             >
-              <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent">{t("ax.intro.title1")}</span>{t("ax.intro.title2")}{" "}
-              <span className="px-2 py-0.5 md:px-3 md:py-1 rounded-lg bg-gradient-to-r from-[#F8B529] to-[#C400FF] text-white">{t("ax.intro.title3")}</span>{t("ax.intro.title4")}
+              {t("ax.intro.title1")}
+              {t("ax.intro.title2")}
+              <br className="lg:hidden" />
+              <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent">{t("ax.intro.title3")}</span>
+              {t("ax.intro.title4")}
             </motion.h2>
             
             <motion.p 
@@ -964,25 +851,50 @@ const AXSystemSection = () => {
               ))}
             </motion.div>
 
-            <motion.div 
-              className="relative overflow-hidden rounded-3xl border border-stone-300/65 bg-gradient-to-br from-[#F8B529]/5 via-background to-[#C400FF]/5 p-6 md:p-8"
+            <motion.div
+              className="mb-6 grid gap-4 md:mb-8 md:grid-cols-2"
               variants={itemVariants}
             >
-              {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#F8B529]/10 to-transparent rounded-bl-full" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[#282640]/10 to-transparent rounded-tr-full" />
-              
-              <p className="text-xs sm:text-sm md:text-lg lg:text-xl text-center font-medium leading-relaxed relative z-10">
-                <span className="font-bold text-foreground">{t("ax.intro.box1")}</span>{t("ax.intro.box2")}{" "}
-                <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent font-bold">{t("ax.intro.box3")}</span> {t("ax.intro.box4")}
-                <br className="hidden md:block" /><span className="md:hidden"> </span>
-                {t("ax.intro.box5")}
-              </p>
+              <article className="group relative overflow-hidden rounded-3xl border border-stone-300/65 bg-white p-3 shadow-[0_24px_60px_rgba(40,38,64,0.08)]">
+                <div className="relative overflow-hidden rounded-[1.35rem] border border-stone-200/80 bg-stone-50">
+                  <img
+                    src="/example-a.png"
+                    alt="영상 팀 효율화 사례"
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute left-3 top-3 rounded-full bg-[linear-gradient(135deg,#F8B529,#C400FF)] px-3.5 py-1.5 text-sm font-bold text-white shadow-lg">
+                    8명 → 1명
+                  </div>
+                </div>
+                <div className="px-1 pb-1 pt-4 text-left">
+                  <p className="text-sm font-semibold tracking-[0.12em] text-[#C400FF]">AI 쇼츠 콘텐츠 자동생성</p>
+                  <h3 className="mt-2 text-lg font-black text-foreground md:text-xl">영상 제작 팀 운영 인력 87.5% 절감</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">반복 편집과 제작 흐름을 AX로 재설계해 8명이 하던 운영을 1명이 관리하는 구조로 바꿨습니다.</p>
+                </div>
+              </article>
+
+              <article className="group relative overflow-hidden rounded-3xl border border-stone-300/65 bg-white p-3 shadow-[0_24px_60px_rgba(40,38,64,0.08)]">
+                <div className="relative overflow-hidden rounded-[1.35rem] border border-stone-200/80 bg-stone-50">
+                  <img
+                    src="/example-b.png"
+                    alt="촬영 화보 이미지 리드 타임 단축 사례"
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                  <div className="absolute left-3 top-3 rounded-full bg-[linear-gradient(135deg,#F8B529,#C400FF)] px-3.5 py-1.5 text-sm font-bold text-white shadow-lg">
+                    리드 타임 -90.6%
+                  </div>
+                </div>
+                <div className="px-1 pb-1 pt-4 text-left">
+                  <p className="text-sm font-semibold tracking-[0.12em] text-[#C400FF]">AI 이미지 생성</p>
+                  <h3 className="mt-2 text-lg font-black text-foreground md:text-xl">촬영 화보 이미지 리드 타임 약 90.6% 감소</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">시안 정리, 선별, 후속 제작 연결을 자동화해 화보 이미지 처리 시간을 대폭 줄였습니다.</p>
+                </div>
+              </article>
             </motion.div>
           </motion.div>
         </div>
         
-        <HeroMetricsMarquee className="absolute inset-x-0 bottom-10 z-20 pb-0 md:bottom-12" />
+        <HeroMetricsMarquee className="relative z-20 mt-10 md:mt-12" />
 
         {/* Scroll indicator - moved outside container, at absolute bottom */}
         <motion.div 
@@ -998,21 +910,17 @@ const AXSystemSection = () => {
         </motion.div>
       </div>
 
-      {/* Part 2: Full-screen scroll snap 4 steps */}
-      {/* Mobile: All 4 steps on one screen */}
-      <MobileAllSteps steps={steps} />
-      
-      {/* Desktop: Individual full-screen steps */}
-      {steps.map((step, index) => (
-        <FullScreenStep 
-          key={step.number} 
-          step={step} 
-          index={index}
-        />
-      ))}
+      <InteractiveDemoSection />
+
+      {/* Part 2: Unified discovery sprint section */}
+      <DiscoverySprintSection
+        steps={steps}
+        activeIndex={activeStepIndex}
+        onSelect={setActiveStepIndex}
+      />
 
       {/* Part 3: Differentiators + Testimonials + Impact */}
-      <div className="min-h-screen flex items-center py-24 relative overflow-hidden overflow-x-hidden snap-start snap-always">
+      <div className="relative flex min-h-screen items-center overflow-hidden overflow-x-hidden py-24">
         {/* Background decorations */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30" preserveAspectRatio="none">
           <defs>
@@ -1084,7 +992,7 @@ const AXSystemSection = () => {
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-base md:text-lg font-bold mb-2 leading-snug text-foreground">
+                    <h3 className="mb-2 whitespace-pre-line text-base font-bold leading-snug text-foreground md:text-lg">
                       {item.title}
                     </h3>
                     

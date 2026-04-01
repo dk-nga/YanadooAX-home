@@ -23,7 +23,7 @@ export function HomePageClient() {
       <ScrollContainerProvider containerRef={scrollRef}>
         <div
           ref={scrollRef}
-          className="h-screen snap-y snap-mandatory overflow-y-auto scrollbar-hide bg-background"
+          className="h-screen overflow-y-auto scrollbar-hide bg-background"
         >
           {!animationComplete ? (
             <HeroAnimation onAnimationComplete={() => setAnimationComplete(true)} />
@@ -32,22 +32,22 @@ export function HomePageClient() {
             <>
               <Header />
               <main>
-                <section id="home" className="snap-start snap-always min-h-screen">
+                <section id="home" className="min-h-screen">
                   <AnimatedSection>
                     <HeroSection />
                   </AnimatedSection>
                 </section>
-                <div id="about" className="snap-start snap-always min-h-screen">
+                <div id="about" className="min-h-screen">
                   <AXSystemSection />
                 </div>
-                <section id="clients" className="snap-start snap-always min-h-screen">
+                <section id="clients" className="min-h-screen">
                   <AnimatedSection showScrollIndicator>
                     <ClientLogosSection />
                     <NewsSection />
                   </AnimatedSection>
                 </section>
-                <section className="snap-start snap-always min-h-screen">
-                  <AnimatedSection>
+                <section className="min-h-screen">
+                  <AnimatedSection persistVisible>
                     <CTASection />
                   </AnimatedSection>
                 </section>

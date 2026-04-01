@@ -1,5 +1,8 @@
 {
   "mcpServers": {
+    "figma-desktop": {
+      "url": "http://127.0.0.1:3845/mcp"
+    },
     "supabase": {
       "type": "http",
       "url": "https://mcp.supabase.com/mcp?project_ref=tamzfysgnqkgjqodalmx&features=database%2Cdocs%2Caccount%2Cdevelopment%2Cstorage%2Cdebugging%2Cfunctions"
