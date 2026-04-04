@@ -232,6 +232,35 @@
       "box4": "진단하고 해결합니다.",
       "box5": "어디서부터 시작할지 모르는 단계부터 정착까지 함께 합니다."
     },
+    "problems": {
+      "badge": "PROBLEMS WE SOLVE",
+      "title": "이런 문제를 해결합니다",
+      "subtitle": "클릭하면 해당 체험 시나리오로 바로 이동합니다",
+      "card1": {
+        "title": "반복 문의 대응에\n시간이 너무 많이 듭니다",
+        "description": "CS팀이 같은 답변을 하루 수십 번 반복"
+      },
+      "card2": {
+        "title": "콘텐츠 제작 속도가\n현업 속도를 못 따라갑니다",
+        "description": "기획 · 초안 · 수정에 매주 수십 시간 투입"
+      },
+      "card3": {
+        "title": "데이터가 흩어져\n의사결정이 느립니다",
+        "description": "보고서 한 장에 팀장 하루가 사라짐"
+      },
+      "card4": {
+        "title": "상담 인력 의존도가 높아\n운영이 불안정합니다",
+        "description": "담당자 부재 시 응답률 급락"
+      },
+      "card5": {
+        "title": "사람 없이\n생산량을 늘리고 싶습니다",
+        "description": "비용 증가 없이 처리량 3배 가능할까?"
+      },
+      "card6": {
+        "title": "AI 도입, 어디서부터\n시작할지 모르겠습니다",
+        "description": "바로 실행해 볼 수 있는 시나리오부터\n찾습니다"
+      }
+    },
     "framework": {
       "title": "Yanadoo AX의 AX Framework",
       "subtitle": "지속 가능한 AI 전환을 위한 4단계 실행 프레임워크"
@@ -324,6 +353,134 @@
       "title3": " 돌아갑니다",
       "subtitle1": "AX 전환의 목적은 도입이 아니라 성과입니다.",
       "subtitle2": "더 적은 시간으로 더 빠르게 보고하고, 더 많이 만들고, 더 오래 응대하는 구조를 만듭니다."
+    },
+    "verifiedResults": {
+      "badge": "VERIFIED RESULTS",
+      "title": "실제 도입 성과",
+      "subtitle": "우리 회사가 이렇게 바뀐다",
+      "featured": {
+        "eyebrow": "실제 검증 사례",
+        "tag": "SA · 마케팅 AX",
+        "title": "트래픽 440% 성장 플랫폼이 구축한 4가지 콘텐츠 운영 효율화 AI 프로세스",
+        "problemLabel": "문제",
+        "problem": "콘텐츠 제작 속도가 플랫폼 변화를 못 따라감.\n채널별 소재 확장이 수작업에 의존.",
+        "solutionLabel": "적용",
+        "solution": "AI 콘텐츠 자동 생성 + 소재 검증(Threads) →\nReels·Short·Newsletter 멀티채널 자동 배포",
+        "stat1": { "value": "+440.5%", "label": "전체 트래픽" },
+        "stat2": { "value": "+2,580.7%", "label": "Threads" },
+        "stat3": { "value": "×12", "label": "매출 J-Curve" },
+        "stat4": { "value": "50%↓", "label": "제작 시간" }
+      },
+      "card1": {
+        "badge": "커머스 · 상세페이지",
+        "team": "이커머스 / MD팀",
+        "title": "상세페이지 자동 생성 · 대량 제작 자동화",
+        "negative": "✕ 포토샵 수작업으로 하루 20~30건 처리 한계",
+        "positive": "✓ Figma + AI 에이전트로 200건+/일 자동 생성",
+        "stat1": { "value": "200건+", "label": "/일 자동 생성" },
+        "stat2": { "value": "-90%", "label": "제작 시간" }
+      },
+      "card2": {
+        "badge": "운영 · VOC 자동화",
+        "team": "CS팀 / 운영팀",
+        "title": "VOC 티켓 주차별 리포트 자동 생성",
+        "negative": "✕ 2주 단위 수작업 집계 · 요약, 지표 정리에 시간 낭비",
+        "positive": "✓ 프롬프트 입력만으로 주차별 VOC 리포트 즉시 생성",
+        "stat1": { "value": "+19.4%", "label": "티켓 처리량" },
+        "stat2": { "value": "0분", "label": "수작업 집계" }
+      },
+      "card3": {
+        "badge": "HR · 계약 자동화",
+        "team": "HR팀 / 경영지원",
+        "title": "계약서 자동 전송 원스톱 시스템",
+        "negative": "✕ 수동 작성→서명 요청→문서 관리 지연, 누락 빈발",
+        "positive": "✓ Form 업로드만으로 계약 · 서명 · 관리 원스톱 자동화",
+        "stat1": { "value": "5분", "label": "계약 처리" },
+        "stat2": { "value": "95%+", "label": "수작업 제거" }
+      },
+      "card4": {
+        "badge": "마케팅 · 키워드",
+        "team": "마케팅팀 / 퍼포먼스",
+        "title": "캠페인 키워드 인사이트 AI Agent",
+        "negative": "✕ 수백 개 UTM 키워드 수작업 분석, 시간 낭비",
+        "positive": "✓ AI가 312개 중 성과 집중 47개 자동 선별 완료",
+        "stat1": { "value": "47개", "label": "핵심 키워드" },
+        "stat2": { "value": "CTR +34%", "label": "집중 조합" }
+      },
+      "card5": {
+        "badge": "영업 · 세일즈 챗봇",
+        "team": "영업팀 / 세일즈",
+        "title": "AI 세일즈 챗봇 24시간 자동화",
+        "negative": "✕ 전화 상담 거부, 야간 · 주말 고객 이탈 발생",
+        "positive": "✓ 브랜드 페르소나 AI 24시간 응대 + 즉시 견적 생성",
+        "stat1": { "value": "24h", "label": "무중단 응대" },
+        "stat2": { "value": "+41%", "label": "전환율 향상" }
+      },
+      "card6": {
+        "badge": "재무 · 리포트",
+        "team": "경영지원 / 재무팀",
+        "title": "재무 Q&A 챗봇 MVP 구축",
+        "negative": "✕ 재무 지표 확인을 담당자에게 직접 요청, 보고서 탐색 낭비",
+        "positive": "✓ '이번 분기 EBITDA?' 질문에 즉시 수치 + 분석 응답",
+        "stat1": { "value": "즉시", "label": "EBITDA 조회" },
+        "stat2": { "value": "8h→40분", "label": "보고서 준비" }
+      },
+      "visual1": {
+        "alt": "영상 팀 효율화 사례",
+        "metric": "8명 → 1명",
+        "label": "AI 쇼츠 콘텐츠 자동생성",
+        "title": "영상 제작 팀 운영 인력 87.5% 절감",
+        "description": "반복 편집과 제작 흐름을 AX로 재설계해 8명이 하던 운영을 1명이 관리하는 구조로 바꿨습니다."
+      },
+      "visual2": {
+        "alt": "촬영 화보 이미지 리드 타임 단축 사례",
+        "metric": "리드 타임 -90.6%",
+        "label": "AI 이미지 생성",
+        "title": "촬영 화보 이미지 리드 타임 약 90.6% 감소",
+        "description": "시안 정리, 선별, 후속 제작 연결을 자동화해 화보 이미지 처리 시간을 대폭 줄였습니다."
+      }
+    },
+    "industryCases": {
+      "badge": "업종별 사례",
+      "title": "업종에 맞게 병목부터 바꿉니다",
+      "subtitle": "같은 AI라도 업종별 병목은 다릅니다.\n콘텐츠 생산, 운영 응대, 내부 보고, 현장 프로세스까지 업종 구조에 맞게 다시 설계합니다.",
+      "case1": {
+        "industry": "게임",
+        "metric": "응답 속도 24시간화",
+        "title": "운영 공지와 유저 응대를 끊기지 않게",
+        "description": "이벤트 안내, FAQ, 운영 공지를 AX 흐름으로 연결해 야간 문의도 먼저 받고, 필요한 이슈만 담당자가 이어받는 구조로 바꿉니다.",
+        "highlight1": "CS 선응대 자동화",
+        "highlight2": "운영 로그 정리"
+      },
+      "case2": {
+        "industry": "이커머스",
+        "metric": "제작 리드타임 단축",
+        "title": "상품 상세와 마케팅 소재를 한 번에",
+        "description": "원본 상품 정보 하나로 상세페이지 초안, 광고 카피, 숏폼 문안까지 연결해 제작 시간을 줄이고 캠페인 반응 포인트까지 빠르게 확인합니다.",
+        "highlight1": "콘텐츠 멀티포맷",
+        "highlight2": "캠페인 성과 연결"
+      },
+      "case3": {
+        "industry": "제조",
+        "metric": "보고 시간 대폭 절감",
+        "title": "현장 데이터가 아침 보고로 바로",
+        "description": "생산·품질·재고 데이터를 묶어 보고용 숫자를 자동 정리하고, 반복 집계 대신 의사결정에 바로 쓰는 브리핑 구조를 만듭니다.",
+        "highlight1": "현장 지표 집계",
+        "highlight2": "임원 보고 자동화"
+      },
+      "case4": {
+        "industry": "교육",
+        "metric": "반복 운영 업무 감소",
+        "title": "반복 상담과 학습 운영을 자동화",
+        "description": "수강 안내, 과제 응답, 학습 리마인드 같은 반복 운영을 자동화해 운영팀은 예외 케이스와 만족도 관리에 더 집중할 수 있게 만듭니다.",
+        "highlight1": "수강생 응대 자동화",
+        "highlight2": "운영 알림 최적화"
+      }
+    },
+    "roleCases": {
+      "badge": "직무별 사례",
+      "title": "직무에 따라 체감 성과가 달라집니다",
+      "subtitle": "같은 조직 안에서도 디자인, 운영, 마케팅처럼 체감 포인트는 다릅니다.\n실무자가 바로 느끼는 변화 중심으로 사례를 정리했습니다."
     },
     "testimonial1": {
       "title": "이론과 실습의 밸런스가 딱 좋았어요",

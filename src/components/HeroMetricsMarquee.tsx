@@ -6,25 +6,26 @@ import { cn } from "@/lib/utils";
 type MetricItem = {
   value: string;
   label: string;
-  note: string;
 };
 
 const metricsByLanguage: Record<"ko" | "ja", MetricItem[]> = {
   ko: [
-    { value: "92%", label: "재구매·심화 교육 희망", note: "education_stats" },
-    { value: "4.6/5.0", label: "평균 교육 만족도", note: "education_stats" },
-    { value: "243명", label: "누적 기업교육 수강생", note: "education_stats" },
-    { value: "12주", label: "정착 중심 AX 파트너십", note: "ax-partners" },
-    { value: "6개", label: "AX-Level 측정 지표", note: "education evidence" },
-    { value: "4단계", label: "Yanadoo AX 실행 프레임워크", note: "home framework" },
+    { value: "+440.5%", label: "S사 전체 트래픽 성장 (3개월)" },
+    { value: "+2,580.7%", label: "Threads 단일 채널 성장" },
+    { value: "×12", label: "SNS 경유 매출 J-Curve" },
+    { value: "50%↓", label: "콘텐츠 제작시간 단축" },
+    { value: "200건+", label: "상세페이지 자동 생성 /일" },
+    { value: "5분", label: "계약서 자동 처리 속도" },
+    { value: "8h→40분", label: "주간 보고서 작성 시간" },
   ],
   ja: [
-    { value: "92%", label: "再受講・発展教育希望", note: "education_stats" },
-    { value: "4.6/5.0", label: "平均教育満足度", note: "education_stats" },
-    { value: "243名", label: "累計法人研修受講者", note: "education_stats" },
-    { value: "12週", label: "定着重視のAXパートナーシップ", note: "ax-partners" },
-    { value: "6項目", label: "AX-Level測定指標", note: "education evidence" },
-    { value: "4段階", label: "Yanadoo AX実行フレームワーク", note: "home framework" },
+    { value: "+440.5%", label: "S社 全体トラフィック成長（3か月）" },
+    { value: "+2,580.7%", label: "Threads単一チャネル成長" },
+    { value: "×12", label: "SNS経由売上 J-Curve" },
+    { value: "50%↓", label: "コンテンツ制作時間短縮" },
+    { value: "200件+", label: "商品詳細ページ自動生成 /日" },
+    { value: "5分", label: "契約書 自動処理速度" },
+    { value: "8h→40分", label: "週次レポート作成時間" },
   ],
 };
 
@@ -34,41 +35,42 @@ export function HeroMetricsMarquee({ className }: { className?: string }) {
   const marqueeItems = [...metrics, ...metrics];
 
   return (
-    <section className={cn("relative px-4 pb-10 md:px-6 md:pb-12", className)}>
-      <div className="container mx-auto">
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/65 bg-[linear-gradient(135deg,rgba(255,255,255,0.9)_0%,rgba(255,248,229,0.88)_45%,rgba(250,243,255,0.92)_100%)] shadow-[0_30px_90px_rgba(40,38,64,0.08)] backdrop-blur-md">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background via-background/80 to-transparent md:w-28" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background via-background/80 to-transparent md:w-28" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C400FF]/35 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#F8B529]/45 to-transparent" />
+    <div className={cn("relative px-0", className)}>
+      <div className="relative overflow-hidden rounded-[28px] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.84),rgba(248,244,252,0.92))] shadow-[0_18px_46px_rgba(40,38,64,0.08)] backdrop-blur-md">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(248,181,41,0.05),rgba(255,255,255,0.03),rgba(196,0,255,0.06))]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C400FF]/18 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#F8B529]/22 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#f8f4fc] via-[#f8f4fc]/88 to-transparent md:w-20" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#f8f4fc] via-[#f8f4fc]/88 to-transparent md:w-20" />
+        <div className="overflow-hidden py-4 md:py-5">
+          <div className="hero-metrics-marquee flex w-max items-center gap-0">
+            {marqueeItems.map((item, index) => {
+              const isBlue = index % 3 === 0 || index % 3 === 1;
+              const isPurple = index % 3 === 2;
 
-          <div className="flex items-center gap-3 border-b border-black/5 px-5 py-3 text-[11px] font-semibold tracking-[0.24em] text-[#282640]/60 uppercase md:px-8">
-            <span className="inline-flex h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF]" />
-            <span>{language === "ja" ? "AX Signals" : "AX Signals"}</span>
-          </div>
-
-          <div className="overflow-hidden py-4 md:py-5">
-            <div className="hero-metrics-marquee flex w-max items-center gap-3 md:gap-4">
-              {marqueeItems.map((item, index) => (
+              return (
                 <article
                   key={`${item.value}-${item.label}-${index}`}
-                  className="group flex min-w-[220px] items-center gap-4 rounded-full border border-[#282640]/8 bg-white/78 px-4 py-3 shadow-[0_12px_30px_rgba(40,38,64,0.06)] backdrop-blur-sm transition-transform duration-300 hover:-translate-y-0.5 md:min-w-[280px] md:px-5"
+                  className="group flex min-w-[250px] items-center gap-5 border-r border-[#282640]/10 px-5 py-1 last:border-r-0 md:min-w-[410px] md:px-14"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(135deg,rgba(248,181,41,0.18)_0%,rgba(196,0,255,0.14)_100%)] ring-1 ring-[#C400FF]/10 md:h-14 md:w-14">
-                    <span className="bg-gradient-to-r from-[#282640] via-[#6A2FCB] to-[#C400FF] bg-clip-text text-[13px] font-semibold leading-none tracking-[-0.02em] text-transparent md:text-[15px]">
-                      {item.value}
-                    </span>
-                  </div>
-
-                  <div className="min-w-0">
-                    <p className="truncate text-sm font-semibold text-foreground md:text-base">{item.label}</p>
-                    <p className="mt-0.5 text-[11px] font-medium tracking-[0.16em] text-muted-foreground uppercase">
-                      {item.note}
-                    </p>
-                  </div>
+                  <span
+                    className={cn(
+                      "shrink-0 text-[2rem] font-black tracking-[-0.04em] md:text-[2.2rem]",
+                      isPurple
+                        ? "text-[#5b3fe3]"
+                        : isBlue
+                          ? "text-[#3565c6]"
+                          : "text-[#46a556]"
+                    )}
+                  >
+                    {item.value}
+                  </span>
+                  <p className="max-w-[160px] text-[15px] font-semibold leading-[1.35] text-[#6d7280] md:max-w-[220px] md:text-[1rem]">
+                    {item.label}
+                  </p>
                 </article>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -98,6 +100,6 @@ export function HeroMetricsMarquee({ className }: { className?: string }) {
           }
         }
       `}</style>
-    </section>
+    </div>
   );
 }

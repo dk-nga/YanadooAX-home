@@ -10,7 +10,6 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeroAnimation } from "@/components/HeroAnimation";
 import { HeroSection } from "@/components/HeroSection";
-import { NewsSection } from "@/components/NewsSection";
 import { ContactWidgetProvider } from "@/contexts/ContactWidgetContext";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 
@@ -40,10 +39,9 @@ export function HomePageClient() {
                 <div id="about" className="min-h-screen">
                   <AXSystemSection />
                 </div>
-                <section id="clients" className="min-h-screen">
-                  <AnimatedSection showScrollIndicator>
+                <section id="clients">
+                  <AnimatedSection className="min-h-0">
                     <ClientLogosSection />
-                    <NewsSection />
                   </AnimatedSection>
                 </section>
                 <section className="min-h-screen">

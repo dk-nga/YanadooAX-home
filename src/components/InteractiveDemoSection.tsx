@@ -12,7 +12,7 @@ import {
   TrendingUp,
   Wand2,
 } from "lucide-react";
-import { startTransition, useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -103,120 +103,121 @@ function FlowRow({
 export function InteractiveDemoSection() {
   const { t } = useLanguage();
 
-  const scenarios: Scenario[] = [
-    {
-      id: "support",
-      title: t("demo.scenarios.support.title"),
-      description: t("demo.scenarios.support.description"),
-      tags: [t("demo.scenarios.support.tag1"), t("demo.scenarios.support.tag2")],
-      prompt: t("demo.scenarios.support.prompt"),
-      quickOptions: [
-        {
-          question: t("demo.scenarios.support.quick1"),
-          userBubble: t("demo.scenarios.support.quick1"),
-          agentReply: t("demo.scenarios.support.reply1"),
-          metrics: [
-            t("demo.scenarios.support.quick1Metric1"),
-            t("demo.scenarios.support.quick1Metric2"),
-            t("demo.scenarios.support.quick1Metric3"),
-          ],
-        },
-        {
-          question: t("demo.scenarios.support.quick2"),
-          userBubble: t("demo.scenarios.support.quick2"),
-          agentReply: t("demo.scenarios.support.reply2"),
-          metrics: [
-            t("demo.scenarios.support.quick2Metric1"),
-            t("demo.scenarios.support.quick2Metric2"),
-            t("demo.scenarios.support.quick2Metric3"),
-          ],
-        },
-        {
-          question: t("demo.scenarios.support.quick3"),
-          userBubble: t("demo.scenarios.support.quick3"),
-          agentReply: t("demo.scenarios.support.reply3"),
-          metrics: [
-            t("demo.scenarios.support.quick3Metric1"),
-            t("demo.scenarios.support.quick3Metric2"),
-            t("demo.scenarios.support.quick3Metric3"),
-          ],
-        },
-      ],
-      metricLabels: [
-        t("demo.scenarios.support.metricLabel1"),
-        t("demo.scenarios.support.metricLabel2"),
-        t("demo.scenarios.support.metricLabel3"),
-      ],
-      beforeItems: [
-        t("demo.scenarios.support.before1"),
-        t("demo.scenarios.support.before2"),
-      ],
-      afterItems: [t("demo.scenarios.support.after1"), t("demo.scenarios.support.after2")],
-      completed: t("demo.scenarios.support.completed"),
-      icon: MessageCircleMore,
-      accent: "#111111",
-      model: "opus",
-    },
-    {
-      id: "content",
-      title: t("demo.scenarios.content.title"),
-      description: t("demo.scenarios.content.description"),
-      tags: [t("demo.scenarios.content.tag1"), t("demo.scenarios.content.tag2")],
-      prompt: t("demo.scenarios.content.prompt"),
-      quickOptions: [
-        {
-          question: t("demo.scenarios.content.quick1"),
-          userBubble: t("demo.scenarios.content.quick1"),
-          agentReply: t("demo.scenarios.content.reply1"),
-          metrics: [
-            t("demo.scenarios.content.quick1Metric1"),
-            t("demo.scenarios.content.quick1Metric2"),
-            t("demo.scenarios.content.quick1Metric3"),
-          ],
-        },
-        {
-          question: t("demo.scenarios.content.quick2"),
-          userBubble: t("demo.scenarios.content.quick2"),
-          agentReply: t("demo.scenarios.content.reply2"),
-          metrics: [
-            t("demo.scenarios.content.quick2Metric1"),
-            t("demo.scenarios.content.quick2Metric2"),
-            t("demo.scenarios.content.quick2Metric3"),
-          ],
-        },
-        {
-          question: t("demo.scenarios.content.quick3"),
-          userBubble: t("demo.scenarios.content.quick3"),
-          agentReply: t("demo.scenarios.content.reply3"),
-          metrics: [
-            t("demo.scenarios.content.quick3Metric1"),
-            t("demo.scenarios.content.quick3Metric2"),
-            t("demo.scenarios.content.quick3Metric3"),
-          ],
-        },
-      ],
-      metricLabels: [
-        t("demo.scenarios.content.metricLabel1"),
-        t("demo.scenarios.content.metricLabel2"),
-        t("demo.scenarios.content.metricLabel3"),
-      ],
-      beforeItems: [
-        t("demo.scenarios.content.before1"),
-        t("demo.scenarios.content.before2"),
-      ],
-      afterItems: [t("demo.scenarios.content.after1"), t("demo.scenarios.content.after2")],
-      completed: t("demo.scenarios.content.completed"),
-      icon: Sparkles,
-      accent: "#2f6edb",
-      model: "flow",
-    },
-    {
-      id: "report",
-      title: t("demo.scenarios.report.title"),
-      description: t("demo.scenarios.report.description"),
-      tags: [t("demo.scenarios.report.tag1"), t("demo.scenarios.report.tag2")],
-      prompt: t("demo.scenarios.report.prompt"),
-      quickOptions: [
+  const scenarios: Scenario[] = useMemo(
+    () => [
+      {
+        id: "support",
+        title: t("demo.scenarios.support.title"),
+        description: t("demo.scenarios.support.description"),
+        tags: [t("demo.scenarios.support.tag1"), t("demo.scenarios.support.tag2")],
+        prompt: t("demo.scenarios.support.prompt"),
+        quickOptions: [
+          {
+            question: t("demo.scenarios.support.quick1"),
+            userBubble: t("demo.scenarios.support.quick1"),
+            agentReply: t("demo.scenarios.support.reply1"),
+            metrics: [
+              t("demo.scenarios.support.quick1Metric1"),
+              t("demo.scenarios.support.quick1Metric2"),
+              t("demo.scenarios.support.quick1Metric3"),
+            ],
+          },
+          {
+            question: t("demo.scenarios.support.quick2"),
+            userBubble: t("demo.scenarios.support.quick2"),
+            agentReply: t("demo.scenarios.support.reply2"),
+            metrics: [
+              t("demo.scenarios.support.quick2Metric1"),
+              t("demo.scenarios.support.quick2Metric2"),
+              t("demo.scenarios.support.quick2Metric3"),
+            ],
+          },
+          {
+            question: t("demo.scenarios.support.quick3"),
+            userBubble: t("demo.scenarios.support.quick3"),
+            agentReply: t("demo.scenarios.support.reply3"),
+            metrics: [
+              t("demo.scenarios.support.quick3Metric1"),
+              t("demo.scenarios.support.quick3Metric2"),
+              t("demo.scenarios.support.quick3Metric3"),
+            ],
+          },
+        ],
+        metricLabels: [
+          t("demo.scenarios.support.metricLabel1"),
+          t("demo.scenarios.support.metricLabel2"),
+          t("demo.scenarios.support.metricLabel3"),
+        ],
+        beforeItems: [
+          t("demo.scenarios.support.before1"),
+          t("demo.scenarios.support.before2"),
+        ],
+        afterItems: [t("demo.scenarios.support.after1"), t("demo.scenarios.support.after2")],
+        completed: t("demo.scenarios.support.completed"),
+        icon: MessageCircleMore,
+        accent: "#111111",
+        model: "opus",
+      },
+      {
+        id: "content",
+        title: t("demo.scenarios.content.title"),
+        description: t("demo.scenarios.content.description"),
+        tags: [t("demo.scenarios.content.tag1"), t("demo.scenarios.content.tag2")],
+        prompt: t("demo.scenarios.content.prompt"),
+        quickOptions: [
+          {
+            question: t("demo.scenarios.content.quick1"),
+            userBubble: t("demo.scenarios.content.quick1"),
+            agentReply: t("demo.scenarios.content.reply1"),
+            metrics: [
+              t("demo.scenarios.content.quick1Metric1"),
+              t("demo.scenarios.content.quick1Metric2"),
+              t("demo.scenarios.content.quick1Metric3"),
+            ],
+          },
+          {
+            question: t("demo.scenarios.content.quick2"),
+            userBubble: t("demo.scenarios.content.quick2"),
+            agentReply: t("demo.scenarios.content.reply2"),
+            metrics: [
+              t("demo.scenarios.content.quick2Metric1"),
+              t("demo.scenarios.content.quick2Metric2"),
+              t("demo.scenarios.content.quick2Metric3"),
+            ],
+          },
+          {
+            question: t("demo.scenarios.content.quick3"),
+            userBubble: t("demo.scenarios.content.quick3"),
+            agentReply: t("demo.scenarios.content.reply3"),
+            metrics: [
+              t("demo.scenarios.content.quick3Metric1"),
+              t("demo.scenarios.content.quick3Metric2"),
+              t("demo.scenarios.content.quick3Metric3"),
+            ],
+          },
+        ],
+        metricLabels: [
+          t("demo.scenarios.content.metricLabel1"),
+          t("demo.scenarios.content.metricLabel2"),
+          t("demo.scenarios.content.metricLabel3"),
+        ],
+        beforeItems: [
+          t("demo.scenarios.content.before1"),
+          t("demo.scenarios.content.before2"),
+        ],
+        afterItems: [t("demo.scenarios.content.after1"), t("demo.scenarios.content.after2")],
+        completed: t("demo.scenarios.content.completed"),
+        icon: Sparkles,
+        accent: "#2f6edb",
+        model: "flow",
+      },
+      {
+        id: "report",
+        title: t("demo.scenarios.report.title"),
+        description: t("demo.scenarios.report.description"),
+        tags: [t("demo.scenarios.report.tag1"), t("demo.scenarios.report.tag2")],
+        prompt: t("demo.scenarios.report.prompt"),
+        quickOptions: [
         {
           question: t("demo.scenarios.report.quick1"),
           userBubble: t("demo.scenarios.report.quick1"),
@@ -367,9 +368,11 @@ export function InteractiveDemoSection() {
       completed: t("demo.scenarios.sales.completed"),
       icon: TrendingUp,
       accent: "#2b7fff",
-      model: "flow",
-    },
-  ];
+        model: "flow",
+      },
+    ],
+    [t]
+  );
 
   const [selectedScenarioId, setSelectedScenarioId] = useState<ScenarioId>("support");
   const [selectedModel, setSelectedModel] = useState<ModelId>("opus");
@@ -463,6 +466,13 @@ export function InteractiveDemoSection() {
     );
   };
 
+  const flowLabels = [
+    t("demo.flow.receive"),
+    t("demo.flow.analyze"),
+    t("demo.flow.generate"),
+    t("demo.flow.report"),
+  ];
+
   useEffect(() => {
     return () => {
       clearTimers();
@@ -473,15 +483,40 @@ export function InteractiveDemoSection() {
     setStatusMessage(t("demo.workspace.ready"));
   }, [t]);
 
-  const flowLabels = [
-    t("demo.flow.receive"),
-    t("demo.flow.analyze"),
-    t("demo.flow.generate"),
-    t("demo.flow.report"),
-  ];
+  useEffect(() => {
+    const handleExternalScenarioSelect = (event: Event) => {
+      const customEvent = event as CustomEvent<{ scenarioId?: ScenarioId }>;
+      const nextScenario = scenariosRef.current.find(
+        (scenario) => scenario.id === customEvent.detail?.scenarioId
+      );
+
+      if (nextScenario) {
+        startTransition(() => {
+          setSelectedScenarioId(nextScenario.id);
+          setSelectedModel(nextScenario.model);
+          setSelectedQuickIndex(0);
+          setAutoMode(true);
+          setLiveMode(true);
+        });
+        clearTimers();
+        setIsRunning(false);
+        setFlowStep(-1);
+        setStatusMessage(t("demo.workspace.ready"));
+        setReplyVisible(false);
+        setMetricsVisible(0);
+        setBeforeAfterVisible(false);
+      }
+    };
+
+    window.addEventListener("ax:select-demo-scenario", handleExternalScenarioSelect as EventListener);
+
+    return () => {
+      window.removeEventListener("ax:select-demo-scenario", handleExternalScenarioSelect as EventListener);
+    };
+  }, [scenarios, t]);
 
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,#fbfbfe_0%,#f3f0fb_52%,#f8f8fc_100%)] pb-28 pt-20 text-slate-950 md:pb-32 md:pt-24">
+    <section id="interactive-demo" className="relative overflow-hidden bg-[linear-gradient(180deg,#fbfbfe_0%,#f3f0fb_52%,#f8f8fc_100%)] pb-28 pt-20 text-slate-950 md:pb-32 md:pt-24">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(196,0,255,0.12),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.78),rgba(248,248,252,0.96))]" />
       <div className="absolute left-[-120px] top-10 h-64 w-64 rounded-full bg-[#F8B529]/10 blur-3xl" />
       <div className="absolute bottom-0 right-[-140px] h-72 w-72 rounded-full bg-[#C400FF]/10 blur-3xl" />

@@ -2,7 +2,7 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, BarChart3, ChevronLeft, ChevronRight, Clock3, Compass, PenTool, TrendingUp, Users } from "lucide-react";
 import { HeroMetricsMarquee } from "@/components/HeroMetricsMarquee";
 import { InteractiveDemoSection } from "@/components/InteractiveDemoSection";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -133,6 +133,231 @@ const getTestimonials = (t: (key: string) => string) => [
   },
 ];
 
+const getIndustryCases = (t: (key: string) => string) => [
+  {
+    id: 1,
+    industry: t("ax.industryCases.case1.industry"),
+    metric: t("ax.industryCases.case1.metric"),
+    title: t("ax.industryCases.case1.title"),
+    description: t("ax.industryCases.case1.description"),
+    highlights: [
+      t("ax.industryCases.case1.highlight1"),
+      t("ax.industryCases.case1.highlight2"),
+    ],
+  },
+  {
+    id: 2,
+    industry: t("ax.industryCases.case2.industry"),
+    metric: t("ax.industryCases.case2.metric"),
+    title: t("ax.industryCases.case2.title"),
+    description: t("ax.industryCases.case2.description"),
+    highlights: [
+      t("ax.industryCases.case2.highlight1"),
+      t("ax.industryCases.case2.highlight2"),
+    ],
+  },
+  {
+    id: 3,
+    industry: t("ax.industryCases.case3.industry"),
+    metric: t("ax.industryCases.case3.metric"),
+    title: t("ax.industryCases.case3.title"),
+    description: t("ax.industryCases.case3.description"),
+    highlights: [
+      t("ax.industryCases.case3.highlight1"),
+      t("ax.industryCases.case3.highlight2"),
+    ],
+  },
+  {
+    id: 4,
+    industry: t("ax.industryCases.case4.industry"),
+    metric: t("ax.industryCases.case4.metric"),
+    title: t("ax.industryCases.case4.title"),
+    description: t("ax.industryCases.case4.description"),
+    highlights: [
+      t("ax.industryCases.case4.highlight1"),
+      t("ax.industryCases.case4.highlight2"),
+    ],
+  },
+];
+
+const getVerifiedResults = (t: (key: string) => string) => ({
+  featured: {
+    eyebrow: t("ax.verifiedResults.featured.eyebrow"),
+    tag: t("ax.verifiedResults.featured.tag"),
+    title: t("ax.verifiedResults.featured.title"),
+    problemLabel: t("ax.verifiedResults.featured.problemLabel"),
+    problem: t("ax.verifiedResults.featured.problem"),
+    solutionLabel: t("ax.verifiedResults.featured.solutionLabel"),
+    solution: t("ax.verifiedResults.featured.solution"),
+    stats: [
+      {
+        value: t("ax.verifiedResults.featured.stat1.value"),
+        label: t("ax.verifiedResults.featured.stat1.label"),
+      },
+      {
+        value: t("ax.verifiedResults.featured.stat2.value"),
+        label: t("ax.verifiedResults.featured.stat2.label"),
+      },
+      {
+        value: t("ax.verifiedResults.featured.stat3.value"),
+        label: t("ax.verifiedResults.featured.stat3.label"),
+      },
+      {
+        value: t("ax.verifiedResults.featured.stat4.value"),
+        label: t("ax.verifiedResults.featured.stat4.label"),
+      },
+    ],
+  },
+  cards: [
+    {
+      badge: t("ax.verifiedResults.card1.badge"),
+      team: t("ax.verifiedResults.card1.team"),
+      title: t("ax.verifiedResults.card1.title"),
+      negative: t("ax.verifiedResults.card1.negative"),
+      positive: t("ax.verifiedResults.card1.positive"),
+      stat1Value: t("ax.verifiedResults.card1.stat1.value"),
+      stat1Label: t("ax.verifiedResults.card1.stat1.label"),
+      stat2Value: t("ax.verifiedResults.card1.stat2.value"),
+      stat2Label: t("ax.verifiedResults.card1.stat2.label"),
+    },
+    {
+      badge: t("ax.verifiedResults.card2.badge"),
+      team: t("ax.verifiedResults.card2.team"),
+      title: t("ax.verifiedResults.card2.title"),
+      negative: t("ax.verifiedResults.card2.negative"),
+      positive: t("ax.verifiedResults.card2.positive"),
+      stat1Value: t("ax.verifiedResults.card2.stat1.value"),
+      stat1Label: t("ax.verifiedResults.card2.stat1.label"),
+      stat2Value: t("ax.verifiedResults.card2.stat2.value"),
+      stat2Label: t("ax.verifiedResults.card2.stat2.label"),
+    },
+    {
+      badge: t("ax.verifiedResults.card3.badge"),
+      team: t("ax.verifiedResults.card3.team"),
+      title: t("ax.verifiedResults.card3.title"),
+      negative: t("ax.verifiedResults.card3.negative"),
+      positive: t("ax.verifiedResults.card3.positive"),
+      stat1Value: t("ax.verifiedResults.card3.stat1.value"),
+      stat1Label: t("ax.verifiedResults.card3.stat1.label"),
+      stat2Value: t("ax.verifiedResults.card3.stat2.value"),
+      stat2Label: t("ax.verifiedResults.card3.stat2.label"),
+    },
+    {
+      badge: t("ax.verifiedResults.card4.badge"),
+      team: t("ax.verifiedResults.card4.team"),
+      title: t("ax.verifiedResults.card4.title"),
+      negative: t("ax.verifiedResults.card4.negative"),
+      positive: t("ax.verifiedResults.card4.positive"),
+      stat1Value: t("ax.verifiedResults.card4.stat1.value"),
+      stat1Label: t("ax.verifiedResults.card4.stat1.label"),
+      stat2Value: t("ax.verifiedResults.card4.stat2.value"),
+      stat2Label: t("ax.verifiedResults.card4.stat2.label"),
+    },
+    {
+      badge: t("ax.verifiedResults.card5.badge"),
+      team: t("ax.verifiedResults.card5.team"),
+      title: t("ax.verifiedResults.card5.title"),
+      negative: t("ax.verifiedResults.card5.negative"),
+      positive: t("ax.verifiedResults.card5.positive"),
+      stat1Value: t("ax.verifiedResults.card5.stat1.value"),
+      stat1Label: t("ax.verifiedResults.card5.stat1.label"),
+      stat2Value: t("ax.verifiedResults.card5.stat2.value"),
+      stat2Label: t("ax.verifiedResults.card5.stat2.label"),
+    },
+    {
+      badge: t("ax.verifiedResults.card6.badge"),
+      team: t("ax.verifiedResults.card6.team"),
+      title: t("ax.verifiedResults.card6.title"),
+      negative: t("ax.verifiedResults.card6.negative"),
+      positive: t("ax.verifiedResults.card6.positive"),
+      stat1Value: t("ax.verifiedResults.card6.stat1.value"),
+      stat1Label: t("ax.verifiedResults.card6.stat1.label"),
+      stat2Value: t("ax.verifiedResults.card6.stat2.value"),
+      stat2Label: t("ax.verifiedResults.card6.stat2.label"),
+    },
+  ],
+  visualProofs: [
+    {
+      image: "/example-a.png",
+      alt: t("ax.verifiedResults.visual1.alt"),
+      metric: t("ax.verifiedResults.visual1.metric"),
+      label: t("ax.verifiedResults.visual1.label"),
+      title: t("ax.verifiedResults.visual1.title"),
+      description: t("ax.verifiedResults.visual1.description"),
+    },
+    {
+      image: "/example-b.png",
+      alt: t("ax.verifiedResults.visual2.alt"),
+      metric: t("ax.verifiedResults.visual2.metric"),
+      label: t("ax.verifiedResults.visual2.label"),
+      title: t("ax.verifiedResults.visual2.title"),
+      description: t("ax.verifiedResults.visual2.description"),
+    },
+  ],
+});
+
+type DemoScenarioId = "support" | "content" | "report" | "marketing" | "sales";
+
+type ProblemCardType = {
+  id: number;
+  title: string;
+  description: string;
+  icon: typeof Clock3;
+  scenarioId: DemoScenarioId;
+  iconClassName: string;
+};
+
+const getProblemCards = (t: (key: string) => string): ProblemCardType[] => [
+  {
+    id: 1,
+    title: t("ax.problems.card1.title"),
+    description: t("ax.problems.card1.description"),
+    icon: Clock3,
+    scenarioId: "support",
+    iconClassName: "text-[#6b7b93]",
+  },
+  {
+    id: 2,
+    title: t("ax.problems.card2.title"),
+    description: t("ax.problems.card2.description"),
+    icon: PenTool,
+    scenarioId: "content",
+    iconClassName: "text-[#d9892f]",
+  },
+  {
+    id: 3,
+    title: t("ax.problems.card3.title"),
+    description: t("ax.problems.card3.description"),
+    icon: BarChart3,
+    scenarioId: "report",
+    iconClassName: "text-[#5f7fd6]",
+  },
+  {
+    id: 4,
+    title: t("ax.problems.card4.title"),
+    description: t("ax.problems.card4.description"),
+    icon: Users,
+    scenarioId: "support",
+    iconClassName: "text-[#7396c4]",
+  },
+  {
+    id: 5,
+    title: t("ax.problems.card5.title"),
+    description: t("ax.problems.card5.description"),
+    icon: TrendingUp,
+    scenarioId: "marketing",
+    iconClassName: "text-[#d66552]",
+  },
+  {
+    id: 6,
+    title: t("ax.problems.card6.title"),
+    description: t("ax.problems.card6.description"),
+    icon: Compass,
+    scenarioId: "sales",
+    iconClassName: "text-[#d6a12e]",
+  },
+];
+
 // Step type definition
 type StepType = {
   number: string;
@@ -159,6 +384,24 @@ type TestimonialType = {
   company: string;
   employeeCount: string;
   image: string;
+};
+
+type IndustryCaseType = {
+  id: number;
+  industry: string;
+  metric: string;
+  title: string;
+  description: string;
+  highlights: string[];
+};
+
+type VerifiedVisualProofType = {
+  image: string;
+  alt: string;
+  metric: string;
+  label: string;
+  title: string;
+  description: string;
 };
 
 // Counter component for animated numbers
@@ -715,45 +958,294 @@ const DiscoverySprintSection = ({
   );
 };
 
+const IndustryCasesSection = ({ cases }: { cases: IndustryCaseType[] }) => {
+  const { t } = useLanguage();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="mx-auto mb-10 max-w-6xl md:mb-14"
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="mb-6 text-center md:mb-8">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C400FF]/15 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 px-4 py-2">
+          <span className="text-sm font-bold text-[#C400FF]">{t("ax.industryCases.badge")}</span>
+        </div>
+        <h3 className="text-2xl font-black leading-tight text-foreground md:text-4xl">
+          {t("ax.industryCases.title")}
+        </h3>
+        <p className="mx-auto mt-3 max-w-3xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
+          {t("ax.industryCases.subtitle")}
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {cases.map((item, index) => (
+          <motion.article
+            key={item.id}
+            className="group relative overflow-hidden rounded-[28px] border border-stone-300/70 bg-white/92 p-5 shadow-[0_24px_70px_rgba(24,24,33,0.06)] backdrop-blur-sm md:p-6"
+            initial={{ opacity: 0, y: 28 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+            transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+            whileHover={{ y: -6 }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.12),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.1),transparent_34%)] opacity-80" />
+            <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full border border-stone-300/50" />
+            <div className="absolute -bottom-20 left-[-10px] h-32 w-32 rounded-full bg-[#f7f4fb]" />
+
+            <div className="relative z-10">
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <span className="rounded-full border border-[#C400FF]/15 bg-white/80 px-3 py-1 text-xs font-bold tracking-[0.16em] text-[#6b33c7]">
+                  {item.industry}
+                </span>
+                <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-sm font-black text-transparent">
+                  {item.metric}
+                </span>
+              </div>
+
+              <h4 className="text-xl font-black leading-tight text-foreground md:text-2xl">
+                {item.title}
+              </h4>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/72 md:text-[15px]">
+                {item.description}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {item.highlights.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="rounded-full border border-stone-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+const VerifiedResultsSection = ({
+  results,
+  visualProofs,
+}: {
+  results: ReturnType<typeof getVerifiedResults>;
+  visualProofs: VerifiedVisualProofType[];
+}) => {
+  const { t } = useLanguage();
+  const ref = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const scrollRail = (direction: "left" | "right") => {
+    const node = railRef.current;
+    if (!node) return;
+    node.scrollBy({ left: direction === "left" ? -360 : 360, behavior: "smooth" });
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className="mx-auto mb-14 max-w-[1380px]"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="mb-7 flex items-end justify-between gap-6">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#C400FF]">
+            {t("ax.verifiedResults.badge")}
+          </p>
+          <h3 className="mt-3 text-3xl font-black leading-tight text-foreground md:text-5xl">
+            {t("ax.verifiedResults.title")}
+          </h3>
+          <p className="mt-2 text-base text-muted-foreground md:text-xl">
+            {t("ax.verifiedResults.subtitle")}
+          </p>
+        </div>
+
+        <div className="hidden items-center gap-3 lg:flex">
+          <button
+            type="button"
+            onClick={() => scrollRail("left")}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-muted-foreground shadow-sm transition-colors hover:border-[#C400FF]/20 hover:text-[#C400FF]"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollRail("right")}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-200 bg-white text-muted-foreground shadow-sm transition-colors hover:border-[#C400FF]/20 hover:text-[#C400FF]"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+
+      <div className="grid items-stretch gap-5 xl:grid-cols-[360px_minmax(0,1fr)]">
+        <article className="relative h-[600px] overflow-hidden rounded-[32px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-7 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.14),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.12),transparent_30%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(196,0,255,0.08))]" />
+          <div className="relative z-10">
+            <div className="mb-5 flex flex-wrap gap-2">
+              <span className="rounded-full border border-[#F8B529]/18 bg-[#F8B529]/10 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-[#F8B529]">
+                {results.featured.eyebrow}
+              </span>
+              <span className="rounded-full border border-white/8 bg-white/6 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-white/70">
+                {results.featured.tag}
+              </span>
+            </div>
+
+            <h4 className="text-[1.28rem] font-black leading-[1.22] tracking-[-0.03em] text-white md:text-[1.5rem]">
+              {results.featured.title}
+            </h4>
+
+            <div className="mt-5 space-y-4 border-t border-white/10 pt-5">
+              <div>
+                <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-white/45">
+                  {results.featured.problemLabel}
+                </p>
+                <p className="whitespace-pre-line text-[15px] leading-relaxed text-white/72">
+                  {results.featured.problem}
+                </p>
+              </div>
+              <div>
+                <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-white/45">
+                  {results.featured.solutionLabel}
+                </p>
+                <p className="whitespace-pre-line text-[15px] leading-relaxed text-white/78">
+                  {results.featured.solution}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              {results.featured.stats.map((stat) => (
+                <div key={stat.label} className="rounded-2xl border border-white/8 bg-white/[0.045] p-4">
+                  <p className="text-[1.2rem] font-black leading-none text-[#F8B529] md:text-[1.35rem]">{stat.value}</p>
+                  <p className="mt-2 text-xs text-white/55">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <div className="min-w-0">
+          <div
+            ref={railRef}
+            className="flex min-h-[600px] gap-4 overflow-x-auto pb-3 scrollbar-hide scroll-smooth"
+          >
+            {results.cards.map((card, index) => (
+              <motion.article
+                key={`${card.badge}-${index}`}
+                className="h-[600px] min-w-[360px] max-w-[360px] rounded-[30px] border border-stone-200/90 bg-white/96 p-6"
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                transition={{ duration: 0.5, delay: index * 0.06 }}
+              >
+                <div className="flex h-full flex-col">
+                  <span className="mb-5 inline-flex rounded-full border border-[#C400FF]/10 bg-[linear-gradient(135deg,#eef5ff,#edf3ff)] px-4 py-1.5 text-[13px] font-bold text-[#4d84d8]">
+                    {card.badge}
+                  </span>
+                  <p className="text-sm font-medium text-[#a6a5ae]">{card.team}</p>
+                  <h4 className="mt-4 text-[1rem] font-black leading-[1.35] text-[#2c2d34] md:text-[1.08rem]">
+                    {card.title}
+                  </h4>
+
+                  <div className="mt-5 rounded-2xl bg-[#fdf2f2] px-4 py-4 text-[13px] leading-relaxed text-[#e46452] md:text-[14px]">
+                    {card.negative}
+                  </div>
+                  <div className="mt-4 rounded-2xl bg-[#edf8ed] px-4 py-4 text-[13px] leading-relaxed text-[#67b56f] md:text-[14px]">
+                    {card.positive}
+                  </div>
+
+                  <div className="mt-auto border-t border-stone-100 pt-5">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <p className="text-[1.55rem] font-black leading-none tracking-[-0.03em] text-[#4b76cf] md:text-[1.8rem]">{card.stat1Value}</p>
+                        <p className="mt-2 text-xs text-[#b1b1ba] md:text-sm">{card.stat1Label}</p>
+                      </div>
+                      <div>
+                        <p className="text-[1.55rem] font-black leading-none tracking-[-0.03em] text-[#4b76cf] md:text-[1.8rem]">{card.stat2Value}</p>
+                        <p className="mt-2 text-xs text-[#b1b1ba] md:text-sm">{card.stat2Label}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2">
+        {visualProofs.map((item) => (
+          <article
+            key={item.title}
+            className="group relative overflow-hidden rounded-3xl border border-stone-300/65 bg-white p-3 shadow-[0_24px_60px_rgba(40,38,64,0.08)]"
+          >
+            <div className="relative overflow-hidden rounded-[1.35rem] border border-stone-200/80 bg-stone-50">
+              <img
+                src={item.image}
+                alt={item.alt}
+                className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div className="absolute left-3 top-3 rounded-full bg-[linear-gradient(135deg,#F8B529,#C400FF)] px-3.5 py-1.5 text-sm font-bold text-white shadow-lg">
+                {item.metric}
+              </div>
+            </div>
+            <div className="px-1 pb-1 pt-4 text-left">
+              <p className="text-sm font-semibold tracking-[0.12em] text-[#C400FF]">{item.label}</p>
+              <h4 className="mt-2 text-lg font-black text-foreground md:text-xl">{item.title}</h4>
+              <p className="mt-2 text-xs leading-relaxed text-slate-500">{item.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 const AXSystemSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
-  const [activeStepIndex, setActiveStepIndex] = useState(0);
-
-  // Translated differentiators
-  const translatedDifferentiators = [
-    {
-      title: t("ax.diff1.title"),
-      subtitle: t("ax.diff1.subtitle"),
-      description: t("ax.diff1.desc"),
-    },
-    {
-      title: t("ax.diff2.title"),
-      subtitle: t("ax.diff2.subtitle"),
-      description: t("ax.diff2.desc"),
-    },
-    {
-      title: t("ax.diff3.title"),
-      subtitle: t("ax.diff3.subtitle"),
-      description: t("ax.diff3.desc"),
-    },
-  ];
-
-  // Translated impacts
-  const impacts = [
-    { value: t("ax.impact1.value"), label: t("ax.impact1.label") },
-    { value: t("ax.impact2.value"), label: t("ax.impact2.label") },
-    { value: t("ax.impact3.value"), label: t("ax.impact3.label") },
-  ];
-
-  // Generate translated steps
-  const steps = getSteps(t);
   
   // Generate translated testimonials
   const testimonials = getTestimonials(t);
+  const industryCases = getIndustryCases(t);
+  const problemCards = getProblemCards(t);
+  const verifiedResults = getVerifiedResults(t);
+
+  const handleProblemCardClick = (scenarioId: DemoScenarioId) => {
+    window.dispatchEvent(
+      new CustomEvent("ax:select-demo-scenario", {
+        detail: { scenarioId },
+      })
+    );
+
+    document.getElementById("interactive-demo")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
 
   return (
-    <section ref={sectionRef} id="partners" className="relative bg-background">
+    <section
+      ref={sectionRef}
+      id="partners"
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#fbf9fe_0%,#f7f3fc_24%,#f6f1fb_46%,#ffffff_100%)]"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.06),transparent_20%),radial-gradient(circle_at_86%_12%,rgba(196,0,255,0.07),transparent_24%)]" />
+
       {/* Part 1: Framework Introduction */}
       <div className="relative flex min-h-screen flex-col items-center overflow-hidden overflow-x-hidden pb-24 md:pb-28">
         {/* Animated decorative background curves */}
@@ -796,6 +1288,8 @@ const AXSystemSection = () => {
         {/* Floating orbs */}
         <FloatingOrb color="#C400FF" size="w-[500px] h-[500px]" position="-top-48 -right-48" />
         <FloatingOrb color="#282640" size="w-[400px] h-[400px]" position="-bottom-32 -left-32" />
+
+        <HeroMetricsMarquee className="relative z-20 w-full pb-12 pt-8 md:pb-16 md:pt-10" />
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 overflow-hidden">
           <motion.div
@@ -810,116 +1304,66 @@ const AXSystemSection = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 border border-[#C400FF]/20 mb-6"
               variants={itemVariants}
             >
-              <span className="text-[#C400FF] font-bold text-sm">Yanadoo AX Framework™</span>
+              <span className="text-[#4566bc] font-bold text-sm">{t("ax.problems.badge")}</span>
             </motion.div>
-            
-            <motion.h2 
-              className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black mb-6 leading-[1.1]"
-              variants={itemVariants}
-            >
-              {t("ax.intro.title1")}
-              {t("ax.intro.title2")}
-              <br className="lg:hidden" />
-              <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent">{t("ax.intro.title3")}</span>
-              {t("ax.intro.title4")}
-            </motion.h2>
-            
-            <motion.p 
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed mb-8 max-w-3xl mx-auto whitespace-pre-line"
-              variants={itemVariants}
-            >
-              {t("ax.intro.subtitle")}
-            </motion.p>
 
-            {/* Process flow preview */}
             <motion.div 
-              className="flex justify-center items-center gap-1 sm:gap-2 md:gap-4 mb-8"
+              className="mb-10"
               variants={itemVariants}
             >
-              {steps.map((step, index) => (
-                <div key={step.number} className="flex items-center">
-                  <div 
-                    className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl font-semibold text-[10px] sm:text-xs md:text-base transition-all hover:scale-105 whitespace-nowrap"
-                    style={{ backgroundColor: `${step.color}15`, color: step.color }}
-                  >
-                    {step.title}
-                  </div>
-                  {index < steps.length - 1 && (
-                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 mx-0.5 sm:mx-1 text-muted-foreground flex-shrink-0" />
-                  )}
+              <div className="mx-auto max-w-6xl text-center">
+                <div className="mb-8">
+                  <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#4566bc]">
+                    {t("ax.problems.badge")}
+                  </p>
+                  <h3 className="mt-3 text-3xl font-black leading-tight text-[#10182b] md:text-6xl">
+                    {t("ax.problems.title")}
+                  </h3>
+                  <p className="mt-4 text-base text-[#8b8b95] md:text-2xl">
+                    {t("ax.problems.subtitle")}
+                  </p>
                 </div>
-              ))}
+
+                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                  {problemCards.map((card) => {
+                    const Icon = card.icon;
+
+                    return (
+                      <button
+                        key={card.id}
+                        type="button"
+                        onClick={() => handleProblemCardClick(card.scenarioId)}
+                        className="group relative flex min-h-[206px] flex-col rounded-[30px] border border-stone-200 bg-white p-7 text-left shadow-[0_16px_40px_rgba(40,38,64,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#C400FF]/20 hover:shadow-[0_24px_56px_rgba(40,38,64,0.1)]"
+                      >
+                        <div className="absolute inset-0 rounded-[30px] bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.05),transparent_28%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="relative z-10 flex h-full flex-col">
+                          <div className={`mb-8 ${card.iconClassName}`}>
+                            <Icon className="h-8 w-8" strokeWidth={2.2} />
+                          </div>
+                          <h4 className="whitespace-pre-line text-[1.75rem] font-black leading-[1.28] tracking-[-0.03em] text-[#2c2d34]">
+                            {card.title}
+                          </h4>
+                          <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[#8f909d]">
+                            {card.description}
+                          </p>
+                          <div className="mt-auto flex justify-end pt-8">
+                            <ArrowRight className="h-5 w-5 text-stone-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#C400FF]" />
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </motion.div>
 
-            <motion.div
-              className="mb-6 grid gap-4 md:mb-8 md:grid-cols-2"
-              variants={itemVariants}
-            >
-              <article className="group relative overflow-hidden rounded-3xl border border-stone-300/65 bg-white p-3 shadow-[0_24px_60px_rgba(40,38,64,0.08)]">
-                <div className="relative overflow-hidden rounded-[1.35rem] border border-stone-200/80 bg-stone-50">
-                  <img
-                    src="/example-a.png"
-                    alt="영상 팀 효율화 사례"
-                    className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                  <div className="absolute left-3 top-3 rounded-full bg-[linear-gradient(135deg,#F8B529,#C400FF)] px-3.5 py-1.5 text-sm font-bold text-white shadow-lg">
-                    8명 → 1명
-                  </div>
-                </div>
-                <div className="px-1 pb-1 pt-4 text-left">
-                  <p className="text-sm font-semibold tracking-[0.12em] text-[#C400FF]">AI 쇼츠 콘텐츠 자동생성</p>
-                  <h3 className="mt-2 text-lg font-black text-foreground md:text-xl">영상 제작 팀 운영 인력 87.5% 절감</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-500">반복 편집과 제작 흐름을 AX로 재설계해 8명이 하던 운영을 1명이 관리하는 구조로 바꿨습니다.</p>
-                </div>
-              </article>
-
-              <article className="group relative overflow-hidden rounded-3xl border border-stone-300/65 bg-white p-3 shadow-[0_24px_60px_rgba(40,38,64,0.08)]">
-                <div className="relative overflow-hidden rounded-[1.35rem] border border-stone-200/80 bg-stone-50">
-                  <img
-                    src="/example-b.png"
-                    alt="촬영 화보 이미지 리드 타임 단축 사례"
-                    className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                  />
-                  <div className="absolute left-3 top-3 rounded-full bg-[linear-gradient(135deg,#F8B529,#C400FF)] px-3.5 py-1.5 text-sm font-bold text-white shadow-lg">
-                    리드 타임 -90.6%
-                  </div>
-                </div>
-                <div className="px-1 pb-1 pt-4 text-left">
-                  <p className="text-sm font-semibold tracking-[0.12em] text-[#C400FF]">AI 이미지 생성</p>
-                  <h3 className="mt-2 text-lg font-black text-foreground md:text-xl">촬영 화보 이미지 리드 타임 약 90.6% 감소</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-slate-500">시안 정리, 선별, 후속 제작 연결을 자동화해 화보 이미지 처리 시간을 대폭 줄였습니다.</p>
-                </div>
-              </article>
-            </motion.div>
           </motion.div>
         </div>
-        
-        <HeroMetricsMarquee className="relative z-20 mt-10 md:mt-12" />
-
-        {/* Scroll indicator - moved outside container, at absolute bottom */}
-        <motion.div 
-          className="absolute bottom-2 left-1/2 z-30 -translate-x-1/2 flex flex-col items-center"
-        >
-          <div className="flex h-8 w-5 justify-center rounded-full border-2 border-slate-300/70 bg-white/20 pt-1.5">
-            <motion.div 
-              className="h-1 w-1 rounded-full bg-slate-400/70"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            />
-          </div>
-        </motion.div>
       </div>
 
       <InteractiveDemoSection />
 
-      {/* Part 2: Unified discovery sprint section */}
-      <DiscoverySprintSection
-        steps={steps}
-        activeIndex={activeStepIndex}
-        onSelect={setActiveStepIndex}
-      />
-
-      {/* Part 3: Differentiators + Testimonials + Impact */}
+      {/* Part 3: Testimonials + Impact */}
       <div className="relative flex min-h-screen items-center overflow-hidden overflow-x-hidden py-24">
         {/* Background decorations */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30" preserveAspectRatio="none">
@@ -934,107 +1378,34 @@ const AXSystemSection = () => {
         </svg>
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 pt-8 overflow-hidden">
-          {/* Title - compact */}
-          <motion.div
-            className="text-center mb-10"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.5 }}
-          >
-            <motion.h2 
-              className="text-lg sm:text-3xl md:text-4xl font-black mb-3 leading-tight whitespace-nowrap"
-              variants={itemVariants}
-            >
-              {t("ax.part3.title1")}{" "}
-              <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-transparent">{t("ax.part3.title2")}</span>{t("ax.part3.title3")}
-            </motion.h2>
-            <motion.p 
-              className="text-base text-muted-foreground max-w-2xl mx-auto"
-              variants={itemVariants}
-            >
-              {t("ax.part3.subtitle1")}<br />
-              {t("ax.part3.subtitle2")}
-            </motion.p>
-          </motion.div>
+          <VerifiedResultsSection
+            results={verifiedResults}
+            visualProofs={verifiedResults.visualProofs}
+          />
 
-          {/* 상단 철학 카드 3개 - Compact style */}
-          <motion.div 
-            className="max-w-5xl mx-auto mb-12"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
-          >
-            
-            <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-              {translatedDifferentiators.map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="group relative overflow-hidden rounded-2xl border border-stone-300/65 bg-background p-5 transition-all duration-500 hover:border-[#C400FF]/18 md:p-6"
-                  variants={itemVariants}
-                  whileHover={{ y: -4 }}
-                >
-                  {/* Background gradient on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#F8B529]/5 via-transparent to-[#C400FF]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Decorative arc */}
-                  <div className="absolute -bottom-24 -right-24 h-48 w-48 rounded-full border border-stone-400/8 transition-colors duration-500 group-hover:border-[#C400FF]/10" />
-                  
-                  {/* Content */}
-                  <div className="relative z-10">
-                    {/* Number indicator */}
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#F8B529] via-[#C400FF] to-[#C400FF] flex items-center justify-center text-white font-bold text-xs shadow-lg shadow-[#C400FF]/25">
-                        {String(index + 1).padStart(2, '0')}
-                      </div>
-                      <div className="h-px flex-1 bg-gradient-to-r from-[#F8B529]/18 to-transparent" />
-                    </div>
-                    
-                    {/* Title */}
-                    <h3 className="mb-2 whitespace-pre-line text-base font-bold leading-snug text-foreground md:text-lg">
-                      {item.title}
-                    </h3>
-                    
-                    {/* Subtitle & Description */}
-                    <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
-                      <span className="text-foreground/80 font-medium">{item.subtitle}</span>
-                      <br />
-                      {item.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <IndustryCasesSection cases={industryCases} />
 
-          {/* 한 줄 카피 with arrows */}
           <motion.div
-            className="text-center mb-12"
+            className="mx-auto mb-6 max-w-3xl text-center md:mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.4 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-xl md:text-2xl font-medium text-muted-foreground mb-4">
-              {t("ax.changing")}
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C400FF]/15 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 px-4 py-2">
+              <span className="text-sm font-bold text-[#C400FF]">{t("ax.roleCases.badge")}</span>
+            </div>
+            <h3 className="font-display text-2xl font-black leading-tight text-[#10182b] md:text-4xl">
+              {t("ax.roleCases.title")}
+            </h3>
+            <p className="mx-auto mt-3 max-w-2xl whitespace-pre-line text-sm leading-relaxed text-[#6d665d] md:text-base">
+              {t("ax.roleCases.subtitle")}
             </p>
-            {/* Double chevron arrows - 3D style */}
-            <motion.div 
-              className="flex flex-col items-center -space-y-3"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            >
-              <ChevronDown className="w-7 h-7 text-[#C400FF]/40" strokeWidth={2.5} />
-              <ChevronDown className="w-7 h-7 text-[#282640]/25" strokeWidth={2} />
-            </motion.div>
           </motion.div>
 
           {/* 슬라이드: 사례/후기 3개 */}
           <TestimonialSlider testimonials={testimonials} />
 
-          {/* 하단 KPI 4개 */}
-          <StatsCounter impacts={impacts} />
         </div>
       </div>
     </section>

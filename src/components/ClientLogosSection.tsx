@@ -22,7 +22,7 @@ export function ClientLogosSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden overflow-x-hidden bg-gradient-to-b from-[#32305f] via-[#3a376d] to-[#44407a] py-24 md:py-28">
+    <section className="relative flex min-h-screen items-center overflow-hidden overflow-x-hidden bg-gradient-to-b from-[#32305f] via-[#3a376d] to-[#44407a] py-24 md:py-28">
       <div
         className="absolute h-64 w-64 rounded-full bg-gradient-to-r from-[#F8B529]/40 to-[#C400FF]/40 blur-3xl"
         style={{ left: "5%", top: "10%" }}
