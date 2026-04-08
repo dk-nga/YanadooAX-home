@@ -2,10 +2,11 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { ArrowRight, BarChart3, ChevronLeft, ChevronRight, Clock3, Compass, PenTool, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, BarChart3, Building2, ChevronLeft, ChevronRight, Clock3, Compass, PenTool, TrendingUp, Users } from "lucide-react";
 import { HeroMetricsMarquee } from "@/components/HeroMetricsMarquee";
 import { InteractiveDemoSection } from "@/components/InteractiveDemoSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "@/i18n/navigation";
 
 import step1Image from "@/assets/step1-discover.png";
 import step2Image from "@/assets/step2-design.png";
@@ -130,6 +131,45 @@ const getTestimonials = (t: (key: string) => string) => [
     company: t("ax.testimonial4.company"),
     employeeCount: t("ax.testimonial4.employees"),
     image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop",
+  },
+];
+
+const getRoleCases = (t: (key: string) => string) => [
+  {
+    id: 1,
+    role: t("ax.roleCases.case1.role"),
+    metric: t("ax.roleCases.case1.metric"),
+    title: t("ax.roleCases.case1.title"),
+    description: t("ax.roleCases.case1.description"),
+    highlights: [t("ax.roleCases.case1.highlight1"), t("ax.roleCases.case1.highlight2")],
+    icon: "design",
+  },
+  {
+    id: 2,
+    role: t("ax.roleCases.case2.role"),
+    metric: t("ax.roleCases.case2.metric"),
+    title: t("ax.roleCases.case2.title"),
+    description: t("ax.roleCases.case2.description"),
+    highlights: [t("ax.roleCases.case2.highlight1"), t("ax.roleCases.case2.highlight2")],
+    icon: "ops",
+  },
+  {
+    id: 3,
+    role: t("ax.roleCases.case3.role"),
+    metric: t("ax.roleCases.case3.metric"),
+    title: t("ax.roleCases.case3.title"),
+    description: t("ax.roleCases.case3.description"),
+    highlights: [t("ax.roleCases.case3.highlight1"), t("ax.roleCases.case3.highlight2")],
+    icon: "marketing",
+  },
+  {
+    id: 4,
+    role: t("ax.roleCases.case4.role"),
+    metric: t("ax.roleCases.case4.metric"),
+    title: t("ax.roleCases.case4.title"),
+    description: t("ax.roleCases.case4.description"),
+    highlights: [t("ax.roleCases.case4.highlight1"), t("ax.roleCases.case4.highlight2")],
+    icon: "sales",
   },
 ];
 
@@ -1032,6 +1072,147 @@ const IndustryCasesSection = ({ cases }: { cases: IndustryCaseType[] }) => {
   );
 };
 
+type RoleCaseType = {
+  id: number;
+  role: string;
+  metric: string;
+  title: string;
+  description: string;
+  highlights: string[];
+  icon: string;
+};
+
+const roleBgMap: Record<string, string> = {
+  design: "rgba(248,181,41,0.10)",
+  ops: "rgba(40,38,64,0.07)",
+  marketing: "rgba(196,0,255,0.08)",
+  sales: "rgba(16,185,129,0.08)",
+};
+
+const RoleCasesSection = ({ cases }: { cases: RoleCaseType[] }) => {
+  const { t } = useLanguage();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="mx-auto mb-10 max-w-6xl md:mb-14"
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="mb-6 text-center md:mb-8">
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#282640]/15 bg-gradient-to-r from-[#282640]/8 to-[#C400FF]/10 px-4 py-2">
+          <span className="text-sm font-bold text-[#282640]">{t("ax.roleCases.badge")}</span>
+        </div>
+        <h3 className="text-2xl font-black leading-tight text-foreground md:text-4xl">
+          {t("ax.roleCases.title")}
+        </h3>
+        <p className="mx-auto mt-3 max-w-3xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
+          {t("ax.roleCases.subtitle")}
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {cases.map((item, index) => (
+          <motion.article
+            key={item.id}
+            className="group relative overflow-hidden rounded-[28px] border border-stone-300/70 bg-white/92 p-5 shadow-[0_24px_70px_rgba(24,24,33,0.06)] backdrop-blur-sm md:p-6"
+            initial={{ opacity: 0, y: 28 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+            transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+            whileHover={{ y: -6 }}
+          >
+            <div
+              className="absolute inset-0 opacity-80"
+              style={{
+                background: `radial-gradient(circle at top left, ${roleBgMap[item.icon] ?? "rgba(196,0,255,0.08)"}, transparent 40%)`,
+              }}
+            />
+            <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full border border-stone-300/50" />
+            <div className="absolute -bottom-20 left-[-10px] h-32 w-32 rounded-full bg-[#f7f4fb]" />
+
+            <div className="relative z-10">
+              <div className="mb-5 flex items-center justify-between gap-3">
+                <span className="rounded-full border border-[#282640]/15 bg-white/80 px-3 py-1 text-xs font-bold tracking-[0.16em] text-[#282640]">
+                  {item.role}
+                </span>
+                <span className="bg-gradient-to-r from-[#282640] to-[#C400FF] bg-clip-text text-sm font-black text-transparent">
+                  {item.metric}
+                </span>
+              </div>
+
+              <h4 className="text-xl font-black leading-tight text-foreground md:text-2xl">
+                {item.title}
+              </h4>
+              <p className="mt-3 text-sm leading-relaxed text-foreground/72 md:text-[15px]">
+                {item.description}
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {item.highlights.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="rounded-full border border-stone-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+const CasesBridgeSection = () => {
+  const { t } = useLanguage();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="mx-auto mb-14 max-w-4xl"
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="overflow-hidden rounded-[28px] border border-stone-200/80 bg-white/80 shadow-[0_12px_48px_rgba(24,24,33,0.07)] backdrop-blur-sm">
+        <div className="px-7 py-7 text-center md:px-12 md:py-10">
+          <p className="mb-1 text-sm font-bold uppercase tracking-[0.2em] text-[#C400FF]">CASE LIBRARY</p>
+          <h3 className="text-xl font-black text-foreground md:text-3xl">{t("ax.casesBridge.title")}</h3>
+          <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground md:text-base">
+            {t("ax.casesBridge.subtitle")}
+          </p>
+
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/cases"
+              className="group flex items-center gap-2 rounded-full border border-[#282640]/20 bg-[#282640] px-6 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#282640]/90 hover:shadow-md"
+            >
+              <Building2 className="h-4 w-4" />
+              {t("ax.casesBridge.industryBtn")}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/cases"
+              className="group flex items-center gap-2 rounded-full border border-[#C400FF]/30 bg-white px-6 py-3 text-sm font-bold text-[#282640] shadow-sm transition-all hover:border-[#C400FF]/60 hover:shadow-md"
+            >
+              <Users className="h-4 w-4 text-[#C400FF]" />
+              {t("ax.casesBridge.roleBtn")}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const VerifiedResultsSection = ({
   results,
   visualProofs,
@@ -1219,9 +1400,10 @@ const AXSystemSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
   
-  // Generate translated testimonials
+  // Generate translated content
   const testimonials = getTestimonials(t);
   const industryCases = getIndustryCases(t);
+  const roleCases = getRoleCases(t);
   const problemCards = getProblemCards(t);
   const verifiedResults = getVerifiedResults(t);
 
@@ -1385,25 +1567,10 @@ const AXSystemSection = () => {
 
           <IndustryCasesSection cases={industryCases} />
 
-          <motion.div
-            className="mx-auto mb-6 max-w-3xl text-center md:mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C400FF]/15 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 px-4 py-2">
-              <span className="text-sm font-bold text-[#C400FF]">{t("ax.roleCases.badge")}</span>
-            </div>
-            <h3 className="font-display text-2xl font-black leading-tight text-[#10182b] md:text-4xl">
-              {t("ax.roleCases.title")}
-            </h3>
-            <p className="mx-auto mt-3 max-w-2xl whitespace-pre-line text-sm leading-relaxed text-[#6d665d] md:text-base">
-              {t("ax.roleCases.subtitle")}
-            </p>
-          </motion.div>
+          <RoleCasesSection cases={roleCases} />
 
-          {/* 슬라이드: 사례/후기 3개 */}
+          <CasesBridgeSection />
+
           <TestimonialSlider testimonials={testimonials} />
 
         </div>

@@ -6,7 +6,7 @@ import { ja, ko } from "date-fns/locale";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { BlogFooter } from "@/components/BlogFooter";
 import { ContactWidget } from "@/components/ContactWidget";
 import { Header } from "@/components/Header";
@@ -180,25 +180,42 @@ export function BlogListPage({ posts, hasError = false }: BlogListPageProps) {
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 md:mb-10"
               >
-                <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <TabsList className="h-auto flex-wrap justify-start gap-2 bg-transparent p-0 md:gap-1 md:bg-muted/50 md:p-1">
-                    <TabsTrigger
-                      value="all"
-                      className="rounded-full border border-black/20 px-3 py-1.5 text-xs data-[state=active]:border-[#282640] data-[state=active]:bg-[#282640] data-[state=active]:text-white md:rounded-md md:px-4 md:py-2 md:text-sm"
+                <div className="relative">
+                  <div className="no-scrollbar overflow-x-auto pb-1">
+                    <ToggleGroup
+                      type="single"
+                      value={selectedCategory}
+                      onValueChange={(v) => v && setSelectedCategory(v)}
+                      spacing={2}
+                      className="w-max"
                     >
-                      {t("blog.categoryAll")}
-                    </TabsTrigger>
-                    {categories.map((category) => (
-                      <TabsTrigger
-                        key={category.slug}
-                        value={category.slug}
-                        className="rounded-full border border-black/20 px-3 py-1.5 text-xs data-[state=active]:border-[#282640] data-[state=active]:bg-[#282640] data-[state=active]:text-white md:rounded-md md:px-4 md:py-2 md:text-sm"
+                      <ToggleGroupItem
+                        value="all"
+                        className={cn(
+                          "h-9 rounded-full border border-border px-4 text-sm font-medium transition-all",
+                          "hover:border-[#282640]/40 hover:bg-[#282640]/5 hover:text-[#282640]",
+                          "data-[state=on]:border-[#282640] data-[state=on]:bg-[#282640] data-[state=on]:text-white data-[state=on]:shadow-sm",
+                        )}
                       >
-                        {category.name}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                </Tabs>
+                        {t("blog.categoryAll")}
+                      </ToggleGroupItem>
+                      {categories.map((category) => (
+                        <ToggleGroupItem
+                          key={category.slug}
+                          value={category.slug}
+                          className={cn(
+                            "h-9 rounded-full border border-border px-4 text-sm font-medium transition-all",
+                            "hover:border-[#282640]/40 hover:bg-[#282640]/5 hover:text-[#282640]",
+                            "data-[state=on]:border-[#282640] data-[state=on]:bg-[#282640] data-[state=on]:text-white data-[state=on]:shadow-sm",
+                          )}
+                        >
+                          {category.name}
+                        </ToggleGroupItem>
+                      ))}
+                    </ToggleGroup>
+                  </div>
+                  <div className="pointer-events-none absolute right-0 top-0 h-full w-12 bg-gradient-to-l from-background to-transparent md:hidden" />
+                </div>
               </motion.div>
             )}
 

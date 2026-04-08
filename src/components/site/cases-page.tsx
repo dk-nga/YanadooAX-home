@@ -18,6 +18,7 @@ import { Header } from "@/components/Header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ContactWidgetProvider, useContactWidget } from "@/contexts/ContactWidgetContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "@/i18n/navigation";
@@ -32,6 +33,14 @@ const industryCategories = [
   { slug: "content", ko: "콘텐츠", ja: "コンテンツ" },
   { slug: "fashion-beauty", ko: "패션&뷰티", ja: "ファッション&ビューティー" },
   { slug: "marketing", ko: "마케팅", ja: "マーケティング" },
+];
+
+const roleCategories = [
+  { slug: "design", ko: "디자인", ja: "デザイン" },
+  { slug: "operations", ko: "운영", ja: "運営" },
+  { slug: "marketing-role", ko: "마케팅", ja: "マーケティング" },
+  { slug: "sales", ko: "영업", ja: "営業" },
+  { slug: "hr", ko: "HR", ja: "HR" },
 ];
 
 function AnimatedCounter({
@@ -90,26 +99,34 @@ type CasesPageProps = {
 function CasesPageContent({ posts, hasError = false }: CasesPageProps) {
   const { language, t } = useLanguage();
   const { openContactWidget } = useContactWidget();
+  const [viewMode, setViewMode] = useState<"industry" | "role">("industry");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
 
   const dateLocale = language === "ja" ? ja : ko;
-  const industrySlugs = industryCategories.map((category) => category.slug);
+  const industrySlugs = industryCategories.map((c) => c.slug);
+  const roleSlugs = roleCategories.map((c) => c.slug);
 
   const filteredPosts = useMemo(() => {
-    const postsWithIndustryTags = posts.filter((post) =>
-      post.tags?.some((tag) => industrySlugs.includes(tag.slug)),
+    const activeSlugs = viewMode === "industry" ? industrySlugs : roleSlugs;
+    const relevant = posts.filter((post) =>
+      post.tags?.some((tag) => activeSlugs.includes(tag.slug)),
     );
 
-    if (selectedCategory === "all") {
-      return postsWithIndustryTags;
-    }
-
-    return postsWithIndustryTags.filter((post) =>
+    if (selectedCategory === "all") return relevant;
+    return relevant.filter((post) =>
       post.tags?.some((tag) => tag.slug === selectedCategory),
     );
-  }, [industrySlugs, posts, selectedCategory]);
+  }, [viewMode, industrySlugs, roleSlugs, posts, selectedCategory]);
+
+  const handleViewModeChange = (mode: string) => {
+    if (mode === "industry" || mode === "role") {
+      setViewMode(mode);
+      setSelectedCategory("all");
+      setCurrentPage(1);
+    }
+  };
 
   const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
 
@@ -332,31 +349,45 @@ function CasesPageContent({ posts, hasError = false }: CasesPageProps) {
 
       <main className="py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-2 text-left text-xl font-bold md:mb-3 md:text-center md:text-3xl"
-          >
-            <span className="text-[#282640]">Case Study</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="mb-5 text-left text-sm text-muted-foreground md:mb-6 md:text-center md:text-base"
-          >
-            {language === "ja"
-              ? "Yanadoo AXが見つけた実践的なAI活用事例をご覧ください。"
-              : "Yanadoo AX가 찾아본 AI 실전 사례들을 살펴보세요."}
-          </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-8 md:mb-10"
+            className="mb-6 md:mb-8"
           >
+            <div className="mb-1 text-left text-xl font-bold md:text-center md:text-3xl">
+              <span className="text-[#282640]">Case Study</span>
+            </div>
+            <p className="mb-5 text-left text-sm text-muted-foreground md:mb-6 md:text-center md:text-base">
+              {language === "ja"
+                ? "Yanadoo AXが見つけた実践的なAI活用事例をご覧ください。"
+                : "Yanadoo AX가 찾아본 AI 실전 사례들을 살펴보세요."}
+            </p>
+
+            {/* 뷰 모드 토글: 업종별 / 직무별 */}
+            <div className="mb-4 flex justify-start md:justify-center">
+              <ToggleGroup
+                type="single"
+                value={viewMode}
+                onValueChange={handleViewModeChange}
+                spacing={0}
+                className="rounded-full border border-stone-200 bg-stone-100/60 p-1"
+              >
+                <ToggleGroupItem
+                  value="industry"
+                  className="h-8 rounded-full px-5 text-sm font-semibold data-[state=on]:bg-[#282640] data-[state=on]:text-white data-[state=on]:shadow-sm"
+                >
+                  {language === "ja" ? "業種別" : "업종별"}
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="role"
+                  className="h-8 rounded-full px-5 text-sm font-semibold data-[state=on]:bg-[#282640] data-[state=on]:text-white data-[state=on]:shadow-sm"
+                >
+                  {language === "ja" ? "職務別" : "직무별"}
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+
+            {/* 세부 카테고리 탭 */}
             <Tabs
               value={selectedCategory}
               onValueChange={(value) => {
@@ -371,7 +402,7 @@ function CasesPageContent({ posts, hasError = false }: CasesPageProps) {
                 >
                   {language === "ja" ? "すべて" : "전체"}
                 </TabsTrigger>
-                {industryCategories.map((category) => (
+                {(viewMode === "industry" ? industryCategories : roleCategories).map((category) => (
                   <TabsTrigger
                     key={category.slug}
                     value={category.slug}
