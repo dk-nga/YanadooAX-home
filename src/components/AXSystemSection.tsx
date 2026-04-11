@@ -1429,7 +1429,7 @@ const AXSystemSection = () => {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.06),transparent_20%),radial-gradient(circle_at_86%_12%,rgba(196,0,255,0.07),transparent_24%)]" />
 
       {/* Part 1: Framework Introduction */}
-      <div className="relative flex min-h-screen flex-col items-center overflow-hidden overflow-x-hidden pb-24 md:pb-28">
+      <div id="problems" className="relative flex min-h-screen flex-col items-center overflow-hidden overflow-x-hidden pb-24 md:pb-28">
         {/* Animated decorative background curves */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
           <defs>
@@ -1560,14 +1560,20 @@ const AXSystemSection = () => {
         </svg>
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 pt-8 overflow-hidden">
-          <VerifiedResultsSection
-            results={verifiedResults}
-            visualProofs={verifiedResults.visualProofs}
-          />
+          <div id="results">
+            <VerifiedResultsSection
+              results={verifiedResults}
+              visualProofs={verifiedResults.visualProofs}
+            />
+          </div>
 
-          <IndustryCasesSection cases={industryCases} />
+          <div id="industry">
+            <IndustryCasesSection cases={industryCases} />
+          </div>
 
-          <RoleCasesSection cases={roleCases} />
+          <div id="role">
+            <RoleCasesSection cases={roleCases} />
+          </div>
 
           <CasesBridgeSection />
 

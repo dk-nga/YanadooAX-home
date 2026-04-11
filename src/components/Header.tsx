@@ -1,18 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Globe, ArrowRight } from "lucide-react";
 import logoFull from "@/assets/logo-full.svg";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useLanguage, type Language } from "@/contexts/LanguageContext";
 import { useContactWidget } from "@/contexts/ContactWidgetContext";
+import { createClient } from "@/lib/supabase/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+type NavVisibility = {
+  partners: boolean;
+  education: boolean;
+  cases: boolean;
+  about: boolean;
+  blog: boolean;
+};
+
+const DEFAULT_VISIBILITY: NavVisibility = {
+  partners: false,
+  education: false,
+  cases: false,
+  about: false,
+  blog: false,
+};
 
 const languages: { code: Language; name: string; flag: string }[] = [
   { code: "ko", name: "한국어", flag: "🇰🇷" },
@@ -127,16 +144,56 @@ function AnnouncementBanner() {
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [navVisibility, setNavVisibility] = useState<NavVisibility>(DEFAULT_VISIBILITY);
   const { language, setLanguage, t } = useLanguage();
   const { openContactWidget } = useContactWidget();
 
-  const menuItems = [
-    { name: t("nav.partners"), href: "/ax-partners", isRoute: true },
-    { name: t("nav.education"), href: "/education", isRoute: true },
-    { name: t("nav.cases"), href: "/cases", isRoute: true },
-    { name: t("nav.about"), href: "/#about", isRoute: true },
-    { name: t("nav.blog"), href: "/blog", isRoute: true },
+  useEffect(() => {
+    const fetchNavSettings = async () => {
+      try {
+        const supabase = createClient();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data } = await (supabase as any)
+          .from("site_settings")
+          .select("value")
+          .eq("key", "nav_visibility")
+          .single();
+        if (data?.value) {
+          setNavVisibility(data.value as NavVisibility);
+        }
+      } catch {
+        // table not yet created — keep defaults (all hidden)
+      }
+    };
+    fetchNavSettings();
+  }, []);
+
+  // 항상 표시되는 섹션 스크롤 메뉴
+  const sectionItems = [
+    { id: "problems", name: "해결 가능한 문제" },
+    { id: "interactive-demo", name: "AX 체험" },
+    { id: "results", name: "실제사례" },
+    { id: "industry", name: "업종별" },
+    { id: "role", name: "직무별" },
   ];
+
+  // Admin에서 ON/OFF하는 추가 메뉴
+  const allExtraItems = [
+    { key: "partners" as const, name: t("nav.partners"), href: "/ax-partners" },
+    { key: "education" as const, name: t("nav.education"), href: "/education" },
+    { key: "cases" as const, name: t("nav.cases"), href: "/cases" },
+    { key: "about" as const, name: t("nav.about"), href: "/#about" },
+    { key: "blog" as const, name: t("nav.blog"), href: "/blog" },
+  ];
+  const extraMenuItems = allExtraItems.filter((item) => navVisibility[item.key]);
+
+  const handleSectionClick = (e: React.MouseEvent, sectionId: string) => {
+    const el = document.getElementById(sectionId);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   return (
     <motion.header
@@ -160,21 +217,41 @@ export function Header() {
               </motion.div>
             </Link>
 
-            <nav className="ml-8 hidden items-center gap-6 md:flex">
-              {menuItems.map((item, index) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            <nav className="ml-8 hidden items-center gap-1 md:flex">
+              {sectionItems.map((item, index) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleSectionClick(e, item.id)}
+                  className="group relative rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <motion.span
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index, duration: 0.4 }}
+                    transition={{ delay: 0.05 * index, duration: 0.4 }}
                   >
                     {item.name}
                   </motion.span>
-                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-[#F8B529] to-[#C400FF] transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#F8B529] to-[#C400FF] transition-all duration-300 group-hover:w-full" />
+                </a>
+              ))}
+              {extraMenuItems.length > 0 && (
+                <span className="mx-2 h-4 w-px bg-border" />
+              )}
+              {extraMenuItems.map((item, index) => (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  className="group relative rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <motion.span
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 * (sectionItems.length + index), duration: 0.4 }}
+                  >
+                    {item.name}
+                  </motion.span>
+                  <span className="absolute -bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#F8B529] to-[#C400FF] transition-all duration-300 group-hover:w-full" />
                 </Link>
               ))}
             </nav>
@@ -237,9 +314,19 @@ export function Header() {
             className="overflow-hidden md:hidden"
           >
             <div className="flex flex-col gap-4 pt-4 pb-2">
-              {menuItems.map((item) => (
+              {sectionItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  onClick={(e) => { setIsOpen(false); handleSectionClick(e, item.id); }}
+                >
+                  {item.name}
+                </a>
+              ))}
+              {extraMenuItems.map((item) => (
                 <Link
-                  key={item.name}
+                  key={item.key}
                   href={item.href}
                   className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => setIsOpen(false)}

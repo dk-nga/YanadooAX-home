@@ -4,6 +4,30 @@ import { useEffect, useState } from "react";
 import { MessageSquare, Star, TrendingUp, Users } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
+type NavVisibility = {
+  partners: boolean;
+  education: boolean;
+  cases: boolean;
+  about: boolean;
+  blog: boolean;
+};
+
+const DEFAULT_NAV: NavVisibility = {
+  partners: false,
+  education: false,
+  cases: false,
+  about: false,
+  blog: false,
+};
+
+const NAV_LABELS: { key: keyof NavVisibility; label: string }[] = [
+  { key: "partners", label: "AX 파트너즈" },
+  { key: "education", label: "AI 교육" },
+  { key: "cases", label: "고객사례" },
+  { key: "about", label: "회사소개" },
+  { key: "blog", label: "블로그" },
+];
+
 type Stats = {
   totalInquiries: number;
   contactCount: number;
@@ -24,6 +48,9 @@ export function AdminDashboard() {
   const [supabase] = useState(createClient);
   const [stats, setStats] = useState<Stats>(initialStats);
   const [loading, setLoading] = useState(true);
+  const [navVisibility, setNavVisibility] = useState<NavVisibility>(DEFAULT_NAV);
+  const [navSaving, setNavSaving] = useState(false);
+  const [navError, setNavError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -63,6 +90,44 @@ export function AdminDashboard() {
 
     fetchStats();
   }, [supabase]);
+
+  useEffect(() => {
+    const fetchNavSettings = async () => {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data } = await (supabase as any)
+          .from("site_settings")
+          .select("value")
+          .eq("key", "nav_visibility")
+          .single();
+        if (data?.value) {
+          setNavVisibility(data.value as NavVisibility);
+        }
+      } catch {
+        // table not yet created
+      }
+    };
+    fetchNavSettings();
+  }, [supabase]);
+
+  const handleNavToggle = async (key: keyof NavVisibility, value: boolean) => {
+    const next = { ...navVisibility, [key]: value };
+    setNavVisibility(next);
+    setNavSaving(true);
+    setNavError(null);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase as any)
+        .from("site_settings")
+        .upsert({ key: "nav_visibility", value: next, updated_at: new Date().toISOString() });
+      if (error) throw error;
+    } catch (e) {
+      setNavError("저장 실패. Supabase에 site_settings 테이블이 필요합니다.");
+      console.error(e);
+    } finally {
+      setNavSaving(false);
+    }
+  };
 
   const statCards = [
     {
@@ -134,6 +199,40 @@ export function AdminDashboard() {
             <div className="text-3xl font-bold text-slate-900">{stat.value}</div>
           </div>
         ))}
+      </div>
+
+      <div className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-slate-900">메뉴 표시 설정</h2>
+          {navSaving && <span className="text-xs text-slate-400">저장 중...</span>}
+          {navError && <span className="text-xs text-red-500">{navError}</span>}
+        </div>
+        <p className="mb-4 text-sm text-slate-500">
+          ON으로 설정한 메뉴만 헤더 네비게이션에 표시됩니다.
+        </p>
+        <div className="flex flex-wrap gap-6">
+          {NAV_LABELS.map(({ key, label }) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => handleNavToggle(key, !navVisibility[key])}
+              className="flex items-center gap-3"
+            >
+              <span
+                className={`relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors duration-200 ${
+                  navVisibility[key] ? "bg-[#C400FF]" : "bg-slate-200"
+                }`}
+              >
+                <span
+                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 ${
+                    navVisibility[key] ? "translate-x-5" : "translate-x-0.5"
+                  }`}
+                />
+              </span>
+              <span className="text-sm font-medium text-slate-700">{label}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
