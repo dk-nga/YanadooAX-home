@@ -1514,7 +1514,7 @@ const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
 
           <div className="overflow-y-auto">
             {/* Before / After 비교 (항상 표시) */}
-            <div className="grid grid-cols-2 gap-0 border-b border-black/6">
+            <div className="grid grid-cols-1 gap-0 border-b border-black/6 sm:grid-cols-2">
               <div className="border-r border-black/6 p-4">
                 <p className="mb-2 text-xs font-bold tracking-widest text-rose-400">BEFORE · 수동</p>
                 <div className="space-y-1.5">
@@ -1558,7 +1558,7 @@ const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
             </div>
 
             {/* 메인 애니메이션 영역 */}
-            <div className="grid min-h-[260px] grid-cols-2 gap-0 p-4">
+            <div className="grid min-h-[200px] grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:gap-0">
               {/* 왼쪽: 폼 → 계약서 */}
               <div className="border-r border-black/6 pr-4">
                 {(activeStep === 0 || phase === "idle") && (
@@ -1763,9 +1763,9 @@ const FinanceDashboardDemoModal = ({ onClose }: { onClose: () => void }) => {
             <button onClick={onClose} className="rounded-full p-1.5 text-white/40 hover:bg-white/10">✕</button>
           </div>
 
-          <div className="flex min-h-0 flex-1 overflow-hidden">
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden sm:flex-row">
             {/* ── 왼쪽: 대시보드 ── */}
-            <div className="flex w-[46%] shrink-0 flex-col gap-3 border-r border-white/8 overflow-y-auto p-4">
+            <div className="flex shrink-0 flex-col gap-3 overflow-y-auto border-b border-white/8 p-4 sm:w-[46%] sm:border-b-0 sm:border-r">
               <p className="text-[10px] font-bold tracking-widest text-white/30">LIVE DASHBOARD · 3Q</p>
 
               {/* KPI 카드 4개 */}

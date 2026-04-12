@@ -44,7 +44,7 @@ export function HeroSection() {
             </span>
 
             {/* Title */}
-            <h1 className="text-[2.6rem] font-black leading-[1.1] tracking-[-0.05em] text-black sm:text-6xl lg:text-[4rem] xl:text-[4.5rem]">
+            <h1 className="text-[1.9rem] font-black leading-[1.1] tracking-[-0.04em] text-black sm:text-5xl lg:text-[4rem] xl:text-[4.5rem]">
               {t("hero.title1")}
               <br />
               {t("hero.title2")}

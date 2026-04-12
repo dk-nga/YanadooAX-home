@@ -22,7 +22,7 @@ export function HomePageClient() {
       <ScrollContainerProvider containerRef={scrollRef}>
         <div
           ref={scrollRef}
-          className="h-screen overflow-y-auto scrollbar-hide bg-background"
+          className="h-[100dvh] overflow-y-auto scrollbar-hide bg-background"
         >
           {!animationComplete ? (
             <HeroAnimation onAnimationComplete={() => setAnimationComplete(true)} />

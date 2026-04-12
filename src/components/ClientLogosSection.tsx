@@ -25,11 +25,11 @@ export function ClientLogosSection() {
       </p>
 
       {/* fade edges */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent sm:w-14" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-white to-transparent sm:w-14" />
 
       <div className="overflow-hidden">
-        <div className="client-logos-marquee flex w-max items-center gap-10 px-10">
+        <div className="client-logos-marquee flex w-max items-center gap-6 px-6 sm:gap-10 sm:px-10">
           {marqueeClients.map((client, i) => (
             <img
               key={`${client.name}-${i}`}

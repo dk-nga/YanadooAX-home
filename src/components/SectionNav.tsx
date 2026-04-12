@@ -58,7 +58,7 @@ export function SectionNav() {
   };
 
   return (
-    <div className="sticky top-[112px] z-40 border-b border-black/8 bg-white/95 backdrop-blur-md shadow-sm">
+    <div className="sticky top-[100px] z-40 border-b border-black/8 bg-white/95 backdrop-blur-md shadow-sm md:top-[112px]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex overflow-x-auto scrollbar-hide">
           {SECTIONS.map((section) => {
