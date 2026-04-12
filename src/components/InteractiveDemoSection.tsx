@@ -516,7 +516,7 @@ export function InteractiveDemoSection() {
   }, [scenarios, t]);
 
   return (
-    <section id="interactive-demo" className="relative overflow-hidden bg-[linear-gradient(180deg,#fbfbfe_0%,#f3f0fb_52%,#f8f8fc_100%)] pb-28 pt-20 text-slate-950 md:pb-32 md:pt-24">
+    <section id="interactive-demo" className="relative overflow-hidden bg-[linear-gradient(180deg,#fbfbfe_0%,#f3f0fb_52%,#f8f8fc_100%)] pb-16 pt-14 text-slate-950 md:pb-20 md:pt-16">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.12),transparent_28%),radial-gradient(circle_at_top_right,rgba(196,0,255,0.12),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.78),rgba(248,248,252,0.96))]" />
       <div className="absolute left-[-120px] top-10 h-64 w-64 rounded-full bg-[#F8B529]/10 blur-3xl" />
       <div className="absolute bottom-0 right-[-140px] h-72 w-72 rounded-full bg-[#C400FF]/10 blur-3xl" />
@@ -531,7 +531,7 @@ export function InteractiveDemoSection() {
           </p>
         </div>
 
-        <div className="grid min-w-0 gap-4 xl:grid-cols-[260px_minmax(0,1fr)]">
+        <div className="grid min-w-0 gap-4 xl:grid-cols-[220px_minmax(0,1fr)]">
           <motion.aside
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -549,7 +549,7 @@ export function InteractiveDemoSection() {
                   type="button"
                   onClick={() => handleScenarioSelect(scenario)}
                   className={cn(
-                    "w-full rounded-[22px] border bg-white/92 px-5 py-4 text-left shadow-[0_12px_32px_rgba(40,38,64,0.06)] backdrop-blur-sm transition-all duration-200",
+                    "w-full rounded-[18px] border bg-white/92 px-4 py-3 text-left shadow-[0_12px_32px_rgba(40,38,64,0.06)] backdrop-blur-sm transition-all duration-200",
                     isSelected
                       ? "border-[#C400FF]/20 shadow-[0_22px_48px_rgba(95,63,156,0.16)]"
                       : "border-[#282640]/10 hover:border-[#282640]/20 hover:shadow-[0_18px_36px_rgba(40,38,64,0.08)]"
@@ -558,7 +558,7 @@ export function InteractiveDemoSection() {
                   <div className="flex items-start gap-3">
                     <div
                       className={cn(
-                        "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl",
+                        "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
                         !isSelected && "bg-slate-100 text-slate-400"
                       )}
                       style={isSelected ? { backgroundColor: `${scenario.accent}12`, color: scenario.accent } : undefined}
@@ -566,8 +566,8 @@ export function InteractiveDemoSection() {
                       <Icon className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-base font-bold text-slate-900">{scenario.title}</p>
-                      <p className="mt-1 text-sm leading-6 text-slate-500">
+                      <p className="text-sm font-bold text-slate-900">{scenario.title}</p>
+                      <p className="mt-0.5 text-xs leading-5 text-slate-500">
                         {scenario.description}
                       </p>
                     </div>
@@ -599,15 +599,15 @@ export function InteractiveDemoSection() {
             transition={{ duration: 0.45 }}
             className="w-full min-w-0 rounded-[24px] border border-white/70 bg-white/92 shadow-[0_30px_70px_rgba(40,38,64,0.1)] backdrop-blur-sm"
           >
-            <div className="flex items-center justify-between border-b border-[#282640]/10 px-5 py-4">
-              <h3 className="text-xl font-bold text-slate-900">{currentScenario.title}</h3>
+            <div className="flex items-center justify-between border-b border-[#282640]/10 px-4 py-3">
+              <h3 className="text-base font-bold text-slate-900">{currentScenario.title}</h3>
               <div className="flex items-center gap-2 text-sm font-semibold text-[#6b33c7]">
                 <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF]" />
                 <span>{t("demo.workspace.live")}</span>
               </div>
             </div>
 
-            <div className="space-y-4 p-4 md:p-5">
+            <div className="space-y-3 p-3 md:p-4">
               <div className="rounded-[20px] border border-[#282640]/10 bg-[linear-gradient(135deg,rgba(248,181,41,0.08),rgba(196,0,255,0.06))] px-4 py-3">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-xs font-semibold tracking-[0.08em] text-[#282640]/50">
@@ -640,9 +640,9 @@ export function InteractiveDemoSection() {
               </div>
 
               <div className="rounded-[20px] border border-[#282640]/10 bg-white/95 shadow-[0_16px_40px_rgba(40,38,64,0.06)]">
-                <div className="min-h-[260px] space-y-4 border-b border-[#282640]/10 px-4 py-4 md:px-5">
+                <div className="min-h-[200px] space-y-3 border-b border-[#282640]/10 px-4 py-3 md:px-5">
                   <div className="flex justify-end">
-                    <div className="max-w-[220px] rounded-[16px] bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] px-4 py-3 text-lg font-bold text-white shadow-[0_16px_32px_rgba(59,49,95,0.28)]">
+                    <div className="max-w-[220px] rounded-[14px] bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] px-3 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(59,49,95,0.24)]">
                       {currentQuick.userBubble}
                     </div>
                   </div>
@@ -653,7 +653,7 @@ export function InteractiveDemoSection() {
                       animate={{ opacity: 1, y: 0 }}
                       className="max-w-[76%] rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(180deg,#ffffff,#faf7ff)] px-4 py-4"
                     >
-                      <p className="text-base leading-8 text-[#282640]/78">{currentQuick.agentReply}</p>
+                      <p className="text-sm leading-6 text-[#282640]/78">{currentQuick.agentReply}</p>
                       <div className="mt-2 text-xs font-semibold text-[#282640]/40">
                         AX Agent · {t("demo.workspace.justNow")}
                       </div>
@@ -669,18 +669,18 @@ export function InteractiveDemoSection() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-3 px-4 py-3 md:px-5">
+                <div className="flex items-center gap-2 px-4 py-2.5 md:px-5">
                   <input
                     value={currentQuick.question}
                     readOnly
                     aria-readonly="true"
-                    className="h-11 flex-1 cursor-default rounded-xl border border-[#282640]/10 bg-[linear-gradient(180deg,#faf8fd,#f3effa)] px-4 text-sm font-medium text-[#282640]/80 outline-none ring-1 ring-white/70"
+                    className="h-9 flex-1 cursor-default rounded-xl border border-[#282640]/10 bg-[linear-gradient(180deg,#faf8fd,#f3effa)] px-3 text-sm font-medium text-[#282640]/80 outline-none ring-1 ring-white/70"
                   />
                   <Button
                     type="button"
                     onClick={runScenario}
                     disabled={isRunning}
-                    className="h-11 rounded-xl bg-[linear-gradient(135deg,#282640,#C400FF)] px-5 text-white shadow-[0_14px_28px_rgba(95,63,156,0.28)] hover:opacity-95"
+                    className="h-9 rounded-xl bg-[linear-gradient(135deg,#282640,#C400FF)] px-4 text-white shadow-[0_10px_22px_rgba(95,63,156,0.24)] hover:opacity-95"
                   >
                     <SendHorizontal className="h-4 w-4" />
                     {t("demo.workspace.send")}
@@ -699,13 +699,13 @@ export function InteractiveDemoSection() {
                 {currentQuick.metrics.map((metric, index) => (
                   <div
                     key={`${metric}-${index}`}
-                    className="rounded-[18px] border border-[#282640]/10 bg-white/95 px-4 py-4 text-center shadow-[0_14px_34px_rgba(40,38,64,0.05)]"
+                    className="rounded-[14px] border border-[#282640]/10 bg-white/95 px-3 py-3 text-center shadow-[0_10px_24px_rgba(40,38,64,0.05)]"
                   >
                     {metricsVisible > index ? (
                       <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                         <p
                           className={cn(
-                            "text-4xl font-black",
+                            "text-3xl font-black",
                             index === 0
                               ? "text-[#6b33c7]"
                               : index === 1
