@@ -543,6 +543,9 @@
         "stat2": {
           "value": "8h→40분",
           "label": "보고서 준비"
+        },
+        "detail": {
+          "financeDemo": true
         }
       },
       "visual1": {

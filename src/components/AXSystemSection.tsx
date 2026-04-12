@@ -359,6 +359,7 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card6.stat1.label"),
       stat2Value: t("ax.verifiedResults.card6.stat2.value"),
       stat2Label: t("ax.verifiedResults.card6.stat2.label"),
+      detail: { financeDemo: true },
     },
   ],
   visualProofs: [
@@ -1261,6 +1262,206 @@ const CasesBridgeSection = () => {
 type ResultCard = ReturnType<typeof getVerifiedResults>["cards"][number];
 
 // ── 채팅 데모 모달 ──────────────────────────────────────────────
+// ── 재무 대시보드 + Q&A 챗봇 데모 모달 ────────────────────────────
+const FINANCE_KPI = [
+  { id: "revenue",  label: "매출액",      value: "₩2.84B",  sub: "전분기 +8.2%",  color: "#F8B529" },
+  { id: "ebitda",   label: "EBITDA",     value: "₩420M",   sub: "전분기 +16.7%", color: "#C400FF" },
+  { id: "margin",   label: "영업이익률",  value: "18.2%",   sub: "업종 평균 +4.1%p", color: "#4ade80" },
+  { id: "cashflow", label: "영업 현금흐름", value: "₩380M", sub: "잉여 현금 건전", color: "#60a5fa" },
+];
+
+const QUARTERLY = [
+  { q: "1Q", v: 62 },
+  { q: "2Q", v: 75 },
+  { q: "3Q", v: 100 },
+];
+
+const FINANCE_CHAT: { role: "user" | "ai"; text: string; highlight?: string }[] = [
+  { role: "user", text: "이번 분기 EBITDA 얼마예요?" },
+  { role: "ai",   text: "3분기 EBITDA는 **₩420M**입니다.\n전 분기(₩360M) 대비 **+16.7%** 증가했습니다.", highlight: "ebitda" },
+  { role: "user", text: "영업이익률은요?" },
+  { role: "ai",   text: "현재 영업이익률은 **18.2%**입니다.\n업종 평균(14.1%) 대비 **+4.1%p** 높은 수준입니다.", highlight: "margin" },
+  { role: "user", text: "현금흐름 상태 요약해줘" },
+  { role: "ai",   text: "영업 현금흐름 **₩380M**으로 건전합니다.\n잉여 현금 확보로 투자 여력 충분한 상태입니다.", highlight: "cashflow" },
+];
+
+function renderChatText(text: string) {
+  return text.split(/(\*\*.*?\*\*)/).map((part, i) =>
+    part.startsWith("**") ? (
+      <strong key={i} className="font-black text-white">{part.slice(2, -2)}</strong>
+    ) : <span key={i}>{part}</span>
+  );
+}
+
+const FinanceDashboardDemoModal = ({ onClose }: { onClose: () => void }) => {
+  const [visible, setVisible] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const [activeKpi, setActiveKpi] = useState<string | null>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (visible >= FINANCE_CHAT.length) return;
+    const msg = FINANCE_CHAT[visible];
+    const delay = msg.role === "user" ? 600 : 400;
+    const t = setTimeout(() => {
+      if (msg.role === "ai") setTyping(true);
+      const t2 = setTimeout(() => {
+        setTyping(false);
+        if (msg.highlight) setActiveKpi(msg.highlight);
+        setVisible((v) => v + 1);
+        setTimeout(() => setActiveKpi(null), 1800);
+      }, msg.role === "ai" ? 1100 : 250);
+      return () => clearTimeout(t2);
+    }, delay);
+    return () => clearTimeout(t);
+  }, [visible]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [visible, typing]);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
+        <motion.div
+          className="relative z-10 flex w-full max-w-3xl flex-col overflow-hidden rounded-[24px] bg-[#0e0f1a] text-white shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
+          style={{ maxHeight: "90vh" }}
+          initial={{ scale: 0.93, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 헤더 */}
+          <div className="flex items-center justify-between border-b border-white/10 px-6 py-3.5">
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold">재무 · 리포트 AX</span>
+              <span className="text-xs text-white/30">Financial QA Agent</span>
+            </div>
+            <button onClick={onClose} className="rounded-full p-1.5 text-white/40 hover:bg-white/10">✕</button>
+          </div>
+
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            {/* ── 왼쪽: 대시보드 ── */}
+            <div className="flex w-[46%] shrink-0 flex-col gap-3 border-r border-white/8 overflow-y-auto p-4">
+              <p className="text-[10px] font-bold tracking-widest text-white/30">LIVE DASHBOARD · 3Q</p>
+
+              {/* KPI 카드 4개 */}
+              <div className="grid grid-cols-2 gap-2">
+                {FINANCE_KPI.map((kpi) => (
+                  <motion.div
+                    key={kpi.id}
+                    animate={activeKpi === kpi.id
+                      ? { scale: 1.04, borderColor: kpi.color, backgroundColor: `${kpi.color}18` }
+                      : { scale: 1, borderColor: "rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.03)" }
+                    }
+                    transition={{ duration: 0.3 }}
+                    className="rounded-xl border p-3"
+                    style={{ borderColor: "rgba(255,255,255,0.08)" }}
+                  >
+                    <p className="text-[10px] text-white/40">{kpi.label}</p>
+                    <p className="mt-1 text-base font-black" style={{ color: activeKpi === kpi.id ? kpi.color : "#fff" }}>
+                      {kpi.value}
+                    </p>
+                    <p className="mt-0.5 text-[10px]" style={{ color: kpi.color }}>{kpi.sub}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* 분기별 매출 미니 차트 */}
+              <div className="rounded-xl border border-white/8 bg-white/3 p-3">
+                <p className="mb-3 text-[10px] text-white/30">분기별 매출 추이</p>
+                <div className="flex items-end justify-around gap-2" style={{ height: 70 }}>
+                  {QUARTERLY.map((q, i) => (
+                    <div key={q.q} className="flex flex-col items-center gap-1.5">
+                      <div className="relative flex w-10 flex-col justify-end overflow-hidden rounded-t-md bg-white/5" style={{ height: 60 }}>
+                        <motion.div
+                          className="w-full rounded-t-md"
+                          style={{ background: i === 2 ? "linear-gradient(to top, #F8B529, #C400FF)" : "rgba(255,255,255,0.15)" }}
+                          initial={{ height: 0 }}
+                          animate={{ height: `${q.v}%` }}
+                          transition={{ duration: 0.8, delay: i * 0.2, ease: "easeOut" }}
+                        />
+                      </div>
+                      <span className="text-[10px] text-white/40">{q.q}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 보고서 링크 더미 */}
+              <div className="space-y-1.5">
+                {["3Q 재무제표.pdf", "EBITDA 분석 리포트.xlsx", "현금흐름 요약.pdf"].map((f, i) => (
+                  <div key={f} className="flex items-center gap-2 rounded-lg border border-white/6 bg-white/3 px-3 py-2">
+                    <span className="text-[10px] text-[#F8B529]">📄</span>
+                    <span className="flex-1 text-[11px] text-white/60">{f}</span>
+                    {activeKpi && i === 0 && (
+                      <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                        className="rounded-full bg-[#C400FF]/20 px-1.5 py-0.5 text-[9px] text-[#C400FF]">참조됨</motion.span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ── 오른쪽: 채팅 ── */}
+            <div className="flex flex-1 flex-col overflow-hidden">
+              <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
+                {FINANCE_CHAT.slice(0, visible).map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                  >
+                    {msg.role === "ai" && (
+                      <div className="mr-2 mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-[9px] font-black">
+                        AX
+                      </div>
+                    )}
+                    <div className={`max-w-[82%] whitespace-pre-line rounded-[16px] px-4 py-2.5 text-sm leading-relaxed ${
+                      msg.role === "user"
+                        ? "rounded-tr-sm bg-[#282640] text-white/90"
+                        : "rounded-tl-sm border border-white/10 bg-white/8 text-white/75"
+                    }`}>
+                      {msg.role === "ai" ? renderChatText(msg.text) : msg.text}
+                    </div>
+                  </motion.div>
+                ))}
+
+                {typing && (
+                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="flex items-end gap-2">
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-[9px] font-black">AX</div>
+                    <div className="flex gap-1 rounded-[16px] rounded-tl-sm border border-white/10 bg-white/8 px-4 py-3">
+                      {[0,1,2].map((j) => (
+                        <motion.span key={j} className="h-1.5 w-1.5 rounded-full bg-white/40"
+                          animate={{ y: [0, -4, 0] }} transition={{ duration: 0.55, repeat: Infinity, delay: j * 0.15 }} />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+
+              {/* 더미 입력창 */}
+              <div className="flex items-center gap-2 border-t border-white/8 px-4 py-3">
+                <div className="flex-1 rounded-full bg-white/8 px-4 py-2 text-xs text-white/25">재무 지표를 자연어로 질문하세요...</div>
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF]">
+                  <span className="text-xs text-white font-bold">↑</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // ── 트래픽 440% 성장 + 키워드 분석 데모 모달 ──────────────────────
 const MONTHS = [
   { label: "1개월차", month: "10월", traffic: 100, threads: 100, revenue: 100 },
@@ -2192,7 +2393,9 @@ const VerifiedResultsSection = ({
           ? <ProductPageDemoModal onClose={() => setSelectedCard(null)} />
           : (selectedCard.detail as { chatMode?: boolean })?.chatMode
             ? <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />
-            : <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
+            : (selectedCard.detail as { financeDemo?: boolean })?.financeDemo
+              ? <FinanceDashboardDemoModal onClose={() => setSelectedCard(null)} />
+              : <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
       )}
     </motion.div>
   );
