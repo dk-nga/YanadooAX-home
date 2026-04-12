@@ -29,7 +29,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_20%),radial-gradient(circle_at_100%_100%,rgba(196,0,255,0.07),transparent_18%)]" />
 
       <div className="container relative z-10 mx-auto flex min-h-screen max-w-[1380px] items-center px-5 pb-16 sm:px-8 lg:px-10">
-        <div className="grid w-full items-center gap-10 lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_540px]">
+        <div className="grid w-full items-center gap-10 lg:grid-cols-[1fr_600px] xl:grid-cols-[1fr_680px]">
 
           {/* Left — copy */}
           <motion.div
@@ -47,11 +47,14 @@ export function HeroSection() {
             <h1 className="text-[2.6rem] font-black leading-[1.1] tracking-[-0.05em] text-black sm:text-6xl lg:text-[4rem] xl:text-[4.5rem]">
               {t("hero.title1")}
               <br />
-              <span className="bg-gradient-to-r from-[#282640] to-[#C400FF] bg-clip-text text-transparent">
-                {t("hero.title2")}
-              </span>
+              {t("hero.title2")}
               <br />
-              {t("hero.title3")}
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-[#F8B529] via-[#C400FF] to-[#282640] bg-clip-text text-transparent">
+                  {t("hero.title3")}
+                </span>
+                <span className="absolute -inset-x-2 bottom-1 top-0 -z-0 rounded-lg bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10" />
+              </span>
             </h1>
 
             {/* Subtitle */}

@@ -1633,7 +1633,7 @@ const AXSystemSection = () => {
         <FloatingOrb color="#C400FF" size="w-[500px] h-[500px]" position="-top-48 -right-48" />
         <FloatingOrb color="#282640" size="w-[400px] h-[400px]" position="-bottom-32 -left-32" />
 
-        <HeroMetricsMarquee className="relative z-20 w-full pb-12 pt-8 md:pb-16 md:pt-10" />
+        {/* metrics marquee moved to HomePageClient */}
         
         <div className="container mx-auto px-4 md:px-6 relative z-10 overflow-hidden">
           <motion.div
