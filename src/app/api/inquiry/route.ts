@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     // 2. Resend로 이메일 발송
     const type = INQUIRY_TYPE_LABEL[body.inquiry_type] ?? body.inquiry_type;
     await resend.emails.send({
-      from: "Yanadoo AX <onboarding@resend.dev>",
+      from: "Yanadoo AX <noreply@nextgenai.kr>",
       to: NOTIFY_EMAILS,
       subject: `[YanadooAX] 새 ${type} - ${body.company} ${body.name}`,
       html: buildEmailHtml(body),
