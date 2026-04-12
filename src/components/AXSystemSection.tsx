@@ -1284,12 +1284,20 @@ const SIZE_ROWS = [
 
 const SIZE_HEADERS = ["사이즈", "어깨", "가슴둘레", "허리둘레", "밑단둘레", "소매장", "소매통", "소매단", "기장"];
 
+// 스트라이프 의류 이미지 (Unsplash)
+const PRODUCT_IMAGES = [
+  "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=300&q=80",
+  "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=300&q=80",
+  "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=300&q=80",
+];
+
 const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
   const [phase, setPhase] = useState<"input" | "generating" | "done">("input");
   const [infoRows, setInfoRows] = useState(0);
   const [sizeRows, setSizeRows] = useState(0);
   const [progress, setProgress] = useState(0);
   const [count, setCount] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(0);
 
   const startGeneration = () => {
     setPhase("generating");
@@ -1297,6 +1305,12 @@ const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
     setSizeRows(0);
     setProgress(0);
     setCount(0);
+    setImagesLoaded(0);
+
+    // 이미지 먼저 로드 (순차)
+    PRODUCT_IMAGES.forEach((_, i) => {
+      setTimeout(() => setImagesLoaded(i + 1), 200 + i * 350);
+    });
 
     // product info rows, one every 180ms
     PRODUCT_INFO.forEach((_, i) => {
@@ -1402,6 +1416,56 @@ const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
               >
                 ▶ 상세페이지 자동 생성 시작
               </button>
+            )}
+
+            {/* 상품 이미지 */}
+            {phase !== "input" && (
+              <div className="mb-5">
+                <p className="mb-2 text-[11px] font-bold tracking-widest text-slate-400">상품 이미지</p>
+                <div className="flex gap-2">
+                  {PRODUCT_IMAGES.map((src, i) => (
+                    <div
+                      key={i}
+                      className="relative h-28 w-24 overflow-hidden rounded-xl border border-slate-200 bg-slate-100"
+                    >
+                      {/* 스켈레톤 */}
+                      {imagesLoaded <= i && (
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100"
+                          animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
+                          transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                        />
+                      )}
+                      {/* 실제 이미지 */}
+                      {imagesLoaded > i && (
+                        <motion.img
+                          src={src}
+                          alt={`상품 이미지 ${i + 1}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.4 }}
+                          className="h-full w-full object-cover"
+                        />
+                      )}
+                      {imagesLoaded > i && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.6 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="absolute right-1 top-1 rounded-full bg-emerald-500 p-0.5 text-[9px] text-white"
+                        >
+                          ✓
+                        </motion.div>
+                      )}
+                    </div>
+                  ))}
+                  {/* 빈 슬롯 */}
+                  {[0,1].map((i) => (
+                    <div key={`empty-${i}`} className="h-28 w-24 rounded-xl border border-dashed border-slate-200 bg-slate-50 flex items-center justify-center">
+                      <span className="text-lg text-slate-300">+</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
 
             {/* 상품 상세정보 */}
