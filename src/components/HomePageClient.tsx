@@ -12,7 +12,6 @@ import { HeroAnimation } from "@/components/HeroAnimation";
 import { HeroSection } from "@/components/HeroSection";
 import { ContactWidgetProvider } from "@/contexts/ContactWidgetContext";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
-import { HeroMetricsMarquee } from "@/components/HeroMetricsMarquee";
 
 export function HomePageClient() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -37,9 +36,7 @@ export function HomePageClient() {
                     <HeroSection />
                   </AnimatedSection>
                 </section>
-                {/* 소셜 프루프 스트립 — 로고 마키 → 숫자 마키 */}
                 <ClientLogosSection />
-                <HeroMetricsMarquee className="px-4 py-4 md:px-8" />
                 <div id="about" className="min-h-screen">
                   <AXSystemSection />
                 </div>

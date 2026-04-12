@@ -14,7 +14,8 @@ const clients = [
   { name: "Stayfolio", logo: `${STORAGE_URL}/stayfolio.png` },
 ];
 
-const marqueeClients = [...clients, ...clients];
+// 3벌 복제 — 끝에서 끊김 없이 루프
+const marqueeClients = [...clients, ...clients, ...clients];
 
 export function ClientLogosSection() {
   return (
@@ -43,10 +44,10 @@ export function ClientLogosSection() {
       <style jsx global>{`
         @keyframes client-logos-marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-33.333%); }
         }
         .client-logos-marquee {
-          animation: client-logos-marquee 28s linear infinite;
+          animation: client-logos-marquee 30s linear infinite;
           will-change: transform;
         }
         .client-logos-marquee:hover {

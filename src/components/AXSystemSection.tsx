@@ -1707,6 +1707,8 @@ const AXSystemSection = () => {
 
       <InteractiveDemoSection />
 
+      <HeroMetricsMarquee className="px-4 py-6 md:px-8 md:py-8" />
+
       {/* Part 3: Testimonials + Impact */}
       <div className="relative flex min-h-screen items-center overflow-hidden overflow-x-hidden py-24">
         {/* Background decorations */}
