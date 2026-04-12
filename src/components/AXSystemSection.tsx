@@ -351,6 +351,14 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card5.stat1.label"),
       stat2Value: t("ax.verifiedResults.card5.stat2.value"),
       stat2Label: t("ax.verifiedResults.card5.stat2.label"),
+      detail: {
+        chatMode: true,
+        persona: t("ax.verifiedResults.card5.detail.persona"),
+        messages: [0, 1, 2, 3, 4, 5].map((i) => ({
+          role: i % 2 === 0 ? "user" : "ai",
+          text: t(`ax.verifiedResults.card5.detail.messages.${i}.text`),
+        })) as { role: "user" | "ai"; text: string }[],
+      },
     },
     {
       badge: t("ax.verifiedResults.card6.badge"),
@@ -1263,6 +1271,127 @@ const CasesBridgeSection = () => {
 
 type ResultCard = ReturnType<typeof getVerifiedResults>["cards"][number];
 
+// ── 채팅 데모 모달 ──────────────────────────────────────────────
+const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => void }) => {
+  const messages = (card.detail as { persona: string; messages: { role: "user" | "ai"; text: string }[] }).messages;
+  const persona = (card.detail as { persona: string }).persona;
+  const [visible, setVisible] = useState(0);
+  const [typing, setTyping] = useState(false);
+
+  useEffect(() => {
+    if (visible >= messages.length) return;
+    const next = messages[visible];
+    const delay = next.role === "ai" ? 900 : 500;
+    const timer = setTimeout(() => {
+      if (next.role === "ai") setTyping(true);
+      const show = setTimeout(() => {
+        setTyping(false);
+        setVisible((v) => v + 1);
+      }, next.role === "ai" ? 1200 : 300);
+      return () => clearTimeout(show);
+    }, visible === 0 ? 400 : delay);
+    return () => clearTimeout(timer);
+  }, [visible, messages]);
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        <motion.div
+          className="relative z-10 flex w-full max-w-sm flex-col overflow-hidden rounded-[28px] bg-[#f0f0f0] shadow-[0_32px_80px_rgba(0,0,0,0.28)]"
+          style={{ height: "min(680px, 90vh)" }}
+          initial={{ scale: 0.92, opacity: 0, y: 24 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.92, opacity: 0, y: 24 }}
+          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 상단 바 */}
+          <div className="flex items-center gap-3 bg-[#282640] px-5 py-4 text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-sm font-black">
+              AX
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-bold">{persona}</p>
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="text-[11px] text-white/60">온라인 · 즉시 응답</span>
+              </div>
+            </div>
+            <button onClick={onClose} className="rounded-full p-1.5 hover:bg-white/10">
+              <span className="text-sm">✕</span>
+            </button>
+          </div>
+
+          {/* 대화 영역 */}
+          <div className="flex flex-1 flex-col gap-3 overflow-y-auto px-4 py-5">
+            {messages.slice(0, visible).map((msg, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25 }}
+                className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+              >
+                {msg.role === "ai" && (
+                  <div className="mr-2 mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-[10px] font-black text-white">
+                    AX
+                  </div>
+                )}
+                <div
+                  className={`max-w-[78%] whitespace-pre-line rounded-[18px] px-4 py-3 text-sm leading-relaxed shadow-sm ${
+                    msg.role === "user"
+                      ? "rounded-tr-md bg-[#282640] text-white"
+                      : "rounded-tl-md bg-white text-slate-800"
+                  }`}
+                >
+                  {msg.text}
+                </div>
+              </motion.div>
+            ))}
+
+            {/* 타이핑 인디케이터 */}
+            {typing && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                className="flex items-end gap-2"
+              >
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-[10px] font-black text-white">
+                  AX
+                </div>
+                <div className="flex gap-1 rounded-[18px] rounded-tl-md bg-white px-4 py-3.5 shadow-sm">
+                  {[0, 1, 2].map((i) => (
+                    <motion.span
+                      key={i}
+                      className="h-2 w-2 rounded-full bg-slate-400"
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          {/* 입력창 (더미) */}
+          <div className="flex items-center gap-2 border-t border-black/8 bg-white px-4 py-3">
+            <div className="flex-1 rounded-full bg-[#f0f0f0] px-4 py-2.5 text-sm text-slate-400">
+              메시지를 입력하세요...
+            </div>
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#282640]">
+              <span className="text-xs text-white">↑</span>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => void }) => (
   <AnimatePresence>
     <motion.div
@@ -1552,7 +1681,9 @@ const VerifiedResultsSection = ({
       </div>
 
       {selectedCard && (
-        <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
+        (selectedCard.detail as { chatMode?: boolean })?.chatMode
+          ? <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />
+          : <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
       )}
     </motion.div>
   );
