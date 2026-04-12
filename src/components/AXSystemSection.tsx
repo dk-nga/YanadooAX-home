@@ -171,6 +171,15 @@ const getRoleCases = (t: (key: string) => string) => [
     highlights: [t("ax.roleCases.case4.highlight1"), t("ax.roleCases.case4.highlight2")],
     icon: "sales",
   },
+  {
+    id: 5,
+    role: t("ax.roleCases.case5.role"),
+    metric: t("ax.roleCases.case5.metric"),
+    title: t("ax.roleCases.case5.title"),
+    description: t("ax.roleCases.case5.description"),
+    highlights: [t("ax.roleCases.case5.highlight1"), t("ax.roleCases.case5.highlight2")],
+    icon: "exec",
+  },
 ];
 
 const getIndustryCases = (t: (key: string) => string) => [
@@ -1044,76 +1053,116 @@ const DiscoverySprintSection = ({
   );
 };
 
+const INDUSTRY_ICONS: Record<string, string> = {
+  "게임": "🎮", "이커머스": "🛍️", "제조": "🏭", "교육": "🎓",
+};
+
 const IndustryCasesSection = ({ cases }: { cases: IndustryCaseType[] }) => {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const [activeTab, setActiveTab] = useState<string>("전체");
+
+  const tabs = ["전체", ...cases.map((c) => c.industry)];
+  const filtered = activeTab === "전체" ? cases : cases.filter((c) => c.industry === activeTab);
 
   return (
     <motion.div
       ref={ref}
+      id="industry"
       className="mx-auto mb-10 max-w-6xl md:mb-14"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="mb-6 text-center md:mb-8">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#C400FF]/15 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 px-4 py-2">
-          <span className="text-sm font-bold text-[#C400FF]">{t("ax.industryCases.badge")}</span>
-        </div>
-        <h3 className="text-2xl font-black leading-tight text-foreground md:text-4xl">
+      {/* 헤더 */}
+      <div className="mb-6 md:mb-8">
+        <span className="text-xs font-bold tracking-widest text-[#C400FF]">{t("ax.industryCases.badge")}</span>
+        <h3 className="mt-2 text-2xl font-black leading-tight text-foreground md:text-4xl">
           {t("ax.industryCases.title")}
         </h3>
-        <p className="mx-auto mt-3 max-w-3xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
+        <p className="mt-2 max-w-2xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
           {t("ax.industryCases.subtitle")}
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {cases.map((item, index) => (
-          <motion.article
-            key={item.id}
-            className="group relative overflow-hidden rounded-[28px] border border-stone-300/70 bg-white/92 p-5 shadow-[0_24px_70px_rgba(24,24,33,0.06)] backdrop-blur-sm md:p-6"
-            initial={{ opacity: 0, y: 28 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-            transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
-            whileHover={{ y: -6 }}
+      {/* 카테고리 탭 */}
+      <div className="mb-6 flex flex-wrap gap-2">
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`flex items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ${
+              activeTab === tab
+                ? "border-[#C400FF] bg-[#C400FF] text-white shadow-[0_4px_16px_rgba(196,0,255,0.3)]"
+                : "border-stone-200 bg-white text-stone-500 hover:border-[#C400FF]/40 hover:text-[#C400FF]"
+            }`}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.12),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.1),transparent_34%)] opacity-80" />
-            <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full border border-stone-300/50" />
-            <div className="absolute -bottom-20 left-[-10px] h-32 w-32 rounded-full bg-[#f7f4fb]" />
-
-            <div className="relative z-10">
-              <div className="mb-5 flex items-center justify-between gap-3">
-                <span className="rounded-full border border-[#C400FF]/15 bg-white/80 px-3 py-1 text-xs font-bold tracking-[0.16em] text-[#6b33c7]">
-                  {item.industry}
-                </span>
-                <span className="bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-sm font-black text-transparent">
-                  {item.metric}
-                </span>
-              </div>
-
-              <h4 className="text-xl font-black leading-tight text-foreground md:text-2xl">
-                {item.title}
-              </h4>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/72 md:text-[15px]">
-                {item.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {item.highlights.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="rounded-full border border-stone-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-muted-foreground"
-                  >
-                    {highlight}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.article>
+            {tab !== "전체" && <span>{INDUSTRY_ICONS[tab] ?? "📌"}</span>}
+            {tab}
+          </button>
         ))}
       </div>
+
+      {/* 카드 그리드 */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.28 }}
+          className={`grid gap-5 ${activeTab === "전체" ? "md:grid-cols-2 xl:grid-cols-4" : "md:grid-cols-1 xl:grid-cols-1"}`}
+        >
+          {filtered.map((item) => (
+            <article
+              key={item.id}
+              className={`relative overflow-hidden rounded-[24px] border border-stone-200 bg-white p-6 shadow-sm ${
+                activeTab !== "전체" ? "flex gap-8 md:p-8" : ""
+              }`}
+            >
+              {/* 배경 그라디언트 */}
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.06),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.05),transparent_30%)]" />
+
+              {/* 업종 아이콘 (확장 시 왼쪽 고정) */}
+              {activeTab !== "전체" && (
+                <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#F8B529]/15 to-[#C400FF]/15 text-3xl">
+                  {INDUSTRY_ICONS[item.industry] ?? "📌"}
+                </div>
+              )}
+
+              <div className="relative z-10 flex-1">
+                <div className="mb-3 flex flex-wrap items-center gap-2">
+                  {activeTab === "전체" && (
+                    <span className="text-lg">{INDUSTRY_ICONS[item.industry] ?? "📌"}</span>
+                  )}
+                  <span className="rounded-full border border-[#C400FF]/20 bg-[#f8f0ff] px-3 py-0.5 text-xs font-bold text-[#6b33c7]">
+                    {item.industry}
+                  </span>
+                  <span className="ml-auto bg-gradient-to-r from-[#F8B529] to-[#C400FF] bg-clip-text text-sm font-black text-transparent">
+                    {item.metric}
+                  </span>
+                </div>
+
+                <h4 className={`font-black leading-tight text-foreground ${activeTab !== "전체" ? "text-2xl md:text-3xl" : "text-lg"}`}>
+                  {item.title}
+                </h4>
+                <p className={`mt-2 leading-relaxed text-stone-500 ${activeTab !== "전체" ? "text-base" : "text-sm"}`}>
+                  {item.description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.highlights.map((h) => (
+                    <span key={h} className="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-600">
+                      {h}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </motion.div>
   );
 };
@@ -1128,87 +1177,144 @@ type RoleCaseType = {
   icon: string;
 };
 
-const roleBgMap: Record<string, string> = {
-  design: "rgba(248,181,41,0.10)",
-  ops: "rgba(40,38,64,0.07)",
-  marketing: "rgba(196,0,255,0.08)",
-  sales: "rgba(16,185,129,0.08)",
+const ROLE_CONFIG: Record<string, { icon: string; accent: string; bg: string }> = {
+  design:    { icon: "🎨", accent: "#F8B529", bg: "rgba(248,181,41,0.08)" },
+  ops:       { icon: "⚙️", accent: "#282640", bg: "rgba(40,38,64,0.06)" },
+  marketing: { icon: "📣", accent: "#C400FF", bg: "rgba(196,0,255,0.07)" },
+  sales:     { icon: "💼", accent: "#10b981", bg: "rgba(16,185,129,0.07)" },
+  exec:      { icon: "🧭", accent: "#6366f1", bg: "rgba(99,102,241,0.07)" },
 };
 
 const RoleCasesSection = ({ cases }: { cases: RoleCaseType[] }) => {
   const { t } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
+  const [activeRole, setActiveRole] = useState<number>(cases[0]?.id ?? 1);
+
+  const active = cases.find((c) => c.id === activeRole) ?? cases[0];
+  const cfg = active ? (ROLE_CONFIG[active.icon] ?? ROLE_CONFIG.ops) : ROLE_CONFIG.ops;
 
   return (
     <motion.div
       ref={ref}
+      id="role"
       className="mx-auto mb-10 max-w-6xl md:mb-14"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="mb-6 text-center md:mb-8">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#282640]/15 bg-gradient-to-r from-[#282640]/8 to-[#C400FF]/10 px-4 py-2">
-          <span className="text-sm font-bold text-[#282640]">{t("ax.roleCases.badge")}</span>
-        </div>
-        <h3 className="text-2xl font-black leading-tight text-foreground md:text-4xl">
+      {/* 헤더 */}
+      <div className="mb-6 md:mb-8">
+        <span className="text-xs font-bold tracking-widest text-[#282640]/60">{t("ax.roleCases.badge")}</span>
+        <h3 className="mt-2 text-2xl font-black leading-tight text-foreground md:text-4xl">
           {t("ax.roleCases.title")}
         </h3>
-        <p className="mx-auto mt-3 max-w-3xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
+        <p className="mt-2 max-w-2xl whitespace-pre-line text-sm leading-relaxed text-muted-foreground md:text-base">
           {t("ax.roleCases.subtitle")}
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {cases.map((item, index) => (
-          <motion.article
-            key={item.id}
-            className="group relative overflow-hidden rounded-[28px] border border-stone-300/70 bg-white/92 p-5 shadow-[0_24px_70px_rgba(24,24,33,0.06)] backdrop-blur-sm md:p-6"
-            initial={{ opacity: 0, y: 28 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-            transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
-            whileHover={{ y: -6 }}
-          >
-            <div
-              className="absolute inset-0 opacity-80"
-              style={{
-                background: `radial-gradient(circle at top left, ${roleBgMap[item.icon] ?? "rgba(196,0,255,0.08)"}, transparent 40%)`,
-              }}
-            />
-            <div className="absolute -right-16 -top-16 h-36 w-36 rounded-full border border-stone-300/50" />
-            <div className="absolute -bottom-20 left-[-10px] h-32 w-32 rounded-full bg-[#f7f4fb]" />
+      <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
+        {/* 왼쪽: 직무 탭 목록 */}
+        <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:pb-0">
+          {cases.map((item) => {
+            const c = ROLE_CONFIG[item.icon] ?? ROLE_CONFIG.ops;
+            const isActive = item.id === activeRole;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setActiveRole(item.id)}
+                className={`flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-3 text-left transition-all duration-200 lg:w-full ${
+                  isActive
+                    ? "border-transparent text-white shadow-lg"
+                    : "border-stone-200 bg-white text-stone-500 hover:border-stone-300"
+                }`}
+                style={isActive ? { background: `linear-gradient(135deg, ${c.accent}ee, ${c.accent}99)` } : {}}
+              >
+                <span className="text-xl">{c.icon}</span>
+                <span className="text-sm font-bold">{item.role}</span>
+                {isActive && (
+                  <span className="ml-auto text-xs font-black opacity-90">{item.metric}</span>
+                )}
+              </button>
+            );
+          })}
+        </div>
 
-            <div className="relative z-10">
-              <div className="mb-5 flex items-center justify-between gap-3">
-                <span className="rounded-full border border-[#282640]/15 bg-white/80 px-3 py-1 text-xs font-bold tracking-[0.16em] text-[#282640]">
-                  {item.role}
-                </span>
-                <span className="bg-gradient-to-r from-[#282640] to-[#C400FF] bg-clip-text text-sm font-black text-transparent">
-                  {item.metric}
-                </span>
-              </div>
+        {/* 오른쪽: 선택된 직무 상세 */}
+        <AnimatePresence mode="wait">
+          {active && (
+            <motion.div
+              key={active.id}
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -8 }}
+              transition={{ duration: 0.25 }}
+              className="relative overflow-hidden rounded-[24px] border border-stone-200 p-6 md:p-8"
+              style={{ background: cfg.bg }}
+            >
+              {/* 배경 accent */}
+              <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full opacity-20 blur-3xl"
+                style={{ background: cfg.accent }} />
 
-              <h4 className="text-xl font-black leading-tight text-foreground md:text-2xl">
-                {item.title}
-              </h4>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/72 md:text-[15px]">
-                {item.description}
-              </p>
+              <div className="relative z-10">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-2xl"
+                    style={{ background: `${cfg.accent}18` }}>
+                    {cfg.icon}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold" style={{ color: cfg.accent }}>{active.role}</span>
+                      <span className="rounded-full px-2.5 py-0.5 text-xs font-black text-white"
+                        style={{ background: cfg.accent }}>{active.metric}</span>
+                    </div>
+                  </div>
+                </div>
 
-              <div className="mt-5 flex flex-wrap gap-2">
-                {item.highlights.map((highlight) => (
-                  <span
-                    key={highlight}
-                    className="rounded-full border border-stone-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                <h4 className="text-xl font-black leading-tight text-foreground md:text-2xl lg:text-3xl">
+                  {active.title}
+                </h4>
+                <p className="mt-3 text-sm leading-relaxed text-stone-600 md:text-base">
+                  {active.description}
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {active.highlights.map((h) => (
+                    <span key={h}
+                      className="rounded-full border px-3 py-1.5 text-xs font-semibold"
+                      style={{ borderColor: `${cfg.accent}30`, color: cfg.accent, background: `${cfg.accent}0d` }}>
+                      {h}
+                    </span>
+                  ))}
+                </div>
+
+                {/* 경영팀 특별 카드 */}
+                {active.icon === "exec" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+                    className="mt-6 rounded-2xl border border-indigo-100 bg-white p-5"
                   >
-                    {highlight}
-                  </span>
-                ))}
+                    <p className="mb-3 text-xs font-bold tracking-widest text-indigo-400">AI 문화 전파 프레임워크</p>
+                    <div className="grid grid-cols-3 gap-3 text-center">
+                      {[
+                        { step: "01", label: "암묵지 포착", desc: "상위 직원 판단 패턴 분석·녹화" },
+                        { step: "02", label: "자산화", desc: "프롬프트·가이드·SOP로 변환" },
+                        { step: "03", label: "전사 확산", desc: "AI-Q 등급 체계로 조직 내재화" },
+                      ].map(({ step, label, desc }) => (
+                        <div key={step} className="rounded-xl bg-indigo-50 p-3">
+                          <span className="text-xs font-black text-indigo-300">{step}</span>
+                          <p className="mt-1 text-xs font-bold text-indigo-700">{label}</p>
+                          <p className="mt-1 text-[10px] leading-tight text-indigo-400">{desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
               </div>
-            </div>
-          </motion.article>
-        ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );
