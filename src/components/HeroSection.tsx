@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { AXDiagnosisModal } from "@/components/AXDiagnosisModal";
+import { useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useContactWidget } from "@/contexts/ContactWidgetContext";
 
 export function HeroSection() {
   const { t } = useLanguage();
-  const [diagnosisOpen, setDiagnosisOpen] = useState(false);
+  const { openDiagnosisModal } = useContactWidget();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export function HeroSection() {
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
-                onClick={() => setDiagnosisOpen(true)}
+                onClick={openDiagnosisModal}
                 className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#282640] px-7 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.02] hover:opacity-95"
               >
                 {t("hero.cta1")}
@@ -141,7 +141,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      <AXDiagnosisModal open={diagnosisOpen} onOpenChange={setDiagnosisOpen} />
     </section>
   );
 }
