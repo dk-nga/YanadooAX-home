@@ -1,7 +1,6 @@
 "use client";
 
 import { z } from "zod";
-import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/lib/supabase/types";
 
 type Translator = (key: string) => string;
@@ -70,15 +69,15 @@ export type CompactContactFormData = z.infer<ReturnType<typeof getCompactContact
 
 type InquiryInsert = Database["public"]["Tables"]["inquiries"]["Insert"];
 
-type SubmitContactInquiryArgs = {
-  supabase: SupabaseClient<Database>;
-  data: InquiryInsert;
-};
+export async function submitContactInquiry({ data }: { data: InquiryInsert }) {
+  const res = await fetch("/api/inquiry", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
 
-export async function submitContactInquiry({ supabase, data }: SubmitContactInquiryArgs) {
-  const { error } = await supabase.from("inquiries").insert(data);
-
-  if (error) {
-    throw error;
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.message ?? "문의 접수에 실패했습니다.");
   }
 }

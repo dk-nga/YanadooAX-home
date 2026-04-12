@@ -61,7 +61,6 @@ export function CompactContactForm() {
 
     try {
       await submitContactInquiry({
-        supabase,
         data: {
           inquiry_type: "contact",
           company: data.company,
