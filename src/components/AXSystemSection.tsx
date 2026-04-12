@@ -259,6 +259,18 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card1.stat1.label"),
       stat2Value: t("ax.verifiedResults.card1.stat2.value"),
       stat2Label: t("ax.verifiedResults.card1.stat2.label"),
+      detail: {
+        problem: t("ax.verifiedResults.card1.detail.problem"),
+        solution: t("ax.verifiedResults.card1.detail.solution"),
+        stack: t("ax.verifiedResults.card1.detail.stack"),
+        workflow: [
+          t("ax.verifiedResults.card1.detail.workflow.0"),
+          t("ax.verifiedResults.card1.detail.workflow.1"),
+          t("ax.verifiedResults.card1.detail.workflow.2"),
+          t("ax.verifiedResults.card1.detail.workflow.3"),
+        ],
+        expand: t("ax.verifiedResults.card1.detail.expand"),
+      },
     },
     {
       badge: t("ax.verifiedResults.card2.badge"),
@@ -270,6 +282,18 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card2.stat1.label"),
       stat2Value: t("ax.verifiedResults.card2.stat2.value"),
       stat2Label: t("ax.verifiedResults.card2.stat2.label"),
+      detail: {
+        problem: t("ax.verifiedResults.card2.detail.problem"),
+        solution: t("ax.verifiedResults.card2.detail.solution"),
+        stack: t("ax.verifiedResults.card2.detail.stack"),
+        workflow: [
+          t("ax.verifiedResults.card2.detail.workflow.0"),
+          t("ax.verifiedResults.card2.detail.workflow.1"),
+          t("ax.verifiedResults.card2.detail.workflow.2"),
+          t("ax.verifiedResults.card2.detail.workflow.3"),
+        ],
+        expand: t("ax.verifiedResults.card2.detail.expand"),
+      },
     },
     {
       badge: t("ax.verifiedResults.card3.badge"),
@@ -281,6 +305,18 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card3.stat1.label"),
       stat2Value: t("ax.verifiedResults.card3.stat2.value"),
       stat2Label: t("ax.verifiedResults.card3.stat2.label"),
+      detail: {
+        problem: t("ax.verifiedResults.card3.detail.problem"),
+        solution: t("ax.verifiedResults.card3.detail.solution"),
+        stack: t("ax.verifiedResults.card3.detail.stack"),
+        workflow: [
+          t("ax.verifiedResults.card3.detail.workflow.0"),
+          t("ax.verifiedResults.card3.detail.workflow.1"),
+          t("ax.verifiedResults.card3.detail.workflow.2"),
+          t("ax.verifiedResults.card3.detail.workflow.3"),
+        ],
+        expand: t("ax.verifiedResults.card3.detail.expand"),
+      },
     },
     {
       badge: t("ax.verifiedResults.card4.badge"),
@@ -292,6 +328,18 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card4.stat1.label"),
       stat2Value: t("ax.verifiedResults.card4.stat2.value"),
       stat2Label: t("ax.verifiedResults.card4.stat2.label"),
+      detail: {
+        problem: t("ax.verifiedResults.card4.detail.problem"),
+        solution: t("ax.verifiedResults.card4.detail.solution"),
+        stack: t("ax.verifiedResults.card4.detail.stack"),
+        workflow: [
+          t("ax.verifiedResults.card4.detail.workflow.0"),
+          t("ax.verifiedResults.card4.detail.workflow.1"),
+          t("ax.verifiedResults.card4.detail.workflow.2"),
+          t("ax.verifiedResults.card4.detail.workflow.3"),
+        ],
+        expand: t("ax.verifiedResults.card4.detail.expand"),
+      },
     },
     {
       badge: t("ax.verifiedResults.card5.badge"),
@@ -352,39 +400,39 @@ const getProblemCards = (t: (key: string) => string): ProblemCardType[] => [
     id: 1,
     title: t("ax.problems.card1.title"),
     description: t("ax.problems.card1.description"),
-    icon: Clock3,
-    scenarioId: "support",
-    iconClassName: "text-[#6b7b93]",
+    icon: TrendingUp,
+    scenarioId: "report",
+    iconClassName: "text-[#5f7fd6]",
   },
   {
     id: 2,
     title: t("ax.problems.card2.title"),
     description: t("ax.problems.card2.description"),
-    icon: PenTool,
-    scenarioId: "content",
-    iconClassName: "text-[#d9892f]",
-  },
-  {
-    id: 3,
-    title: t("ax.problems.card3.title"),
-    description: t("ax.problems.card3.description"),
-    icon: BarChart3,
-    scenarioId: "report",
-    iconClassName: "text-[#5f7fd6]",
-  },
-  {
-    id: 4,
-    title: t("ax.problems.card4.title"),
-    description: t("ax.problems.card4.description"),
     icon: Users,
     scenarioId: "support",
     iconClassName: "text-[#7396c4]",
   },
   {
+    id: 3,
+    title: t("ax.problems.card3.title"),
+    description: t("ax.problems.card3.description"),
+    icon: Clock3,
+    scenarioId: "support",
+    iconClassName: "text-[#6b7b93]",
+  },
+  {
+    id: 4,
+    title: t("ax.problems.card4.title"),
+    description: t("ax.problems.card4.description"),
+    icon: Building2,
+    scenarioId: "content",
+    iconClassName: "text-[#d9892f]",
+  },
+  {
     id: 5,
     title: t("ax.problems.card5.title"),
     description: t("ax.problems.card5.description"),
-    icon: TrendingUp,
+    icon: Compass,
     scenarioId: "marketing",
     iconClassName: "text-[#d66552]",
   },
@@ -392,8 +440,8 @@ const getProblemCards = (t: (key: string) => string): ProblemCardType[] => [
     id: 6,
     title: t("ax.problems.card6.title"),
     description: t("ax.problems.card6.description"),
-    icon: Compass,
-    scenarioId: "sales",
+    icon: BarChart3,
+    scenarioId: "report",
     iconClassName: "text-[#d6a12e]",
   },
 ];
@@ -1213,6 +1261,106 @@ const CasesBridgeSection = () => {
   );
 };
 
+type ResultCard = ReturnType<typeof getVerifiedResults>["cards"][number];
+
+const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => void }) => (
+  <AnimatePresence>
+    <motion.div
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+      <motion.div
+        className="relative z-10 w-full max-w-2xl overflow-hidden rounded-[28px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
+        initial={{ scale: 0.94, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.94, opacity: 0, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4 bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] p-6 text-white">
+          <div>
+            <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold tracking-widest text-white/90">
+              {card.badge}
+            </span>
+            <h3 className="mt-3 text-xl font-black leading-tight">{card.title}</h3>
+            <p className="mt-1 text-sm text-white/70">{card.team}</p>
+          </div>
+          <button
+            onClick={onClose}
+            className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="space-y-5 overflow-y-auto p-6" style={{ maxHeight: "65vh" }}>
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { v: card.stat1Value, l: card.stat1Label },
+              { v: card.stat2Value, l: card.stat2Label },
+            ].map(({ v, l }) => (
+              <div key={l} className="rounded-2xl bg-[#f6f1fb] px-4 py-3 text-center">
+                <p className="text-2xl font-black text-[#C400FF]">{v}</p>
+                <p className="mt-0.5 text-xs font-semibold text-slate-500">{l}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Problem & Solution */}
+          <div className="space-y-3">
+            <div className="rounded-2xl border border-rose-100 bg-rose-50 p-4">
+              <p className="mb-1.5 text-xs font-bold tracking-widest text-rose-500">AS-IS 문제</p>
+              <p className="text-sm leading-relaxed text-slate-700">{card.detail?.problem}</p>
+            </div>
+            <div className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
+              <p className="mb-1.5 text-xs font-bold tracking-widest text-emerald-600">솔루션</p>
+              <p className="text-sm leading-relaxed text-slate-700">{card.detail?.solution}</p>
+            </div>
+          </div>
+
+          {/* Workflow */}
+          {card.detail?.workflow && (
+            <div>
+              <p className="mb-3 text-xs font-bold tracking-widest text-slate-400">TO-BE 업무 흐름</p>
+              <div className="flex flex-wrap gap-2">
+                {card.detail.workflow.map((step, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#C400FF] text-[10px] font-bold text-white">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm font-medium text-slate-700">{step}</span>
+                    {i < card.detail!.workflow.length - 1 && (
+                      <span className="text-slate-300">→</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Stack */}
+          <div className="rounded-2xl bg-slate-50 p-4">
+            <p className="mb-1.5 text-xs font-bold tracking-widest text-slate-400">기술 스택</p>
+            <p className="text-sm text-slate-600">{card.detail?.stack}</p>
+          </div>
+
+          {/* Expand */}
+          <div className="rounded-2xl border border-[#C400FF]/15 bg-[#f6f1fb] p-4">
+            <p className="mb-1.5 text-xs font-bold tracking-widest text-[#C400FF]">확장 가능성</p>
+            <p className="text-sm text-slate-600">{card.detail?.expand}</p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  </AnimatePresence>
+);
+
 const VerifiedResultsSection = ({
   results,
   visualProofs,
@@ -1224,6 +1372,7 @@ const VerifiedResultsSection = ({
   const ref = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const [selectedCard, setSelectedCard] = useState<ResultCard | null>(null);
 
   const scrollRail = (direction: "left" | "right") => {
     const node = railRef.current;
@@ -1328,10 +1477,11 @@ const VerifiedResultsSection = ({
             {results.cards.map((card, index) => (
               <motion.article
                 key={`${card.badge}-${index}`}
-                className="h-[600px] min-w-[360px] max-w-[360px] rounded-[30px] border border-stone-200/90 bg-white/96 p-6"
+                className="group h-[600px] min-w-[360px] max-w-[360px] cursor-pointer rounded-[30px] border border-stone-200/90 bg-white/96 p-6 transition-shadow hover:shadow-[0_24px_60px_rgba(196,0,255,0.12)]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
+                onClick={() => card.detail && setSelectedCard(card)}
               >
                 <div className="flex h-full flex-col">
                   <span className="mb-5 inline-flex rounded-full border border-[#C400FF]/10 bg-[linear-gradient(135deg,#eef5ff,#edf3ff)] px-4 py-1.5 text-[13px] font-bold text-[#4d84d8]">
@@ -1360,6 +1510,11 @@ const VerifiedResultsSection = ({
                         <p className="mt-2 text-xs text-[#b1b1ba] md:text-sm">{card.stat2Label}</p>
                       </div>
                     </div>
+                    {card.detail && (
+                      <p className="mt-3 text-center text-xs font-semibold text-[#C400FF]/60 group-hover:text-[#C400FF]">
+                        자세히 보기 →
+                      </p>
+                    )}
                   </div>
                 </div>
               </motion.article>
@@ -1392,6 +1547,10 @@ const VerifiedResultsSection = ({
           </article>
         ))}
       </div>
+
+      {selectedCard && (
+        <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
+      )}
     </motion.div>
   );
 };
