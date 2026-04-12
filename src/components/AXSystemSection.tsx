@@ -1421,11 +1421,20 @@ const VerifiedResultsSection = ({
         </div>
       </div>
 
-      <div className="grid items-stretch gap-5 xl:grid-cols-[360px_minmax(0,1fr)]">
-        <article className="relative h-[600px] overflow-hidden rounded-[32px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-7 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)]">
+      <div
+        ref={railRef}
+        className="flex min-h-[600px] gap-4 overflow-x-auto pb-3 scrollbar-hide scroll-smooth"
+      >
+        {/* Featured card — 레일 첫 번째 */}
+        <motion.article
+          className="relative h-[600px] min-w-[380px] max-w-[380px] overflow-hidden rounded-[30px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-7 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)]"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.14),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.12),transparent_30%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(196,0,255,0.08))]" />
-          <div className="relative z-10">
+          <div className="relative z-10 flex h-full flex-col">
             <div className="mb-5 flex flex-wrap gap-2">
               <span className="rounded-full border border-[#F8B529]/18 bg-[#F8B529]/10 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-[#F8B529]">
                 {results.featured.eyebrow}
@@ -1458,7 +1467,7 @@ const VerifiedResultsSection = ({
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-auto grid grid-cols-2 gap-3">
               {results.featured.stats.map((stat) => (
                 <div key={stat.label} className="rounded-2xl border border-white/8 bg-white/[0.045] p-4">
                   <p className="text-[1.2rem] font-black leading-none text-[#F8B529] md:text-[1.35rem]">{stat.value}</p>
@@ -1467,14 +1476,10 @@ const VerifiedResultsSection = ({
               ))}
             </div>
           </div>
-        </article>
+        </motion.article>
 
-        <div className="min-w-0">
-          <div
-            ref={railRef}
-            className="flex min-h-[600px] gap-4 overflow-x-auto pb-3 scrollbar-hide scroll-smooth"
-          >
-            {results.cards.map((card, index) => (
+        {/* 나머지 카드들 */}
+        {results.cards.map((card, index) => (
               <motion.article
                 key={`${card.badge}-${index}`}
                 className="group h-[600px] min-w-[360px] max-w-[360px] cursor-pointer rounded-[30px] border border-stone-200/90 bg-white/96 p-6 transition-shadow hover:shadow-[0_24px_60px_rgba(196,0,255,0.12)]"
@@ -1519,8 +1524,6 @@ const VerifiedResultsSection = ({
                 </div>
               </motion.article>
             ))}
-          </div>
-        </div>
       </div>
 
       <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2">
