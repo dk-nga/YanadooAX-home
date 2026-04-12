@@ -303,18 +303,7 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card3.stat1.label"),
       stat2Value: t("ax.verifiedResults.card3.stat2.value"),
       stat2Label: t("ax.verifiedResults.card3.stat2.label"),
-      detail: {
-        problem: t("ax.verifiedResults.card3.detail.problem"),
-        solution: t("ax.verifiedResults.card3.detail.solution"),
-        stack: t("ax.verifiedResults.card3.detail.stack"),
-        workflow: [
-          t("ax.verifiedResults.card3.detail.workflow.0"),
-          t("ax.verifiedResults.card3.detail.workflow.1"),
-          t("ax.verifiedResults.card3.detail.workflow.2"),
-          t("ax.verifiedResults.card3.detail.workflow.3"),
-        ],
-        expand: t("ax.verifiedResults.card3.detail.expand"),
-      },
+      detail: { contractDemo: true },
     },
     {
       badge: t("ax.verifiedResults.card4.badge"),
@@ -1421,6 +1410,275 @@ const CasesBridgeSection = () => {
 type ResultCard = ReturnType<typeof getVerifiedResults>["cards"][number];
 
 // ── 채팅 데모 모달 ──────────────────────────────────────────────
+// ── 계약서 자동화 흐름 데모 모달 ─────────────────────────────────
+const CONTRACT_FORM_FIELDS = [
+  { label: "성명", value: "김지수" },
+  { label: "직책", value: "시니어 디자이너" },
+  { label: "입사일", value: "2025.10.01" },
+  { label: "계약기간", value: "1년 (자동 갱신)" },
+  { label: "급여", value: "연 5,200만원" },
+];
+
+const CONTRACT_LINES = [
+  "근로계약서",
+  "",
+  "사용자: (주)야나두AX  |  근로자: 김지수",
+  "직책: 시니어 디자이너",
+  "계약기간: 2025.10.01 ~ 2026.09.30",
+  "급여: 연 52,000,000원",
+  "",
+  "제1조(근무장소) 본사 및 원격근무 병행",
+  "제2조(업무내용) UI/UX 디자인 업무 전반",
+  "제3조(근무시간) 09:00~18:00, 주 40시간",
+  "...",
+  "서명란: ___________ (인)",
+];
+
+const STEPS = [
+  { id: "form",    icon: "📋", label: "폼 입력",      time: "0초" },
+  { id: "gen",     icon: "⚡", label: "계약서 생성",  time: "3초" },
+  { id: "sign",    icon: "✉️", label: "서명 링크 발송", time: "4초" },
+  { id: "archive", icon: "📁", label: "문서 자동 보관", time: "5분 후" },
+];
+
+const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
+  const [phase, setPhase] = useState<"idle" | "running" | "done">("idle");
+  const [activeStep, setActiveStep] = useState(-1);
+  const [formFields, setFormFields] = useState(0);
+  const [contractLines, setContractLines] = useState(0);
+  const [emailVisible, setEmailVisible] = useState(false);
+  const [archiveDone, setArchiveDone] = useState(false);
+
+  const run = () => {
+    setPhase("running");
+    setActiveStep(0);
+    setFormFields(0);
+    setContractLines(0);
+    setEmailVisible(false);
+    setArchiveDone(false);
+
+    // Step 0: Form fields appear
+    CONTRACT_FORM_FIELDS.forEach((_, i) =>
+      setTimeout(() => setFormFields(i + 1), 200 + i * 280)
+    );
+
+    // Step 1: Contract generation
+    const genStart = 200 + CONTRACT_FORM_FIELDS.length * 280 + 400;
+    setTimeout(() => setActiveStep(1), genStart);
+    CONTRACT_LINES.forEach((_, i) =>
+      setTimeout(() => setContractLines(i + 1), genStart + 300 + i * 120)
+    );
+
+    // Step 2: Email
+    const emailStart = genStart + 300 + CONTRACT_LINES.length * 120 + 300;
+    setTimeout(() => { setActiveStep(2); setEmailVisible(true); }, emailStart);
+
+    // Step 3: Archive + done
+    setTimeout(() => { setActiveStep(3); setArchiveDone(true); }, emailStart + 900);
+    setTimeout(() => setPhase("done"), emailStart + 1600);
+  };
+
+  const BEFORE = ["담당자가 Word 수동 작성", "서명 요청 이메일 개별 발송", "반려·재발송 반복", "서류 폴더 수동 보관", "처리까지 평균 2~3일"];
+  const AFTER  = ["폼 입력 한 번으로 완료", "계약서 자동 생성 (3초)", "전자서명 링크 자동 발송", "완료 즉시 Drive 자동 분류", "처리까지 5분"];
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/55 backdrop-blur-sm" />
+        <motion.div
+          className="relative z-10 w-full max-w-3xl overflow-hidden rounded-[24px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
+          style={{ maxHeight: "90vh" }}
+          initial={{ scale: 0.93, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 헤더 */}
+          <div className="flex items-center justify-between border-b border-black/8 px-6 py-4">
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-gradient-to-r from-[#282640] to-[#6366f1] px-3 py-1 text-[11px] font-bold text-white">
+                HR · 계약 자동화
+              </span>
+              {phase === "done" && (
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                  className="text-xs font-bold text-emerald-600">✓ 5분 내 처리 완료</motion.span>
+              )}
+            </div>
+            <button onClick={onClose} className="rounded-full p-1.5 text-slate-400 hover:bg-slate-100">✕</button>
+          </div>
+
+          <div className="overflow-y-auto">
+            {/* Before / After 비교 (항상 표시) */}
+            <div className="grid grid-cols-2 gap-0 border-b border-black/6">
+              <div className="border-r border-black/6 p-4">
+                <p className="mb-2 text-xs font-bold tracking-widest text-rose-400">BEFORE · 수동</p>
+                <div className="space-y-1.5">
+                  {BEFORE.map((t) => (
+                    <div key={t} className="flex items-start gap-2 text-xs text-slate-500">
+                      <span className="mt-0.5 text-rose-300">✕</span>{t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="p-4">
+                <p className="mb-2 text-xs font-bold tracking-widest text-emerald-500">AFTER · AI 자동화</p>
+                <div className="space-y-1.5">
+                  {AFTER.map((t) => (
+                    <div key={t} className="flex items-start gap-2 text-xs text-slate-600">
+                      <span className="mt-0.5 text-emerald-400">✓</span>{t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* 스텝 인디케이터 */}
+            <div className="flex border-b border-black/6">
+              {STEPS.map((s, i) => (
+                <div key={s.id}
+                  className={`flex flex-1 flex-col items-center gap-1 py-3 text-center transition-colors ${
+                    activeStep === i ? "bg-[#6366f1]/5" : activeStep > i ? "bg-emerald-50" : ""
+                  }`}>
+                  <span className="text-base">{s.icon}</span>
+                  <span className={`text-[11px] font-bold ${
+                    activeStep === i ? "text-[#6366f1]" : activeStep > i ? "text-emerald-600" : "text-slate-300"
+                  }`}>{s.label}</span>
+                  <span className="text-[10px] text-slate-300">{s.time}</span>
+                  {activeStep > i && (
+                    <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}
+                      className="text-xs text-emerald-500 font-bold">✓</motion.span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* 메인 애니메이션 영역 */}
+            <div className="grid min-h-[260px] grid-cols-2 gap-0 p-4">
+              {/* 왼쪽: 폼 → 계약서 */}
+              <div className="border-r border-black/6 pr-4">
+                {(activeStep === 0 || phase === "idle") && (
+                  <div>
+                    <p className="mb-3 text-[10px] font-bold tracking-widest text-slate-400">근로계약 입력 폼</p>
+                    <div className="space-y-2">
+                      {CONTRACT_FORM_FIELDS.slice(0, Math.max(formFields, phase === "idle" ? CONTRACT_FORM_FIELDS.length : 0)).map((f) => (
+                        <motion.div key={f.label}
+                          initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }}
+                          className="flex items-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2"
+                        >
+                          <span className="w-16 shrink-0 text-[10px] font-semibold text-slate-400">{f.label}</span>
+                          <span className="text-xs font-medium text-slate-700">{f.value}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {activeStep >= 1 && (
+                  <div>
+                    <p className="mb-2 text-[10px] font-bold tracking-widest text-slate-400">생성된 계약서 미리보기</p>
+                    <div className="rounded-xl border border-slate-200 bg-white p-3 font-mono text-[10px] leading-5 text-slate-600 shadow-sm">
+                      {CONTRACT_LINES.slice(0, contractLines).map((line, i) => (
+                        <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                          className={line === "" ? "h-2" : line === "근로계약서" ? "font-black text-center text-xs text-slate-800 mb-1" : ""}>
+                          {line}
+                        </motion.div>
+                      ))}
+                      {activeStep === 1 && contractLines < CONTRACT_LINES.length && (
+                        <motion.span className="inline-block h-3 w-0.5 bg-[#6366f1]"
+                          animate={{ opacity: [1, 0] }} transition={{ duration: 0.5, repeat: Infinity }} />
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 오른쪽: 이메일 발송 → 보관 */}
+              <div className="pl-4">
+                {/* 이메일 카드 */}
+                {emailVisible && (
+                  <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                    className="mb-3 rounded-xl border border-indigo-100 bg-indigo-50 p-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="text-base">✉️</span>
+                      <span className="text-xs font-bold text-indigo-700">서명 요청 메일 자동 발송</span>
+                      <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3 }}
+                        className="ml-auto rounded-full bg-emerald-500 px-2 py-0.5 text-[10px] font-bold text-white">발송됨</motion.span>
+                    </div>
+                    <div className="space-y-1 text-[11px] text-indigo-600">
+                      <div>To: jisoo.kim@company.com</div>
+                      <div>제목: [계약서 서명 요청] 근로계약서_김지수</div>
+                      <div className="mt-2 rounded-lg bg-white px-3 py-2 text-slate-500">
+                        안녕하세요, 김지수님.<br />
+                        근로계약서 서명을 요청드립니다.<br />
+                        <span className="text-[#6366f1] underline">→ 서명하기 링크</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Drive 보관 */}
+                {archiveDone && (
+                  <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                    className="rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <span className="text-base">📁</span>
+                      <span className="text-xs font-bold text-emerald-700">Drive 자동 분류·보관</span>
+                    </div>
+                    <div className="space-y-1.5">
+                      {["📄 근로계약서_김지수_2025.pdf", "📄 서명완료_타임스탬프.pdf", "📊 계약 현황 시트 자동 업데이트"].map((f) => (
+                        <motion.div key={f} initial={{ opacity: 0, x: 6 }} animate={{ opacity: 1, x: 0 }}
+                          className="flex items-center gap-1.5 text-[11px] text-emerald-700">
+                          {f}
+                        </motion.div>
+                      ))}
+                    </div>
+                    <div className="mt-3 flex items-center gap-2 rounded-lg bg-white px-3 py-2">
+                      <span className="text-emerald-500 font-black text-xs">⏱</span>
+                      <span className="text-xs font-bold text-slate-600">총 처리 시간: <span className="text-emerald-600">5분</span></span>
+                      <span className="ml-auto text-[10px] text-slate-400 line-through">기존 2~3일</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                {!emailVisible && !archiveDone && phase !== "done" && (
+                  <div className="flex h-full items-center justify-center text-slate-200 text-4xl">
+                    📋
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* 실행 버튼 */}
+            {phase === "idle" && (
+              <div className="border-t border-black/6 px-6 py-4">
+                <button onClick={run}
+                  className="w-full rounded-xl bg-gradient-to-r from-[#282640] to-[#6366f1] py-3 text-sm font-bold text-white hover:opacity-90">
+                  ▶ 자동화 프로세스 실행
+                </button>
+              </div>
+            )}
+
+            {phase === "done" && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                className="border-t border-black/6 px-6 py-4">
+                <div className="rounded-xl bg-emerald-50 py-3 text-center">
+                  <p className="text-sm font-bold text-emerald-700">✓ 계약 처리 완료 · 수작업 95% 제거</p>
+                  <p className="mt-1 text-xs text-emerald-500">폼 입력 → 계약서 생성 → 서명 발송 → 보관까지 완전 자동</p>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // ── 재무 대시보드 + Q&A 챗봇 데모 모달 ────────────────────────────
 const FINANCE_KPI = [
   { id: "revenue",  label: "매출액",      value: "₩2.84B",  sub: "전분기 +8.2%",  color: "#F8B529" },
@@ -2547,15 +2805,14 @@ const VerifiedResultsSection = ({
       </div>
 
       {featuredOpen && <TrafficGrowthDemoModal onClose={() => setFeaturedOpen(false)} />}
-      {selectedCard && (
-        (selectedCard.detail as { productDemo?: boolean })?.productDemo
-          ? <ProductPageDemoModal onClose={() => setSelectedCard(null)} />
-          : (selectedCard.detail as { chatMode?: boolean })?.chatMode
-            ? <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />
-            : (selectedCard.detail as { financeDemo?: boolean })?.financeDemo
-              ? <FinanceDashboardDemoModal onClose={() => setSelectedCard(null)} />
-              : <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
-      )}
+      {selectedCard && (() => {
+        const d = selectedCard.detail as Record<string, boolean> | undefined;
+        if (d?.productDemo)  return <ProductPageDemoModal onClose={() => setSelectedCard(null)} />;
+        if (d?.chatMode)     return <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />;
+        if (d?.financeDemo)  return <FinanceDashboardDemoModal onClose={() => setSelectedCard(null)} />;
+        if (d?.contractDemo) return <ContractAutoDemoModal onClose={() => setSelectedCard(null)} />;
+        return <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />;
+      })()}
     </motion.div>
   );
 };
