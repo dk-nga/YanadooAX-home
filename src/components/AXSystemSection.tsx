@@ -259,18 +259,7 @@ const getVerifiedResults = (t: (key: string) => string) => ({
       stat1Label: t("ax.verifiedResults.card1.stat1.label"),
       stat2Value: t("ax.verifiedResults.card1.stat2.value"),
       stat2Label: t("ax.verifiedResults.card1.stat2.label"),
-      detail: {
-        problem: t("ax.verifiedResults.card1.detail.problem"),
-        solution: t("ax.verifiedResults.card1.detail.solution"),
-        stack: t("ax.verifiedResults.card1.detail.stack"),
-        workflow: [
-          t("ax.verifiedResults.card1.detail.workflow.0"),
-          t("ax.verifiedResults.card1.detail.workflow.1"),
-          t("ax.verifiedResults.card1.detail.workflow.2"),
-          t("ax.verifiedResults.card1.detail.workflow.3"),
-        ],
-        expand: t("ax.verifiedResults.card1.detail.expand"),
-      },
+      detail: { productDemo: true },
     },
     {
       badge: t("ax.verifiedResults.card2.badge"),
@@ -1272,6 +1261,244 @@ const CasesBridgeSection = () => {
 type ResultCard = ReturnType<typeof getVerifiedResults>["cards"][number];
 
 // ── 채팅 데모 모달 ──────────────────────────────────────────────
+// ── 상세페이지 자동 생성 데모 모달 ──────────────────────────────
+const PRODUCT_INFO = [
+  { label: "상품명", value: "멀티 폴STR PRT" },
+  { label: "색  상", value: "모스 핑크(14)/터쿼이즈그린(81)" },
+  { label: "사이즈", value: "095/100/105/110/115" },
+  { label: "소  재", value: "겉감:폴리에스터 96.00%,폴리우레탄 4.00%" },
+  { label: "성  별", value: "남성" },
+  { label: "시  즌", value: "여름" },
+  { label: "제조국", value: "미안마" },
+  { label: "세  탁", value: "세탁전문점 or 드라이클리닝 권장" },
+  { label: "제조일", value: "20250901" },
+];
+
+const SIZE_ROWS = [
+  { size: "095", data: ["44.5", "106", "101", "106", "23", "38", "35.5", "71.5"] },
+  { size: "100", data: ["46", "111", "106", "111", "23.5", "39.5", "36.5", "73"] },
+  { size: "105", data: ["47.5", "116", "111", "116", "24", "41", "37.5", "74.5"] },
+  { size: "110", data: ["49.5", "123", "118", "123", "24.5", "43", "39", "76"] },
+  { size: "115", data: ["51.5", "130", "125", "130", "25", "45", "40.5", "77.5"] },
+];
+
+const SIZE_HEADERS = ["사이즈", "어깨", "가슴둘레", "허리둘레", "밑단둘레", "소매장", "소매통", "소매단", "기장"];
+
+const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
+  const [phase, setPhase] = useState<"input" | "generating" | "done">("input");
+  const [infoRows, setInfoRows] = useState(0);
+  const [sizeRows, setSizeRows] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [count, setCount] = useState(0);
+
+  const startGeneration = () => {
+    setPhase("generating");
+    setInfoRows(0);
+    setSizeRows(0);
+    setProgress(0);
+    setCount(0);
+
+    // product info rows, one every 180ms
+    PRODUCT_INFO.forEach((_, i) => {
+      setTimeout(() => setInfoRows(i + 1), 300 + i * 180);
+    });
+
+    // progress bar
+    const total = PRODUCT_INFO.length * 180 + 300;
+    const progressInterval = setInterval(() => {
+      setProgress((p) => Math.min(p + 3, 100));
+    }, 60);
+
+    // size rows after info is done
+    const sizeStart = total + 200;
+    SIZE_ROWS.forEach((_, i) => {
+      setTimeout(() => setSizeRows(i + 1), sizeStart + i * 200);
+    });
+
+    // count-up
+    const countStart = sizeStart;
+    setTimeout(() => {
+      const interval = setInterval(() => {
+        setCount((c) => {
+          if (c >= 200) { clearInterval(interval); return 200; }
+          return c + 7;
+        });
+      }, 30);
+    }, countStart);
+
+    // done
+    setTimeout(() => {
+      clearInterval(progressInterval);
+      setProgress(100);
+      setPhase("done");
+    }, sizeStart + SIZE_ROWS.length * 200 + 400);
+  };
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-3"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+        <motion.div
+          className="relative z-10 flex w-full max-w-2xl flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.24)]"
+          style={{ maxHeight: "90vh" }}
+          initial={{ scale: 0.93, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 헤더 */}
+          <div className="flex items-center justify-between border-b border-black/8 px-5 py-4">
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold text-white">
+                AI 상세페이지 자동 생성
+              </span>
+              {phase === "generating" && (
+                <span className="text-xs font-semibold text-[#C400FF]">
+                  생성 중 {count}건 처리됨
+                </span>
+              )}
+              {phase === "done" && (
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
+                  className="text-xs font-bold text-emerald-600"
+                >
+                  ✓ 완료 · {count}건 생성
+                </motion.span>
+              )}
+            </div>
+            <button onClick={onClose} className="rounded-full p-1.5 text-slate-400 hover:bg-slate-100">✕</button>
+          </div>
+
+          {/* 프로그레스 바 */}
+          {phase !== "input" && (
+            <div className="h-1 w-full bg-slate-100">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[#F8B529] to-[#C400FF]"
+                style={{ width: `${progress}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          )}
+
+          <div className="overflow-y-auto px-5 py-5">
+            {/* 입력 프롬프트 */}
+            <div className="mb-5 rounded-xl border border-dashed border-[#C400FF]/30 bg-[#fdf6ff] p-4">
+              <p className="mb-2 text-[11px] font-bold tracking-widest text-[#C400FF]">AI 입력값</p>
+              <p className="font-mono text-xs leading-6 text-slate-600">
+                상품명: 멀티 폴STR PRT | 색상: 모스핑크/터쿼이즈그린<br />
+                사이즈: 095~115 | 소재: 폴리에스터96% | 성별: 남성 | 시즌: 여름
+              </p>
+            </div>
+
+            {phase === "input" && (
+              <button
+                onClick={startGeneration}
+                className="w-full rounded-xl bg-gradient-to-r from-[#282640] to-[#C400FF] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                ▶ 상세페이지 자동 생성 시작
+              </button>
+            )}
+
+            {/* 상품 상세정보 */}
+            {infoRows > 0 && (
+              <div className="mb-6">
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="h-4 w-1 rounded-full bg-slate-800" />
+                  <span className="text-sm font-bold text-slate-800">상품 상세정보</span>
+                </div>
+                <table className="w-full border-collapse text-sm">
+                  <tbody>
+                    {PRODUCT_INFO.slice(0, infoRows).map((row, i) => (
+                      <motion.tr
+                        key={row.label}
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="border-b border-slate-100"
+                      >
+                        <td className="w-24 py-2.5 pr-4 text-right font-bold text-slate-700">{row.label}</td>
+                        <td className="py-2.5 text-slate-600">
+                          {i === infoRows - 1 && phase === "generating" ? (
+                            <span className="inline-flex items-center gap-1">
+                              {row.value}
+                              <motion.span
+                                className="inline-block h-3.5 w-0.5 bg-[#C400FF]"
+                                animate={{ opacity: [1, 0] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                              />
+                            </span>
+                          ) : row.value}
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {/* 사이즈 정보 */}
+            {sizeRows > 0 && (
+              <div>
+                <div className="mb-3 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="h-4 w-1 rounded-full bg-slate-800" />
+                    <span className="text-sm font-bold text-slate-800">사이즈 정보</span>
+                  </div>
+                  <span className="text-xs text-slate-400">단위 : cm</span>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse text-xs">
+                    <thead>
+                      <tr className="border-b-2 border-slate-200">
+                        {SIZE_HEADERS.map((h) => (
+                          <th key={h} className="pb-2 pr-3 text-center font-bold text-slate-700 first:text-left">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {SIZE_ROWS.slice(0, sizeRows).map((row) => (
+                        <motion.tr
+                          key={row.size}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="border-b border-slate-100"
+                        >
+                          <td className="py-2.5 font-bold text-slate-800">{row.size}</td>
+                          {row.data.map((v, i) => (
+                            <td key={i} className="py-2.5 pr-3 text-center text-slate-600">{v}</td>
+                          ))}
+                        </motion.tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* 완료 배너 */}
+            {phase === "done" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                className="mt-5 rounded-xl bg-emerald-50 border border-emerald-100 px-4 py-3 text-center"
+              >
+                <p className="text-sm font-bold text-emerald-700">✓ 상세페이지 {count}건 자동 생성 완료</p>
+                <p className="mt-1 text-xs text-emerald-600">기존 2~5일 → AI 자동 생성 수초 내 처리</p>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
+// ── 채팅 데모 모달 ──────────────────────────────────────────────
 const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => void }) => {
   const messages = (card.detail as { persona: string; messages: { role: "user" | "ai"; text: string }[] }).messages;
   const persona = (card.detail as { persona: string }).persona;
@@ -1681,9 +1908,11 @@ const VerifiedResultsSection = ({
       </div>
 
       {selectedCard && (
-        (selectedCard.detail as { chatMode?: boolean })?.chatMode
-          ? <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />
-          : <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
+        (selectedCard.detail as { productDemo?: boolean })?.productDemo
+          ? <ProductPageDemoModal onClose={() => setSelectedCard(null)} />
+          : (selectedCard.detail as { chatMode?: boolean })?.chatMode
+            ? <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />
+            : <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />
       )}
     </motion.div>
   );
