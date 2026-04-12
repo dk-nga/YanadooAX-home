@@ -12,6 +12,7 @@ import { HeroAnimation } from "@/components/HeroAnimation";
 import { HeroSection } from "@/components/HeroSection";
 import { ContactWidgetProvider } from "@/contexts/ContactWidgetContext";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
+import { FAQSection } from "@/components/FAQSection";
 
 export function HomePageClient() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -40,6 +41,7 @@ export function HomePageClient() {
                 <div id="about" className="min-h-screen">
                   <AXSystemSection />
                 </div>
+                <FAQSection />
                 <section className="min-h-screen">
                   <AnimatedSection persistVisible>
                     <CTASection />

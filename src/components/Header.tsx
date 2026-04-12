@@ -235,8 +235,22 @@ export function Header() {
                   <span className="absolute -bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#F8B529] to-[#C400FF] transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
+              <span className="mx-1 h-4 w-px bg-border" />
+              <Link
+                href="/faq"
+                className="group relative rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <motion.span
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25, duration: 0.4 }}
+                >
+                  {t("nav.faq")}
+                </motion.span>
+                <span className="absolute -bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-[#F8B529] to-[#C400FF] transition-all duration-300 group-hover:w-full" />
+              </Link>
               {extraMenuItems.length > 0 && (
-                <span className="mx-2 h-4 w-px bg-border" />
+                <span className="mx-1 h-4 w-px bg-border" />
               )}
               {extraMenuItems.map((item, index) => (
                 <Link
@@ -324,6 +338,13 @@ export function Header() {
                   {item.name}
                 </a>
               ))}
+              <Link
+                href="/faq"
+                className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setIsOpen(false)}
+              >
+                {t("nav.faq")}
+              </Link>
               {extraMenuItems.map((item) => (
                 <Link
                   key={item.key}
