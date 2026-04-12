@@ -1293,21 +1293,74 @@ const RoleCasesSection = ({ cases }: { cases: RoleCaseType[] }) => {
                 {active.icon === "exec" && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                    className="mt-6 rounded-2xl border border-indigo-100 bg-white p-5"
+                    className="mt-6 space-y-3"
                   >
-                    <p className="mb-3 text-xs font-bold tracking-widest text-indigo-400">AI 문화 전파 프레임워크</p>
-                    <div className="grid grid-cols-3 gap-3 text-center">
-                      {[
-                        { step: "01", label: "암묵지 포착", desc: "상위 직원 판단 패턴 분석·녹화" },
-                        { step: "02", label: "자산화", desc: "프롬프트·가이드·SOP로 변환" },
-                        { step: "03", label: "전사 확산", desc: "AI-Q 등급 체계로 조직 내재화" },
-                      ].map(({ step, label, desc }) => (
-                        <div key={step} className="rounded-xl bg-indigo-50 p-3">
-                          <span className="text-xs font-black text-indigo-300">{step}</span>
-                          <p className="mt-1 text-xs font-bold text-indigo-700">{label}</p>
-                          <p className="mt-1 text-[10px] leading-tight text-indigo-400">{desc}</p>
-                        </div>
-                      ))}
+                    {/* 전파 프레임워크 */}
+                    <div className="rounded-2xl border border-indigo-100 bg-white p-5">
+                      <p className="mb-3 text-xs font-bold tracking-widest text-indigo-400">AI 문화 전파 프레임워크</p>
+                      <div className="flex items-center gap-1">
+                        {[
+                          { step: "01", label: "암묵지 포착", desc: "상위 직원 패턴 분석" },
+                          { step: "02", label: "자산화", desc: "프롬프트·SOP 변환" },
+                          { step: "03", label: "전사 확산", desc: "AI-Q 등급 체계" },
+                        ].map(({ step, label, desc }, i) => (
+                          <div key={step} className="flex flex-1 items-center gap-1">
+                            <div className="flex-1 rounded-xl bg-indigo-50 p-3 text-center">
+                              <span className="text-[10px] font-black text-indigo-300">{step}</span>
+                              <p className="mt-0.5 text-xs font-bold text-indigo-700">{label}</p>
+                              <p className="mt-0.5 text-[10px] leading-tight text-indigo-400">{desc}</p>
+                            </div>
+                            {i < 2 && <span className="shrink-0 text-indigo-200">→</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* AI-Q 등급 시각화 */}
+                    <div className="rounded-2xl border border-indigo-100 bg-white p-5">
+                      <div className="mb-3 flex items-center justify-between">
+                        <p className="text-xs font-bold tracking-widest text-indigo-400">AI-Q 등급 체계</p>
+                        <span className="rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-bold text-indigo-500">
+                          패션/유통 7개 팀 실증
+                        </span>
+                      </div>
+                      <div className="space-y-2">
+                        {[
+                          { grade: "S", label: "AI를 업무 구조로 활용, 타부서 확산 가능", bar: 100, color: "#6366f1", bg: "#eef2ff", users: 2 },
+                          { grade: "A", label: "대부분 업무에 AI 적용, 생산성 개선 명확", bar: 78,  color: "#8b5cf6", bg: "#f5f3ff", users: 5 },
+                          { grade: "B", label: "일부 활용, 코칭으로 성장 가능",            bar: 52,  color: "#a78bfa", bg: "#faf5ff", users: 12 },
+                          { grade: "C", label: "기초 단계, 교육·환경 조성 필요",            bar: 28,  color: "#c4b5fd", bg: "#fdf4ff", users: 8 },
+                        ].map(({ grade, label, bar, color, bg, users }, i) => (
+                          <div key={grade} className="flex items-center gap-3">
+                            {/* 등급 배지 */}
+                            <span
+                              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm font-black text-white"
+                              style={{ background: color }}
+                            >
+                              {grade}
+                            </span>
+                            <div className="flex-1">
+                              <div className="mb-1 flex items-center justify-between">
+                                <span className="text-[11px] text-stone-500">{label}</span>
+                                <span className="text-[10px] font-semibold text-stone-400">{users}명</span>
+                              </div>
+                              {/* 진행 바 */}
+                              <div className="h-1.5 w-full overflow-hidden rounded-full" style={{ background: bg }}>
+                                <motion.div
+                                  className="h-full rounded-full"
+                                  style={{ background: color }}
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${bar}%` }}
+                                  transition={{ duration: 0.7, delay: 0.3 + i * 0.1, ease: "easeOut" }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="mt-3 text-[10px] text-stone-400">
+                        ※ 12주 프로그램 후 S·A 등급 비율 25% → 67%로 향상
+                      </p>
                     </div>
                   </motion.div>
                 )}
