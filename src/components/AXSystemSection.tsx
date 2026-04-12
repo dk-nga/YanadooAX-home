@@ -1261,6 +1261,216 @@ const CasesBridgeSection = () => {
 type ResultCard = ReturnType<typeof getVerifiedResults>["cards"][number];
 
 // ── 채팅 데모 모달 ──────────────────────────────────────────────
+// ── 트래픽 440% 성장 + 키워드 분석 데모 모달 ──────────────────────
+const MONTHS = [
+  { label: "1개월차", month: "10월", traffic: 100, threads: 100, revenue: 100 },
+  { label: "2개월차", month: "11월", traffic: 218, threads: 640, revenue: 340 },
+  { label: "3개월차", month: "12월", traffic: 441, threads: 2680, revenue: 1200 },
+];
+
+const KEYWORDS = [
+  { kw: "AI 콘텐츠 자동화", score: 94, channel: "Threads" },
+  { kw: "SNS 소재 검증", score: 88, channel: "Reels" },
+  { kw: "멀티채널 배포", score: 85, channel: "Newsletter" },
+  { kw: "AI 이미지 생성", score: 81, channel: "Shorts" },
+  { kw: "브랜드 페르소나", score: 76, channel: "Threads" },
+  { kw: "콘텐츠 리퍼포징", score: 72, channel: "Reels" },
+  { kw: "자동 스케줄링", score: 68, channel: "Newsletter" },
+];
+
+const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
+  const [step, setStep] = useState(0);           // 0=idle, 1=month1, 2=month2, 3=month3
+  const [kwVisible, setKwVisible] = useState(0); // 키워드 등장 수
+  const [phase, setPhase] = useState<"chart" | "keywords" | "done">("chart");
+
+  useEffect(() => {
+    if (step === 0) return;
+    if (step <= 3) {
+      const t = setTimeout(() => setStep((s) => s + 1), 900);
+      return () => clearTimeout(t);
+    }
+    // 차트 완료 → 키워드 페이즈
+    const t = setTimeout(() => setPhase("keywords"), 600);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  useEffect(() => {
+    if (phase !== "keywords") return;
+    if (kwVisible >= KEYWORDS.length) { setPhase("done"); return; }
+    const t = setTimeout(() => setKwVisible((v) => v + 1), 220);
+    return () => clearTimeout(t);
+  }, [phase, kwVisible]);
+
+  const start = () => setStep(1);
+
+  const barH = (pct: number, max: number) => `${Math.round((pct / max) * 100)}%`;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
+        <motion.div
+          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-[24px] bg-[#0e0f1a] text-white shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
+          style={{ maxHeight: "90vh" }}
+          initial={{ scale: 0.93, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* 헤더 */}
+          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold text-white">
+                S사 · 마케팅 AX
+              </span>
+              {phase === "done" && (
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold text-[#F8B529]">
+                  +440.5% 달성 ✓
+                </motion.span>
+              )}
+            </div>
+            <button onClick={onClose} className="rounded-full p-1.5 text-white/40 hover:bg-white/10">✕</button>
+          </div>
+
+          <div className="overflow-y-auto px-6 py-5">
+            {/* ── 3개월 트래픽 차트 ── */}
+            <p className="mb-4 text-xs font-bold tracking-widest text-white/40">3개월 트래픽 성장 추이</p>
+
+            <div className="mb-6 flex items-end justify-center gap-6">
+              {MONTHS.map((m, i) => {
+                const show = step > i;
+                const maxTraffic = 441;
+                return (
+                  <div key={m.month} className="flex flex-col items-center gap-2">
+                    {/* 3개 바 묶음 */}
+                    <div className="flex items-end gap-1" style={{ height: 140 }}>
+                      {/* 트래픽 */}
+                      <div className="relative flex w-8 flex-col items-center justify-end overflow-hidden rounded-t-lg bg-white/5" style={{ height: "100%" }}>
+                        <motion.div
+                          className="w-full rounded-t-lg bg-gradient-to-t from-[#F8B529] to-[#ffdc7a]"
+                          initial={{ height: 0 }}
+                          animate={{ height: show ? barH(m.traffic, maxTraffic) : 0 }}
+                          transition={{ duration: 0.7, ease: "easeOut" }}
+                        />
+                      </div>
+                      {/* Threads */}
+                      <div className="relative flex w-8 flex-col items-center justify-end overflow-hidden rounded-t-lg bg-white/5" style={{ height: "100%" }}>
+                        <motion.div
+                          className="w-full rounded-t-lg bg-gradient-to-t from-[#C400FF] to-[#e06dff]"
+                          initial={{ height: 0 }}
+                          animate={{ height: show ? barH(Math.min(m.threads, maxTraffic * 6), maxTraffic * 6) : 0 }}
+                          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+                        />
+                      </div>
+                    </div>
+                    {/* 수치 */}
+                    {show && (
+                      <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="text-center">
+                        <p className="text-[11px] font-black text-[#F8B529]">
+                          {i === 2 ? "+440.5%" : `+${m.traffic - 100}%`}
+                        </p>
+                        <p className="text-[10px] text-white/40">{m.month} {m.label}</p>
+                      </motion.div>
+                    )}
+                    {!show && <div className="h-8 w-16 rounded-lg bg-white/5" />}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* 범례 */}
+            <div className="mb-5 flex items-center justify-center gap-4 text-[11px] text-white/50">
+              <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-[#F8B529]" />전체 트래픽</span>
+              <span className="flex items-center gap-1.5"><span className="h-2 w-4 rounded-full bg-[#C400FF]" />Threads</span>
+            </div>
+
+            {/* 최종 수치 카드 */}
+            {step >= 3 && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                className="mb-6 grid grid-cols-4 gap-2"
+              >
+                {[
+                  { v: "+440.5%", l: "전체 트래픽", c: "#F8B529" },
+                  { v: "+2,580.7%", l: "Threads", c: "#C400FF" },
+                  { v: "×12", l: "매출 J-Curve", c: "#4ade80" },
+                  { v: "50%↓", l: "제작시간", c: "#60a5fa" },
+                ].map(({ v, l, c }) => (
+                  <div key={l} className="rounded-xl border border-white/8 bg-white/5 px-3 py-3 text-center">
+                    <p className="text-lg font-black" style={{ color: c }}>{v}</p>
+                    <p className="mt-1 text-[10px] text-white/45">{l}</p>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* ── 키워드 레퍼런스 분석 ── */}
+            {(phase === "keywords" || phase === "done") && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <p className="mb-3 text-xs font-bold tracking-widest text-white/40">
+                  AI 키워드 레퍼런스 분석
+                </p>
+                <div className="space-y-2">
+                  {KEYWORDS.slice(0, kwVisible).map((kw, i) => (
+                    <motion.div
+                      key={kw.kw}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/5 px-4 py-2.5"
+                    >
+                      <span className="w-4 text-center text-xs font-bold text-white/30">{i + 1}</span>
+                      <span className="flex-1 text-sm font-semibold text-white/85">{kw.kw}</span>
+                      <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-bold text-white/50">
+                        {kw.channel}
+                      </span>
+                      {/* 스코어 바 */}
+                      <div className="relative h-1.5 w-20 overflow-hidden rounded-full bg-white/10">
+                        <motion.div
+                          className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF]"
+                          initial={{ width: 0 }}
+                          animate={{ width: `${kw.score}%` }}
+                          transition={{ duration: 0.5, delay: 0.1 }}
+                        />
+                      </div>
+                      <span className="w-8 text-right text-xs font-bold text-[#F8B529]">{kw.score}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* 시작 버튼 */}
+            {step === 0 && (
+              <button
+                onClick={start}
+                className="mt-2 w-full rounded-xl bg-gradient-to-r from-[#F8B529] to-[#C400FF] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                ▶ 3개월 성장 데이터 재생
+              </button>
+            )}
+
+            {phase === "done" && (
+              <motion.div
+                initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+                className="mt-4 rounded-xl border border-[#F8B529]/20 bg-[#F8B529]/8 px-4 py-3 text-center"
+              >
+                <p className="text-sm font-bold text-[#F8B529]">✓ AI 콘텐츠 자동화 파이프라인 구축 완료</p>
+                <p className="mt-1 text-xs text-white/45">콘텐츠 제작 50%↓ · 트래픽 440.5%↑ · 매출 J-Curve ×12</p>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // ── 상세페이지 자동 생성 데모 모달 ──────────────────────────────
 const PRODUCT_INFO = [
   { label: "상품명", value: "멀티 폴STR PRT" },
@@ -1793,6 +2003,7 @@ const VerifiedResultsSection = ({
   const railRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [selectedCard, setSelectedCard] = useState<ResultCard | null>(null);
+  const [featuredOpen, setFeaturedOpen] = useState(false);
 
   const scrollRail = (direction: "left" | "right") => {
     const node = railRef.current;
@@ -1847,7 +2058,8 @@ const VerifiedResultsSection = ({
       >
         {/* Featured card — 레일 첫 번째 */}
         <motion.article
-          className="relative h-[600px] min-w-[380px] max-w-[380px] overflow-hidden rounded-[30px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-7 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)]"
+          className="group relative h-[600px] min-w-[380px] max-w-[380px] cursor-pointer overflow-hidden rounded-[30px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-7 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)] transition-shadow hover:shadow-[0_28px_80px_rgba(196,0,255,0.22)]"
+          onClick={() => setFeaturedOpen(true)}
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
           transition={{ duration: 0.5 }}
@@ -1895,6 +2107,9 @@ const VerifiedResultsSection = ({
                 </div>
               ))}
             </div>
+            <p className="mt-3 text-center text-xs font-semibold text-white/30 group-hover:text-[#F8B529] transition-colors">
+              자세히 보기 →
+            </p>
           </div>
         </motion.article>
 
@@ -1971,6 +2186,7 @@ const VerifiedResultsSection = ({
         ))}
       </div>
 
+      {featuredOpen && <TrafficGrowthDemoModal onClose={() => setFeaturedOpen(false)} />}
       {selectedCard && (
         (selectedCard.detail as { productDemo?: boolean })?.productDemo
           ? <ProductPageDemoModal onClose={() => setSelectedCard(null)} />
