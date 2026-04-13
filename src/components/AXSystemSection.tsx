@@ -830,7 +830,7 @@ const DiscoverySprintSection = ({
   return (
     <div
       ref={ref}
-      className="relative min-h-screen overflow-hidden bg-background pb-16 pt-6 md:pb-24 md:pt-12"
+      className="relative overflow-hidden bg-background pb-10 pt-6 md:min-h-screen md:pb-24 md:pt-12"
     >
       <svg className="absolute inset-0 h-full w-full pointer-events-none" preserveAspectRatio="none">
         <defs>
@@ -1484,22 +1484,25 @@ const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/55 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 w-full max-w-3xl overflow-hidden rounded-[24px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
-          style={{ maxHeight: "90vh" }}
-          initial={{ scale: 0.93, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          className="relative z-10 w-full max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.12)] sm:max-h-[90vh] sm:max-w-3xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
+          initial={{ y: "60%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "60%", opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* 바텀 시트 핸들 */}
+          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
+            <div className="h-1 w-10 rounded-full bg-black/15" />
+          </div>
           {/* 헤더 */}
-          <div className="flex items-center justify-between border-b border-black/8 px-6 py-4">
+          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-black/8 bg-white px-4 py-3 sm:px-6 sm:py-4">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#282640] to-[#6366f1] px-3 py-1 text-[11px] font-bold text-white">
                 HR · 계약 자동화
@@ -1509,7 +1512,7 @@ const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
                   className="text-xs font-bold text-emerald-600">✓ 5분 내 처리 완료</motion.span>
               )}
             </div>
-            <button onClick={onClose} className="rounded-full p-1.5 text-slate-400 hover:bg-slate-100">✕</button>
+            <button onClick={onClose} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 text-base">✕</button>
           </div>
 
           <div className="overflow-y-auto">
@@ -1740,27 +1743,29 @@ const FinanceDashboardDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full max-w-3xl flex-col overflow-hidden rounded-[24px] bg-[#0e0f1a] text-white shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
-          style={{ maxHeight: "90vh" }}
-          initial={{ scale: 0.93, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-[#0e0f1a] text-white shadow-[0_-8px_40px_rgba(0,0,0,0.4)] sm:max-h-[90vh] sm:max-w-3xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
+          initial={{ y: "60%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "60%", opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* 헤더 */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-3.5">
+          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
+            <div className="h-1 w-10 rounded-full bg-white/25" />
+          </div>
+          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0e0f1a] px-6 py-3.5">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold">재무 · 리포트 AX</span>
               <span className="text-xs text-white/30">Financial QA Agent</span>
             </div>
-            <button onClick={onClose} className="rounded-full p-1.5 text-white/40 hover:bg-white/10">✕</button>
+            <button onClick={onClose} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white/80 hover:bg-white/25 text-base">✕</button>
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden sm:flex-row">
@@ -1926,22 +1931,24 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 w-full max-w-2xl overflow-hidden rounded-[24px] bg-[#0e0f1a] text-white shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
-          style={{ maxHeight: "90vh" }}
-          initial={{ scale: 0.93, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          className="relative z-10 w-full max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-[#0e0f1a] text-white shadow-[0_-8px_40px_rgba(0,0,0,0.4)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
+          initial={{ y: "60%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "60%", opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
           {/* 헤더 */}
-          <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
+          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
+            <div className="h-1 w-10 rounded-full bg-white/25" />
+          </div>
+          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0e0f1a] px-4 py-3 sm:px-6 sm:py-4">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold text-white">
                 S사 · 마케팅 AX
@@ -1952,7 +1959,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
                 </motion.span>
               )}
             </div>
-            <button onClick={onClose} className="rounded-full p-1.5 text-white/40 hover:bg-white/10">✕</button>
+            <button onClick={onClose} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white/80 hover:bg-white/25 text-base">✕</button>
           </div>
 
           <div className="overflow-y-auto px-6 py-5">
@@ -2179,22 +2186,25 @@ const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-center justify-center p-3"
+        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-3"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full max-w-2xl flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.24)]"
-          style={{ maxHeight: "90vh" }}
-          initial={{ scale: 0.93, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.1)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.24)]"
+          initial={{ y: "60%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "60%", opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* 바텀 시트 핸들 */}
+          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
+            <div className="h-1 w-10 rounded-full bg-black/15" />
+          </div>
           {/* 헤더 */}
-          <div className="flex items-center justify-between border-b border-black/8 px-5 py-4">
+          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-black/8 bg-white px-4 py-3 sm:px-5 sm:py-4">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold text-white">
                 AI 상세페이지 자동 생성
@@ -2213,7 +2223,7 @@ const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
                 </motion.span>
               )}
             </div>
-            <button onClick={onClose} className="rounded-full p-1.5 text-slate-400 hover:bg-slate-100">✕</button>
+            <button onClick={onClose} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 text-base">✕</button>
           </div>
 
           {/* 프로그레스 바 */}
@@ -2415,22 +2425,25 @@ const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => voi
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full max-w-sm flex-col overflow-hidden rounded-[28px] bg-[#f0f0f0] shadow-[0_32px_80px_rgba(0,0,0,0.28)]"
-          style={{ height: "min(680px, 90vh)" }}
-          initial={{ scale: 0.92, opacity: 0, y: 24 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.92, opacity: 0, y: 24 }}
-          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-[#f0f0f0] shadow-[0_-8px_40px_rgba(0,0,0,0.18)] sm:max-h-[90vh] sm:max-w-sm sm:rounded-[28px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.28)]"
+          initial={{ y: "60%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "60%", opacity: 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* 바텀 시트 핸들 */}
+          <div className="flex justify-center pt-2.5 pb-1 bg-[#282640] sm:hidden">
+            <div className="h-1 w-10 rounded-full bg-white/25" />
+          </div>
           {/* 상단 바 */}
-          <div className="flex items-center gap-3 bg-[#282640] px-5 py-4 text-white">
+          <div className="sticky top-0 z-10 flex items-center gap-3 bg-[#282640] px-5 py-4 text-white">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-sm font-black">
               AX
             </div>
@@ -2441,9 +2454,7 @@ const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => voi
                 <span className="text-[11px] text-white/60">온라인 · 즉시 응답</span>
               </div>
             </div>
-            <button onClick={onClose} className="rounded-full p-1.5 hover:bg-white/10">
-              <span className="text-sm">✕</span>
-            </button>
+            <button onClick={onClose} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white/80 hover:bg-white/25 text-base">✕</button>
           </div>
 
           {/* 대화 영역 */}
@@ -2522,15 +2533,19 @@ const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => v
     >
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       <motion.div
-        className="relative z-10 w-full max-w-2xl overflow-hidden rounded-[28px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
-        initial={{ scale: 0.94, opacity: 0, y: 20 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.94, opacity: 0, y: 20 }}
+        className="relative z-10 w-full max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.12)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[28px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
+        initial={{ y: "60%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "60%", opacity: 0 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* 바텀 시트 핸들 */}
+        <div className="flex justify-center pt-2.5 pb-1 bg-[#282640] sm:hidden">
+          <div className="h-1 w-10 rounded-full bg-white/25" />
+        </div>
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] p-6 text-white">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] p-6 text-white">
           <div>
             <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold tracking-widest text-white/90">
               {card.badge}
@@ -2633,9 +2648,9 @@ const VerifiedResultsSection = ({
     <motion.div
       ref={ref}
       className="mx-auto mb-14 max-w-[1380px]"
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="mb-7 flex items-end justify-between gap-6">
         <div>
@@ -2672,11 +2687,11 @@ const VerifiedResultsSection = ({
 
       <div
         ref={railRef}
-        className="flex min-h-[600px] gap-4 overflow-x-auto pb-3 scrollbar-hide scroll-smooth"
+        className="flex gap-4 overflow-x-auto pb-3 scrollbar-hide scroll-smooth"
       >
         {/* Featured card — 레일 첫 번째 */}
         <motion.article
-          className="group relative h-[600px] min-w-[380px] max-w-[380px] cursor-pointer overflow-hidden rounded-[30px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-7 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)] transition-shadow hover:shadow-[0_28px_80px_rgba(196,0,255,0.22)]"
+          className="group relative h-[440px] min-w-[280px] max-w-[280px] cursor-pointer overflow-hidden rounded-[24px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-5 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)] transition-shadow hover:shadow-[0_28px_80px_rgba(196,0,255,0.22)] sm:h-[600px] sm:min-w-[380px] sm:max-w-[380px] sm:rounded-[30px] sm:p-7"
           onClick={() => setFeaturedOpen(true)}
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
@@ -2685,47 +2700,47 @@ const VerifiedResultsSection = ({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.14),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.12),transparent_30%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(196,0,255,0.08))]" />
           <div className="relative z-10 flex h-full flex-col">
-            <div className="mb-5 flex flex-wrap gap-2">
-              <span className="rounded-full border border-[#F8B529]/18 bg-[#F8B529]/10 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-[#F8B529]">
+            <div className="mb-3 flex flex-wrap gap-1.5 sm:mb-5 sm:gap-2">
+              <span className="rounded-full border border-[#F8B529]/18 bg-[#F8B529]/10 px-2.5 py-0.5 text-[10px] font-bold tracking-[0.12em] text-[#F8B529] sm:px-3 sm:py-1 sm:text-[11px]">
                 {results.featured.eyebrow}
               </span>
-              <span className="rounded-full border border-white/8 bg-white/6 px-3 py-1 text-[11px] font-bold tracking-[0.14em] text-white/70">
+              <span className="rounded-full border border-white/8 bg-white/6 px-2.5 py-0.5 text-[10px] font-bold tracking-[0.12em] text-white/70 sm:px-3 sm:py-1 sm:text-[11px]">
                 {results.featured.tag}
               </span>
             </div>
 
-            <h4 className="text-[1.28rem] font-black leading-[1.22] tracking-[-0.03em] text-white md:text-[1.5rem]">
+            <h4 className="text-[1.05rem] font-black leading-[1.22] tracking-[-0.03em] text-white sm:text-[1.28rem] md:text-[1.5rem]">
               {results.featured.title}
             </h4>
 
-            <div className="mt-5 space-y-4 border-t border-white/10 pt-5">
+            <div className="mt-3 space-y-2.5 border-t border-white/10 pt-3 sm:mt-5 sm:space-y-4 sm:pt-5">
               <div>
-                <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-white/45">
+                <p className="mb-1 text-[10px] font-bold tracking-[0.15em] text-white/45 sm:mb-2 sm:text-[11px]">
                   {results.featured.problemLabel}
                 </p>
-                <p className="whitespace-pre-line text-[15px] leading-relaxed text-white/72">
+                <p className="whitespace-pre-line text-[12px] leading-relaxed text-white/72 sm:text-[15px]">
                   {results.featured.problem}
                 </p>
               </div>
               <div>
-                <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-white/45">
+                <p className="mb-1 text-[10px] font-bold tracking-[0.15em] text-white/45 sm:mb-2 sm:text-[11px]">
                   {results.featured.solutionLabel}
                 </p>
-                <p className="whitespace-pre-line text-[15px] leading-relaxed text-white/78">
+                <p className="whitespace-pre-line text-[12px] leading-relaxed text-white/78 sm:text-[15px]">
                   {results.featured.solution}
                 </p>
               </div>
             </div>
 
-            <div className="mt-auto grid grid-cols-2 gap-3">
+            <div className="mt-auto grid grid-cols-2 gap-2 sm:gap-3">
               {results.featured.stats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-white/8 bg-white/[0.045] p-4">
-                  <p className="text-[1.2rem] font-black leading-none text-[#F8B529] md:text-[1.35rem]">{stat.value}</p>
-                  <p className="mt-2 text-xs text-white/55">{stat.label}</p>
+                <div key={stat.label} className="rounded-xl border border-white/8 bg-white/[0.045] p-2.5 sm:rounded-2xl sm:p-4">
+                  <p className="text-base font-black leading-none text-[#F8B529] sm:text-[1.2rem] md:text-[1.35rem]">{stat.value}</p>
+                  <p className="mt-1 text-[10px] text-white/55 sm:mt-2 sm:text-xs">{stat.label}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-center text-xs font-semibold text-white/30 group-hover:text-[#F8B529] transition-colors">
+            <p className="mt-2 text-center text-[10px] font-semibold text-white/30 transition-colors group-hover:text-[#F8B529] sm:mt-3 sm:text-xs">
               자세히 보기 →
             </p>
           </div>
@@ -2735,41 +2750,41 @@ const VerifiedResultsSection = ({
         {results.cards.map((card, index) => (
               <motion.article
                 key={`${card.badge}-${index}`}
-                className="group h-[600px] min-w-[360px] max-w-[360px] cursor-pointer rounded-[30px] border border-stone-200/90 bg-white/96 p-6 transition-shadow hover:shadow-[0_24px_60px_rgba(196,0,255,0.12)]"
+                className="group h-[440px] min-w-[260px] max-w-[260px] cursor-pointer rounded-[24px] border border-stone-200/90 bg-white/96 p-4 transition-shadow hover:shadow-[0_24px_60px_rgba(196,0,255,0.12)] sm:h-[600px] sm:min-w-[360px] sm:max-w-[360px] sm:rounded-[30px] sm:p-6"
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
                 onClick={() => card.detail && setSelectedCard(card)}
               >
                 <div className="flex h-full flex-col">
-                  <span className="mb-5 inline-flex rounded-full border border-[#C400FF]/10 bg-[linear-gradient(135deg,#eef5ff,#edf3ff)] px-4 py-1.5 text-[13px] font-bold text-[#4d84d8]">
+                  <span className="mb-3 inline-flex rounded-full border border-[#C400FF]/10 bg-[linear-gradient(135deg,#eef5ff,#edf3ff)] px-3 py-1 text-[11px] font-bold text-[#4d84d8] sm:mb-5 sm:px-4 sm:py-1.5 sm:text-[13px]">
                     {card.badge}
                   </span>
-                  <p className="text-sm font-medium text-[#a6a5ae]">{card.team}</p>
-                  <h4 className="mt-4 text-[1rem] font-black leading-[1.35] text-[#2c2d34] md:text-[1.08rem]">
+                  <p className="text-xs font-medium text-[#a6a5ae] sm:text-sm">{card.team}</p>
+                  <h4 className="mt-2 text-[0.88rem] font-black leading-[1.35] text-[#2c2d34] sm:mt-4 sm:text-[1rem] md:text-[1.08rem]">
                     {card.title}
                   </h4>
 
-                  <div className="mt-5 rounded-2xl bg-[#fdf2f2] px-4 py-4 text-[13px] leading-relaxed text-[#e46452] md:text-[14px]">
+                  <div className="mt-3 rounded-xl bg-[#fdf2f2] px-3 py-2.5 text-[11px] leading-relaxed text-[#e46452] sm:mt-5 sm:rounded-2xl sm:px-4 sm:py-4 sm:text-[13px] md:text-[14px]">
                     {card.negative}
                   </div>
-                  <div className="mt-4 rounded-2xl bg-[#edf8ed] px-4 py-4 text-[13px] leading-relaxed text-[#67b56f] md:text-[14px]">
+                  <div className="mt-2 rounded-xl bg-[#edf8ed] px-3 py-2.5 text-[11px] leading-relaxed text-[#67b56f] sm:mt-4 sm:rounded-2xl sm:px-4 sm:py-4 sm:text-[13px] md:text-[14px]">
                     {card.positive}
                   </div>
 
-                  <div className="mt-auto border-t border-stone-100 pt-5">
-                    <div className="grid grid-cols-2 gap-3">
+                  <div className="mt-auto border-t border-stone-100 pt-3 sm:pt-5">
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
                       <div>
-                        <p className="text-[1.55rem] font-black leading-none tracking-[-0.03em] text-[#4b76cf] md:text-[1.8rem]">{card.stat1Value}</p>
-                        <p className="mt-2 text-xs text-[#b1b1ba] md:text-sm">{card.stat1Label}</p>
+                        <p className="text-xl font-black leading-none tracking-[-0.03em] text-[#4b76cf] sm:text-[1.55rem] md:text-[1.8rem]">{card.stat1Value}</p>
+                        <p className="mt-1 text-[10px] text-[#b1b1ba] sm:mt-2 sm:text-xs md:text-sm">{card.stat1Label}</p>
                       </div>
                       <div>
-                        <p className="text-[1.55rem] font-black leading-none tracking-[-0.03em] text-[#4b76cf] md:text-[1.8rem]">{card.stat2Value}</p>
-                        <p className="mt-2 text-xs text-[#b1b1ba] md:text-sm">{card.stat2Label}</p>
+                        <p className="text-xl font-black leading-none tracking-[-0.03em] text-[#4b76cf] sm:text-[1.55rem] md:text-[1.8rem]">{card.stat2Value}</p>
+                        <p className="mt-1 text-[10px] text-[#b1b1ba] sm:mt-2 sm:text-xs md:text-sm">{card.stat2Label}</p>
                       </div>
                     </div>
                     {card.detail && (
-                      <p className="mt-3 text-center text-xs font-semibold text-[#C400FF]/60 group-hover:text-[#C400FF]">
+                      <p className="mt-2 text-center text-[10px] font-semibold text-[#C400FF]/60 group-hover:text-[#C400FF] sm:mt-3 sm:text-xs">
                         자세히 보기 →
                       </p>
                     )}
@@ -2777,6 +2792,13 @@ const VerifiedResultsSection = ({
                 </div>
               </motion.article>
             ))}
+      </div>
+
+      {/* 모바일 스와이프 힌트 */}
+      <div className="mt-3 flex items-center justify-center gap-2 text-xs text-slate-400 lg:hidden">
+        <ChevronLeft className="h-3.5 w-3.5" />
+        <span className="font-medium">옆으로 넘겨보세요</span>
+        <ChevronRight className="h-3.5 w-3.5" />
       </div>
 
       <div className="mt-8 grid gap-4 md:mt-10 md:grid-cols-2">
@@ -2998,7 +3020,7 @@ const AXSystemSection = () => {
             <RoleCasesSection cases={roleCases} />
           </div>
 
-          <CasesBridgeSection />
+          {/* <CasesBridgeSection /> */}
 
           <TestimonialSlider testimonials={testimonials} />
 

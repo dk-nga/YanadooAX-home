@@ -24,7 +24,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-background pt-28 text-foreground sm:pt-32 lg:pt-24"
+      className="relative min-h-screen overflow-hidden bg-background pt-40 text-foreground sm:pt-40 lg:pt-24"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_20%),radial-gradient(circle_at_100%_100%,rgba(196,0,255,0.07),transparent_18%)]" />
 

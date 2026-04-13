@@ -33,17 +33,17 @@ export function HomePageClient() {
             <>
               <Header />
               <main>
-                <section id="home" className="min-h-screen">
+                <section id="home" className="md:min-h-screen">
                   <AnimatedSection>
                     <HeroSection />
                   </AnimatedSection>
                 </section>
                 <ClientLogosSection />
-                <div id="about" className="min-h-screen">
+                <div id="about" className="md:min-h-screen">
                   <AXSystemSection />
                 </div>
                 <FAQSection />
-                <section className="min-h-screen">
+                <section className="md:min-h-screen">
                   <AnimatedSection persistVisible>
                     <CTASection />
                   </AnimatedSection>
