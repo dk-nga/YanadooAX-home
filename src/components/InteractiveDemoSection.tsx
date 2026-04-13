@@ -781,7 +781,7 @@ export function InteractiveDemoSection() {
         </div>
 
         {/* ── Mobile: 2-col card grid + accordion workspace ── */}
-        <div className="xl:hidden">
+        <div className="lg:hidden">
           {scenarioRows.map((row, rowIndex) => {
             const rowHasActive = row.some((s) => s.id === selectedScenarioId);
             return (
@@ -855,7 +855,7 @@ export function InteractiveDemoSection() {
         </div>
 
         {/* ── Desktop: sidebar + workspace ── */}
-        <div className="hidden min-w-0 gap-4 xl:grid xl:grid-cols-[220px_minmax(0,1fr)]">
+        <div className="hidden min-w-0 gap-4 lg:grid lg:grid-cols-[200px_minmax(0,1fr)]">
           <motion.aside
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
