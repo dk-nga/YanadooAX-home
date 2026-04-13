@@ -24,11 +24,11 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen overflow-hidden bg-background pt-40 text-foreground sm:pt-40 lg:pt-24"
+      className="relative overflow-hidden bg-background pt-40 text-foreground sm:pt-40 lg:min-h-screen lg:pt-24"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.04),transparent_20%),radial-gradient(circle_at_100%_100%,rgba(196,0,255,0.07),transparent_18%)]" />
 
-      <div className="container relative z-10 mx-auto flex min-h-screen max-w-[1380px] items-center px-5 pb-16 sm:px-8 lg:px-10">
+      <div className="container relative z-10 mx-auto flex max-w-[1380px] items-start px-5 pb-8 sm:px-8 sm:pb-10 lg:min-h-screen lg:items-center lg:pb-16 lg:px-10">
         <div className="grid w-full items-center gap-10 lg:grid-cols-[1fr_600px] xl:grid-cols-[1fr_680px]">
 
           {/* Left — copy */}

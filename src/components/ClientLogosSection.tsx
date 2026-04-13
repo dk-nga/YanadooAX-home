@@ -19,8 +19,8 @@ const marqueeClients = [...clients, ...clients, ...clients];
 
 export function ClientLogosSection() {
   return (
-    <div className="relative border-y border-black/6 bg-white py-5">
-      <p className="mb-4 text-center text-xs font-semibold tracking-[0.22em] text-black/30 uppercase">
+    <div className="relative border-y border-black/6 bg-white py-4">
+      <p className="mb-3 text-center text-xs font-semibold tracking-[0.22em] text-black/30 uppercase">
         도입 기업
       </p>
 
