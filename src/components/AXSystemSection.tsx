@@ -1205,7 +1205,7 @@ const RoleCasesSection = ({ cases }: { cases: RoleCaseType[] }) => {
 
       <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
         {/* 왼쪽: 직무 탭 목록 */}
-        <div className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:pb-0">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:overflow-x-auto sm:pb-1 lg:flex-col lg:pb-0">
           {cases.map((item) => {
             const c = ROLE_CONFIG[item.icon] ?? ROLE_CONFIG.ops;
             const isActive = item.id === activeRole;
@@ -1213,7 +1213,7 @@ const RoleCasesSection = ({ cases }: { cases: RoleCaseType[] }) => {
               <button
                 key={item.id}
                 onClick={() => setActiveRole(item.id)}
-                className={`flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-3 text-left transition-all duration-200 lg:w-full ${
+                className={`flex w-full items-center gap-2.5 rounded-2xl border px-3 py-2.5 text-left transition-all duration-200 sm:shrink-0 sm:w-auto lg:w-full ${
                   isActive
                     ? "border-transparent text-white shadow-lg"
                     : "border-stone-200 bg-white text-stone-500 hover:border-stone-300"

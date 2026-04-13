@@ -327,20 +327,10 @@ export function Header() {
             animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
             className="overflow-hidden md:hidden"
           >
-            <div className="flex flex-col gap-4 pt-4 pb-2">
-              {sectionItems.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
-                  onClick={(e) => { setIsOpen(false); handleSectionClick(e, item.id); }}
-                >
-                  {item.name}
-                </a>
-              ))}
+            <div className="flex flex-col gap-3 pt-3 pb-2">
               <Link
                 href="/faq"
-                className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
                 onClick={() => setIsOpen(false)}
               >
                 {t("nav.faq")}
@@ -349,7 +339,7 @@ export function Header() {
                 <Link
                   key={item.key}
                   href={item.href}
-                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className="rounded-xl bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}

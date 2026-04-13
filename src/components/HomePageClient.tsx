@@ -13,6 +13,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { ContactWidgetProvider } from "@/contexts/ContactWidgetContext";
 import { ScrollContainerProvider } from "@/contexts/ScrollContainerContext";
 import { FAQSection } from "@/components/FAQSection";
+import { MobileBottomNav } from "@/components/MobileBottomNav";
 
 export function HomePageClient() {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -50,6 +51,7 @@ export function HomePageClient() {
               </main>
               <Footer />
               <ContactWidget />
+              <MobileBottomNav />
             </>
           ) : null}
         </div>

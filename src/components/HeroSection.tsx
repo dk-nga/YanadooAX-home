@@ -70,18 +70,18 @@ export function HeroSection() {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="flex flex-row flex-wrap gap-2">
               <button
                 type="button"
                 onClick={openDiagnosisModal}
-                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[#282640] px-7 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.02] hover:opacity-95"
+                className="inline-flex flex-1 min-h-11 items-center justify-center rounded-xl bg-[#282640] px-4 text-xs font-semibold text-white transition-transform duration-300 hover:scale-[1.02] hover:opacity-95 sm:flex-none sm:min-h-12 sm:px-7 sm:text-sm"
               >
                 {t("hero.cta1")}
               </button>
               <button
                 type="button"
                 onClick={scrollToResults}
-                className="inline-flex min-h-12 items-center justify-center rounded-xl border border-black/12 bg-white px-7 text-sm font-semibold text-black transition-colors duration-300 hover:bg-black/[0.03]"
+                className="inline-flex flex-1 min-h-11 items-center justify-center rounded-xl border border-black/12 bg-white px-4 text-xs font-semibold text-black transition-colors duration-300 hover:bg-black/[0.03] sm:flex-none sm:min-h-12 sm:px-7 sm:text-sm"
               >
                 {t("hero.cta2")}
               </button>

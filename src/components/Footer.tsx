@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 
 export function Footer() {
   return (
-    <footer className="snap-start overflow-hidden bg-[#2f2c49] py-12 text-white/82">
+    <footer className="snap-start overflow-hidden bg-[#2f2c49] pb-24 pt-12 text-white/82 md:pb-12">
       <div className="container mx-auto overflow-hidden px-4 md:px-6">
         <div className="mb-12">
           <img src={logoFull.src} alt="Yanadoo AX" className="mb-6 h-8 brightness-0 invert" />

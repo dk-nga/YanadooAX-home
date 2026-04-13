@@ -58,7 +58,7 @@ export function CTASection() {
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-white/40">
                   {t("cta.form.eyebrow")}
                 </p>
-                <h2 className="mt-6 text-xl font-black leading-[1.1] md:text-[2.625rem]">
+                <h2 className="mt-6 text-xl font-black leading-[1.1] sm:text-2xl md:text-[2.625rem]">
                   {t("cta.form.title1")}
                   <br />
                   <span className="text-[#7db2ff]">{t("cta.form.title2")}</span>

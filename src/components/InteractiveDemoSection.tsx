@@ -642,7 +642,7 @@ export function InteractiveDemoSection() {
               <div className="rounded-[20px] border border-[#282640]/10 bg-white/95 shadow-[0_16px_40px_rgba(40,38,64,0.06)]">
                 <div className="min-h-[200px] space-y-3 border-b border-[#282640]/10 px-4 py-3 md:px-5">
                   <div className="flex justify-end">
-                    <div className="max-w-[220px] rounded-[14px] bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] px-3 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(59,49,95,0.24)]">
+                    <div className="max-w-[70%] rounded-[14px] bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] px-3 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(59,49,95,0.24)]">
                       {currentQuick.userBubble}
                     </div>
                   </div>
@@ -651,7 +651,7 @@ export function InteractiveDemoSection() {
                     <motion.div
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="max-w-[76%] rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(180deg,#ffffff,#faf7ff)] px-4 py-4"
+                      className="max-w-[82%] rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(180deg,#ffffff,#faf7ff)] px-4 py-4"
                     >
                       <p className="text-sm leading-6 text-[#282640]/78">{currentQuick.agentReply}</p>
                       <div className="mt-2 text-xs font-semibold text-[#282640]/40">
@@ -659,7 +659,7 @@ export function InteractiveDemoSection() {
                       </div>
                     </motion.div>
                   ) : (
-                    <div className="max-w-[76%] rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(180deg,#ffffff,#faf7ff)] px-4 py-4">
+                    <div className="max-w-[82%] rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(180deg,#ffffff,#faf7ff)] px-4 py-4">
                       <div className="space-y-2">
                         <div className="h-3 w-full rounded-full bg-[#282640]/10" />
                         <div className="h-3 w-5/6 rounded-full bg-[#282640]/10" />
