@@ -541,11 +541,11 @@ export function InteractiveDemoSection() {
 
   // Shared workspace panel content — compact=true for mobile
   const renderWorkspaceContent = (compact: boolean) => (
-    <div className={cn("space-y-2", compact ? "p-2.5" : "space-y-3 p-3 md:p-4")}>
+    <div className={cn("space-y-2", compact ? "p-2.5" : "p-3")}>
       {/* Prompt + quick options */}
       <div className={cn(
-        "rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(135deg,rgba(248,181,41,0.08),rgba(196,0,255,0.06))]",
-        compact ? "px-3 py-2" : "px-4 py-3"
+        "rounded-[14px] border border-[#282640]/10 bg-[linear-gradient(135deg,rgba(248,181,41,0.08),rgba(196,0,255,0.06))]",
+        compact ? "px-3 py-2" : "px-3 py-2.5"
       )}>
         <div className="flex items-center justify-between gap-3">
           <p className="text-xs font-semibold tracking-[0.08em] text-[#282640]/50">
@@ -557,11 +557,11 @@ export function InteractiveDemoSection() {
         </div>
         <p className={cn(
           "rounded-xl border border-white/70 bg-white/80 text-sm leading-5 text-[#282640]/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]",
-          compact ? "mt-2 px-3 py-2 text-xs" : "mt-3 rounded-2xl px-4 py-3 leading-6"
+          compact ? "mt-2 px-3 py-2 text-xs" : "mt-2 px-3 py-2 text-xs"
         )}>
           {currentScenario.prompt}
         </p>
-        <div className={cn("flex flex-wrap", compact ? "mt-2 gap-1.5" : "mt-3 gap-2")}>
+        <div className={cn("flex flex-wrap", compact ? "mt-2 gap-1.5" : "mt-2 gap-1.5")}>
           {currentScenario.quickOptions.map((option, index) => (
             <button
               key={option.question}
@@ -569,7 +569,7 @@ export function InteractiveDemoSection() {
               onClick={() => setSelectedQuickIndex(index)}
               className={cn(
                 "rounded-full border font-semibold transition-all duration-200",
-                compact ? "px-2.5 py-1 text-[10px]" : "px-4 py-2 text-sm",
+                compact ? "px-2.5 py-1 text-[10px]" : "px-3 py-1.5 text-xs",
                 selectedQuickIndex === index
                   ? "border-transparent bg-[linear-gradient(135deg,#282640,#C400FF)] text-white shadow-[0_8px_16px_rgba(95,63,156,0.25)]"
                   : "border-white/80 bg-white/90 text-[#282640]/80 hover:border-[#C400FF]/20 hover:text-[#6b33c7]"
@@ -582,10 +582,10 @@ export function InteractiveDemoSection() {
       </div>
 
       {/* Chat area */}
-      <div className="rounded-[16px] border border-[#282640]/10 bg-white/95 shadow-[0_16px_40px_rgba(40,38,64,0.06)]">
+      <div className="rounded-[14px] border border-[#282640]/10 bg-white/95 shadow-[0_12px_32px_rgba(40,38,64,0.06)]">
         <div className={cn(
           "space-y-2 border-b border-[#282640]/10",
-          compact ? "min-h-[96px] px-3 py-2.5" : "min-h-[200px] space-y-3 px-4 py-3 md:px-5"
+          compact ? "min-h-[96px] px-3 py-2.5" : "min-h-[130px] px-3 py-2.5"
         )}>
           <div className="flex justify-end">
             <div className={cn(
@@ -624,7 +624,7 @@ export function InteractiveDemoSection() {
           )}
         </div>
 
-        <div className={cn("flex items-center gap-2", compact ? "px-3 py-2" : "px-4 py-2.5 md:px-5")}>
+        <div className={cn("flex items-center gap-2", compact ? "px-3 py-2" : "px-3 py-2")}>
           <input
             value={currentQuick.question}
             readOnly
@@ -651,31 +651,28 @@ export function InteractiveDemoSection() {
 
       {/* Flow */}
       <div className={cn(
-        "rounded-[16px] border border-[#282640]/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(248,244,252,0.95))]",
-        compact ? "px-3 py-2.5" : "px-4 py-4"
+        "rounded-[14px] border border-[#282640]/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.9),rgba(248,244,252,0.95))]",
+        compact ? "px-3 py-2.5" : "px-3 py-2.5"
       )}>
-        <p className={cn("font-semibold text-[#282640]/62", compact ? "text-[10px]" : "text-sm")}>{t("demo.workspace.flowTitle")}</p>
-        <div className={compact ? "mt-1.5" : "mt-3"}>
-          <FlowRow labels={flowLabels} stageIndex={flowStep} isRunning={isRunning} compact={compact} />
+        <p className={cn("font-semibold text-[#282640]/62", compact ? "text-[10px]" : "text-xs")}>{t("demo.workspace.flowTitle")}</p>
+        <div className={compact ? "mt-1.5" : "mt-2"}>
+          <FlowRow labels={flowLabels} stageIndex={flowStep} isRunning={isRunning} compact={true} />
         </div>
       </div>
 
       {/* Metrics */}
-      <div className={cn("grid gap-1.5", compact ? "grid-cols-3" : "gap-3 md:grid-cols-3")}>
+      <div className="grid grid-cols-3 gap-1.5">
         {currentQuick.metrics.map((metric, index) => (
           <div
             key={`${metric}-${index}`}
-            className={cn(
-              "rounded-[12px] border border-[#282640]/10 bg-white/95 text-center shadow-[0_8px_20px_rgba(40,38,64,0.05)]",
-              compact ? "px-2 py-2" : "rounded-[14px] px-3 py-3"
-            )}
+            className="rounded-[12px] border border-[#282640]/10 bg-white/95 px-2 py-2 text-center shadow-[0_8px_20px_rgba(40,38,64,0.05)]"
           >
             {metricsVisible > index ? (
               <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
                 <p
                   className={cn(
                     "font-black",
-                    compact ? "text-lg" : "text-3xl",
+                    compact ? "text-lg" : "text-xl",
                     index === 0
                       ? "text-[#6b33c7]"
                       : index === 1
@@ -685,7 +682,7 @@ export function InteractiveDemoSection() {
                 >
                   {metric}
                 </p>
-                <p className={cn("font-semibold text-[#282640]/55", compact ? "mt-0.5 text-[9px]" : "mt-1 text-sm")}>
+                <p className={cn("font-semibold text-[#282640]/55", compact ? "mt-0.5 text-[9px]" : "mt-0.5 text-[10px]")}>
                   {currentScenario.metricLabels[index]}
                 </p>
               </motion.div>
@@ -700,17 +697,17 @@ export function InteractiveDemoSection() {
       </div>
 
       {/* Before / After */}
-      <div className={cn("grid gap-1.5", compact ? "grid-cols-2" : "gap-3 md:grid-cols-2")}>
-        <div className={cn("rounded-[14px] border border-rose-100 bg-rose-50", compact ? "px-3 py-2.5" : "px-4 py-4")}>
-          <p className={cn("font-black tracking-[0.18em] text-[#d2624d]", compact ? "text-[10px]" : "text-sm")}>
+      <div className="grid grid-cols-2 gap-1.5">
+        <div className={cn("rounded-[12px] border border-rose-100 bg-rose-50", compact ? "px-3 py-2.5" : "px-3 py-2.5")}>
+          <p className="text-[10px] font-black tracking-[0.18em] text-[#d2624d]">
             {t("demo.workspace.before")}
           </p>
-          <div className={compact ? "mt-2 space-y-1.5" : "mt-4 space-y-3"}>
+          <div className={compact ? "mt-2 space-y-1.5" : "mt-2 space-y-1.5"}>
             {beforeAfterVisible
               ? currentScenario.beforeItems.map((item) => (
                   <div key={item} className="flex items-start gap-1.5 text-slate-600">
-                    <span className={cn("mt-0.5 text-[#d2624d]", compact ? "text-xs" : "mt-1")}>×</span>
-                    <span className={compact ? "text-[10px] leading-4" : "text-sm"}>{item}</span>
+                    <span className="mt-0.5 text-[10px] text-[#d2624d]">×</span>
+                    <span className="text-[10px] leading-4">{item}</span>
                   </div>
                 ))
               : [0, 1].map((index) => (
@@ -719,16 +716,16 @@ export function InteractiveDemoSection() {
           </div>
         </div>
 
-        <div className={cn("rounded-[14px] border border-emerald-100 bg-emerald-50", compact ? "px-3 py-2.5" : "px-4 py-4")}>
-          <p className={cn("font-black tracking-[0.18em] text-[#67a96b]", compact ? "text-[10px]" : "text-sm")}>
+        <div className={cn("rounded-[12px] border border-emerald-100 bg-emerald-50", compact ? "px-3 py-2.5" : "px-3 py-2.5")}>
+          <p className="text-[10px] font-black tracking-[0.18em] text-[#67a96b]">
             {t("demo.workspace.after")}
           </p>
-          <div className={compact ? "mt-2 space-y-1.5" : "mt-4 space-y-3"}>
+          <div className={compact ? "mt-2 space-y-1.5" : "mt-2 space-y-1.5"}>
             {beforeAfterVisible
               ? currentScenario.afterItems.map((item) => (
                   <div key={item} className="flex items-start gap-1.5 text-slate-600">
-                    <span className={cn("mt-0.5 text-[#67a96b]", compact ? "text-xs" : "mt-1")}>✓</span>
-                    <span className={compact ? "text-[10px] leading-4" : "text-sm"}>{item}</span>
+                    <span className="mt-0.5 text-[10px] text-[#67a96b]">✓</span>
+                    <span className="text-[10px] leading-4">{item}</span>
                   </div>
                 ))
               : [0, 1].map((index) => (
@@ -740,8 +737,8 @@ export function InteractiveDemoSection() {
 
       {/* Footer status */}
       <div className={cn(
-        "flex flex-wrap items-center justify-between gap-2 rounded-[14px] border border-[#282640]/10 bg-white/95 shadow-[0_12px_30px_rgba(40,38,64,0.05)]",
-        compact ? "px-3 py-2" : "gap-3 rounded-[18px] px-4 py-3"
+        "flex flex-wrap items-center justify-between gap-2 rounded-[14px] border border-[#282640]/10 bg-white/95 shadow-[0_8px_20px_rgba(40,38,64,0.05)]",
+        compact ? "px-3 py-2" : "px-3 py-2"
       )}>
         {!compact && (
           <div className="flex flex-wrap gap-4">
@@ -864,7 +861,7 @@ export function InteractiveDemoSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.45 }}
-            className="min-w-0 space-y-3"
+            className="min-w-0 space-y-2"
           >
             {scenarios.map((scenario) => {
               const Icon = scenario.icon;
@@ -876,35 +873,35 @@ export function InteractiveDemoSection() {
                   type="button"
                   onClick={() => handleScenarioSelect(scenario)}
                   className={cn(
-                    "w-full rounded-[18px] border bg-white/92 px-4 py-3 text-left shadow-[0_12px_32px_rgba(40,38,64,0.06)] backdrop-blur-sm transition-all duration-200",
+                    "w-full rounded-[14px] border bg-white/92 px-3 py-2.5 text-left shadow-[0_8px_24px_rgba(40,38,64,0.06)] backdrop-blur-sm transition-all duration-200",
                     isSelected
-                      ? "border-[#C400FF]/20 shadow-[0_22px_48px_rgba(95,63,156,0.16)]"
-                      : "border-[#282640]/10 hover:border-[#282640]/20 hover:shadow-[0_18px_36px_rgba(40,38,64,0.08)]"
+                      ? "border-[#C400FF]/20 shadow-[0_14px_36px_rgba(95,63,156,0.16)]"
+                      : "border-[#282640]/10 hover:border-[#282640]/20 hover:shadow-[0_12px_28px_rgba(40,38,64,0.08)]"
                   )}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-2">
                     <div
                       className={cn(
-                        "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg",
+                        "flex h-6 w-6 shrink-0 items-center justify-center rounded-lg",
                         !isSelected && "bg-slate-100 text-slate-400"
                       )}
                       style={isSelected ? { backgroundColor: `${scenario.accent}12`, color: scenario.accent } : undefined}
                     >
-                      <Icon className="h-4 w-4" />
+                      <Icon className="h-3.5 w-3.5" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-sm font-bold text-slate-900">{scenario.title}</p>
-                      <p className="mt-0.5 text-xs leading-5 text-slate-500">
+                      <p className="text-xs font-bold text-slate-900">{scenario.title}</p>
+                      <p className="mt-0.5 text-[11px] leading-4 text-slate-500">
                         {scenario.description}
                       </p>
                     </div>
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-1.5">
                     {scenario.tags.map((tag) => (
                       <span
                         key={tag}
                         className={cn(
-                          "rounded-full px-2.5 py-1 text-[11px] font-semibold",
+                          "rounded-full px-2 py-0.5 text-[10px] font-semibold",
                           isSelected
                             ? "border border-[#C400FF]/10 bg-gradient-to-r from-[#F8B529]/10 to-[#C400FF]/10 text-[#6b33c7]"
                             : "border border-slate-200 bg-slate-100 text-slate-500"

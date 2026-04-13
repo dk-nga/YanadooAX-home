@@ -244,10 +244,6 @@ const getVerifiedResults = (t: (key: string) => string) => ({
         label: t("ax.verifiedResults.featured.stat1.label"),
       },
       {
-        value: t("ax.verifiedResults.featured.stat2.value"),
-        label: t("ax.verifiedResults.featured.stat2.label"),
-      },
-      {
         value: t("ax.verifiedResults.featured.stat3.value"),
         label: t("ax.verifiedResults.featured.stat3.label"),
       },
@@ -2691,7 +2687,7 @@ const VerifiedResultsSection = ({
       >
         {/* Featured card — 레일 첫 번째 */}
         <motion.article
-          className="group relative h-[440px] min-w-[280px] max-w-[280px] cursor-pointer overflow-hidden rounded-[24px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-5 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)] transition-shadow hover:shadow-[0_28px_80px_rgba(196,0,255,0.22)] sm:h-[600px] sm:min-w-[380px] sm:max-w-[380px] sm:rounded-[30px] sm:p-7"
+          className="group relative h-[440px] min-w-[280px] max-w-[280px] cursor-pointer overflow-hidden rounded-[24px] border border-stone-300/60 bg-[linear-gradient(180deg,#11131c_0%,#171a27_100%)] p-5 text-white shadow-[0_28px_80px_rgba(22,18,35,0.22)] transition-shadow hover:shadow-[0_28px_80px_rgba(196,0,255,0.22)] sm:h-[600px] sm:min-w-[380px] sm:max-w-[380px] sm:rounded-[30px] sm:p-7 lg:h-[540px] lg:min-w-[380px] lg:max-w-[380px] lg:rounded-[28px] lg:p-6"
           onClick={() => setFeaturedOpen(true)}
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
@@ -2700,7 +2696,7 @@ const VerifiedResultsSection = ({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.14),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.12),transparent_30%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(196,0,255,0.08))]" />
           <div className="relative z-10 flex h-full flex-col">
-            <div className="mb-3 flex flex-wrap gap-1.5 sm:mb-5 sm:gap-2">
+            <div className="mb-3 flex flex-wrap gap-1.5 sm:gap-2 lg:mb-2">
               <span className="rounded-full border border-[#F8B529]/18 bg-[#F8B529]/10 px-2.5 py-0.5 text-[10px] font-bold tracking-[0.12em] text-[#F8B529] sm:px-3 sm:py-1 sm:text-[11px]">
                 {results.featured.eyebrow}
               </span>
@@ -2709,38 +2705,38 @@ const VerifiedResultsSection = ({
               </span>
             </div>
 
-            <h4 className="text-[1.05rem] font-black leading-[1.22] tracking-[-0.03em] text-white sm:text-[1.28rem] md:text-[1.5rem]">
+            <h4 className="text-[1.05rem] font-black leading-[1.2] tracking-[-0.03em] text-white sm:text-[1.28rem] lg:text-[1.15rem]">
               {results.featured.title}
             </h4>
 
-            <div className="mt-3 space-y-2.5 border-t border-white/10 pt-3 sm:mt-5 sm:space-y-4 sm:pt-5">
+            <div className="mt-3 space-y-2.5 border-t border-white/10 pt-3 sm:mt-5 sm:space-y-4 sm:pt-5 lg:mt-3 lg:space-y-2.5 lg:pt-3">
               <div>
-                <p className="mb-1 text-[10px] font-bold tracking-[0.15em] text-white/45 sm:mb-2 sm:text-[11px]">
+                <p className="mb-1 text-[10px] font-bold tracking-[0.15em] text-white/45 sm:text-[11px]">
                   {results.featured.problemLabel}
                 </p>
-                <p className="whitespace-pre-line text-[12px] leading-relaxed text-white/72 sm:text-[15px]">
+                <p className="whitespace-pre-line text-[12px] leading-snug text-white/72 sm:text-[14px] lg:whitespace-normal lg:text-[13px]">
                   {results.featured.problem}
                 </p>
               </div>
               <div>
-                <p className="mb-1 text-[10px] font-bold tracking-[0.15em] text-white/45 sm:mb-2 sm:text-[11px]">
+                <p className="mb-1 text-[10px] font-bold tracking-[0.15em] text-white/45 sm:text-[11px]">
                   {results.featured.solutionLabel}
                 </p>
-                <p className="whitespace-pre-line text-[12px] leading-relaxed text-white/78 sm:text-[15px]">
+                <p className="whitespace-pre-line text-[12px] leading-snug text-white/78 sm:text-[14px] lg:whitespace-normal lg:text-[13px]">
                   {results.featured.solution}
                 </p>
               </div>
             </div>
 
-            <div className="mt-auto grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="mt-auto grid grid-cols-3 gap-1.5 sm:gap-2">
               {results.featured.stats.map((stat) => (
-                <div key={stat.label} className="rounded-xl border border-white/8 bg-white/[0.045] p-2.5 sm:rounded-2xl sm:p-4">
-                  <p className="text-base font-black leading-none text-[#F8B529] sm:text-[1.2rem] md:text-[1.35rem]">{stat.value}</p>
-                  <p className="mt-1 text-[10px] text-white/55 sm:mt-2 sm:text-xs">{stat.label}</p>
+                <div key={stat.label} className="rounded-lg border border-white/8 bg-white/[0.045] px-1.5 py-2 sm:rounded-xl sm:p-3 lg:p-3">
+                  <p className="text-[12px] font-black leading-none text-[#F8B529] sm:text-[1.1rem] lg:text-[1.35rem]">{stat.value}</p>
+                  <p className="mt-1 text-[9px] text-white/55 sm:text-[10px]">{stat.label}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-2 text-center text-[10px] font-semibold text-white/30 transition-colors group-hover:text-[#F8B529] sm:mt-3 sm:text-xs">
+            <p className="mt-2 text-center text-[10px] font-semibold text-white/30 transition-colors group-hover:text-[#F8B529] sm:text-xs">
               자세히 보기 →
             </p>
           </div>
@@ -2750,7 +2746,7 @@ const VerifiedResultsSection = ({
         {results.cards.map((card, index) => (
               <motion.article
                 key={`${card.badge}-${index}`}
-                className="group h-[440px] min-w-[260px] max-w-[260px] cursor-pointer rounded-[24px] border border-stone-200/90 bg-white/96 p-4 transition-shadow hover:shadow-[0_24px_60px_rgba(196,0,255,0.12)] sm:h-[600px] sm:min-w-[360px] sm:max-w-[360px] sm:rounded-[30px] sm:p-6"
+                className="group h-[440px] min-w-[260px] max-w-[260px] cursor-pointer rounded-[24px] border border-stone-200/90 bg-white/96 p-4 transition-shadow hover:shadow-[0_24px_60px_rgba(196,0,255,0.12)] sm:h-[600px] sm:min-w-[360px] sm:max-w-[360px] sm:rounded-[30px] sm:p-6 lg:h-[540px] lg:min-w-[360px] lg:max-w-[360px] lg:rounded-[24px] lg:p-6"
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
                 transition={{ duration: 0.5, delay: index * 0.06 }}
@@ -2761,7 +2757,7 @@ const VerifiedResultsSection = ({
                     {card.badge}
                   </span>
                   <p className="text-xs font-medium text-[#a6a5ae] sm:text-sm">{card.team}</p>
-                  <h4 className="mt-2 text-[0.88rem] font-black leading-[1.35] text-[#2c2d34] sm:mt-4 sm:text-[1rem] md:text-[1.08rem]">
+                  <h4 className="mt-2 text-[0.88rem] font-black leading-[1.35] text-[#2c2d34] sm:mt-4 sm:text-[1rem] lg:mt-3 lg:text-[1.08rem]">
                     {card.title}
                   </h4>
 
