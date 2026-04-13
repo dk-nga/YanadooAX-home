@@ -2919,15 +2919,15 @@ const AXSystemSection = () => {
                   <p className="text-sm font-bold uppercase tracking-[0.28em] text-[#4566bc]">
                     {t("ax.problems.badge")}
                   </p>
-                  <h3 className="mt-3 text-3xl font-black leading-tight text-[#10182b] md:text-6xl">
+                  <h3 className="mt-3 text-2xl font-black leading-tight text-[#10182b] md:text-4xl lg:text-6xl">
                     {t("ax.problems.title")}
                   </h3>
-                  <p className="mt-4 text-base text-[#8b8b95] md:text-2xl">
+                  <p className="mt-3 text-sm text-[#8b8b95] md:text-lg lg:text-2xl">
                     {t("ax.problems.subtitle")}
                   </p>
                 </div>
 
-                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                <div className="grid grid-cols-2 gap-3 md:gap-5 xl:grid-cols-3">
                   {problemCards.map((card) => {
                     const Icon = card.icon;
 
@@ -2936,21 +2936,21 @@ const AXSystemSection = () => {
                         key={card.id}
                         type="button"
                         onClick={() => handleProblemCardClick(card.scenarioId)}
-                        className="group relative flex min-h-[206px] flex-col rounded-[30px] border border-stone-200 bg-white p-7 text-left shadow-[0_16px_40px_rgba(40,38,64,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[#C400FF]/20 hover:shadow-[0_24px_56px_rgba(40,38,64,0.1)]"
+                        className="group relative flex flex-col rounded-[18px] border border-stone-200 bg-white p-4 text-left shadow-[0_8px_24px_rgba(40,38,64,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#C400FF]/20 hover:shadow-[0_16px_40px_rgba(40,38,64,0.09)] md:rounded-[28px] md:p-6 lg:p-7"
                       >
-                        <div className="absolute inset-0 rounded-[30px] bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.05),transparent_28%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="absolute inset-0 rounded-[18px] bg-[radial-gradient(circle_at_top_left,rgba(248,181,41,0.06),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(196,0,255,0.05),transparent_28%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:rounded-[28px] lg:rounded-[30px]" />
                         <div className="relative z-10 flex h-full flex-col">
-                          <div className={`mb-8 ${card.iconClassName}`}>
-                            <Icon className="h-8 w-8" strokeWidth={2.2} />
+                          <div className={`mb-3 md:mb-6 ${card.iconClassName}`}>
+                            <Icon className="h-5 w-5 md:h-7 md:w-7 lg:h-8 lg:w-8" strokeWidth={2.2} />
                           </div>
-                          <h4 className="whitespace-pre-line text-[1.75rem] font-black leading-[1.28] tracking-[-0.03em] text-[#2c2d34]">
+                          <h4 className="whitespace-pre-line text-sm font-black leading-[1.3] tracking-[-0.02em] text-[#2c2d34] md:text-xl lg:text-[1.75rem] lg:leading-[1.28]">
                             {card.title}
                           </h4>
-                          <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[#8f909d]">
+                          <p className="mt-2 hidden whitespace-pre-line text-xs leading-relaxed text-[#8f909d] md:block md:text-sm lg:mt-4 lg:text-[15px]">
                             {card.description}
                           </p>
-                          <div className="mt-auto flex justify-end pt-8">
-                            <ArrowRight className="h-5 w-5 text-stone-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#C400FF]" />
+                          <div className="mt-auto flex justify-end pt-3 md:pt-6">
+                            <ArrowRight className="h-4 w-4 text-stone-300 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[#C400FF] md:h-5 md:w-5" />
                           </div>
                         </div>
                       </button>
