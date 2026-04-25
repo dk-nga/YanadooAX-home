@@ -1951,7 +1951,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
       >
         <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 w-full max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-[#0e0f1a] text-white shadow-[0_-8px_40px_rgba(0,0,0,0.4)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
+          className="relative z-10 flex w-full flex-col max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-[#0e0f1a] text-white shadow-[0_-8px_40px_rgba(0,0,0,0.4)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
           initial={{ y: "60%" }}
           animate={{ y: 0 }}
           exit={{ y: "60%", opacity: 0 }}
@@ -1962,7 +1962,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
           <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
             <div className="h-1 w-10 rounded-full bg-white/25" />
           </div>
-          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0e0f1a] px-4 py-3 sm:px-6 sm:py-4">
+          <div className="shrink-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0e0f1a] px-4 py-3 sm:px-6 sm:py-4">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold text-white">
                 S사 · 마케팅 AX
@@ -1976,7 +1976,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
             <button onClick={onClose} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 text-white/80 hover:bg-white/25 text-base">✕</button>
           </div>
 
-          <div className="overflow-y-auto px-6 py-5">
+          <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">
             {/* ── 3개월 트래픽 차트 ── */}
             <p className="mb-4 text-xs font-bold tracking-widest text-white/40">3개월 트래픽 성장 추이</p>
 
