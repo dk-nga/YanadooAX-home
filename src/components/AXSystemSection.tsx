@@ -1487,23 +1487,19 @@ const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
+        className="fixed inset-0 z-[200] flex items-center p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/55 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 w-full max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.12)] sm:max-h-[90vh] sm:max-w-3xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
-          initial={{ y: "60%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "60%", opacity: 0 }}
+          className="relative z-10 w-full max-h-[90dvh] overflow-hidden rounded-[24px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.2)] sm:max-w-3xl"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* 바텀 시트 핸들 */}
-          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
-            <div className="h-1 w-10 rounded-full bg-black/15" />
-          </div>
           {/* 헤더 */}
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-black/8 bg-white px-4 py-3 sm:px-6 sm:py-4">
             <div className="flex items-center gap-2">
@@ -1752,23 +1748,19 @@ const FinanceDashboardDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
+        className="fixed inset-0 z-[200] flex items-center p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-[#0e0f1a] text-white shadow-[0_-8px_40px_rgba(0,0,0,0.4)] sm:max-h-[90vh] sm:max-w-3xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
-          initial={{ y: "60%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "60%", opacity: 0 }}
+          className="relative z-10 flex w-full max-h-[90dvh] flex-col overflow-hidden rounded-[24px] bg-[#0e0f1a] text-white shadow-[0_32px_80px_rgba(0,0,0,0.5)] sm:max-w-3xl"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* 헤더 */}
-          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
-            <div className="h-1 w-10 rounded-full bg-white/25" />
-          </div>
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0e0f1a] px-6 py-3.5">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold">재무 · 리포트 AX</span>
@@ -1946,23 +1938,19 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
+        className="fixed inset-0 z-[200] flex items-center p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full flex-col max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-[#0e0f1a] text-white shadow-[0_-8px_40px_rgba(0,0,0,0.4)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.5)]"
-          initial={{ y: "60%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "60%", opacity: 0 }}
+          className="relative z-10 flex w-full flex-col max-h-[90dvh] overflow-hidden rounded-[24px] bg-[#0e0f1a] text-white shadow-[0_32px_80px_rgba(0,0,0,0.5)] sm:max-w-2xl"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* 헤더 */}
-          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
-            <div className="h-1 w-10 rounded-full bg-white/25" />
-          </div>
           <div className="shrink-0 z-10 flex items-center justify-between border-b border-white/10 bg-[#0e0f1a] px-4 py-3 sm:px-6 sm:py-4">
             <div className="flex items-center gap-2">
               <span className="rounded-full bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-3 py-1 text-[11px] font-bold text-white">
@@ -2207,23 +2195,19 @@ const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-3"
+        className="fixed inset-0 z-[200] flex items-center p-3"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.1)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[24px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.24)]"
-          initial={{ y: "60%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "60%", opacity: 0 }}
+          className="relative z-10 flex w-full max-h-[90dvh] flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.24)] sm:max-w-2xl"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* 바텀 시트 핸들 */}
-          <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
-            <div className="h-1 w-10 rounded-full bg-black/15" />
-          </div>
           {/* 헤더 */}
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-black/8 bg-white px-4 py-3 sm:px-5 sm:py-4">
             <div className="flex items-center gap-2">
@@ -2452,23 +2436,19 @@ const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => voi
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
+        className="fixed inset-0 z-[200] flex items-center p-4"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         onClick={onClose}
       >
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
         <motion.div
-          className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-[#f0f0f0] shadow-[0_-8px_40px_rgba(0,0,0,0.18)] sm:max-h-[90vh] sm:max-w-sm sm:rounded-[28px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.28)]"
-          initial={{ y: "60%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "60%", opacity: 0 }}
+          className="relative z-10 flex w-full max-h-[90dvh] flex-col overflow-hidden rounded-[28px] bg-[#f0f0f0] shadow-[0_32px_80px_rgba(0,0,0,0.28)] sm:max-w-sm"
+          initial={{ y: 16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* 바텀 시트 핸들 */}
-          <div className="flex justify-center pt-2.5 pb-1 bg-[#282640] sm:hidden">
-            <div className="h-1 w-10 rounded-full bg-white/25" />
-          </div>
           {/* 상단 바 */}
           <div className="sticky top-0 z-10 flex items-center gap-3 bg-[#282640] px-5 py-4 text-white">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#F8B529] to-[#C400FF] text-sm font-black">
@@ -2552,7 +2532,7 @@ const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => voi
 const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => void }) => (
   <AnimatePresence>
     <motion.div
-      className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
+      className="fixed inset-0 z-[200] flex items-center p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -2560,17 +2540,13 @@ const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => v
     >
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       <motion.div
-        className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.12)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[28px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
-        initial={{ y: "60%" }}
-        animate={{ y: 0 }}
-        exit={{ y: "60%", opacity: 0 }}
+        className="relative z-10 flex w-full max-h-[90dvh] flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_32px_80px_rgba(0,0,0,0.2)] sm:max-w-2xl"
+        initial={{ y: 16, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 16, opacity: 0 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* 바텀 시트 핸들 */}
-        <div className="flex justify-center pt-2.5 pb-1 bg-[#282640] sm:hidden">
-          <div className="h-1 w-10 rounded-full bg-white/25" />
-        </div>
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-start justify-between gap-4 bg-[linear-gradient(135deg,#282640,#3a315f_55%,#C400FF)] p-6 text-white">
           <div>
