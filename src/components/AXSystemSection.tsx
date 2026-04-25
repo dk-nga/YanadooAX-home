@@ -1445,6 +1445,12 @@ const ContractAutoDemoModal = ({ onClose }: { onClose: () => void }) => {
   const [emailVisible, setEmailVisible] = useState(false);
   const [archiveDone, setArchiveDone] = useState(false);
 
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
   const run = () => {
     setPhase("running");
     setActiveStep(0);
@@ -1716,6 +1722,12 @@ const FinanceDashboardDemoModal = ({ onClose }: { onClose: () => void }) => {
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  useEffect(() => {
     if (visible >= FINANCE_CHAT.length) return;
     const msg = FINANCE_CHAT[visible];
     const delay = msg.role === "user" ? 600 : 400;
@@ -1766,7 +1778,7 @@ const FinanceDashboardDemoModal = ({ onClose }: { onClose: () => void }) => {
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden sm:flex-row">
             {/* ── 왼쪽: 대시보드 ── */}
-            <div className="flex shrink-0 flex-col gap-3 overflow-y-auto border-b border-white/8 p-4 sm:w-[46%] sm:border-b-0 sm:border-r">
+            <div className="flex flex-col gap-3 overflow-y-auto border-b border-white/8 p-4 h-[42%] sm:h-auto sm:shrink-0 sm:w-[46%] sm:border-b-0 sm:border-r">
               <p className="text-[10px] font-bold tracking-widest text-white/30">LIVE DASHBOARD · 3Q</p>
 
               {/* KPI 카드 4개 */}
@@ -1901,6 +1913,12 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
   const [step, setStep] = useState(0);           // 0=idle, 1=month1, 2=month2, 3=month3
   const [kwVisible, setKwVisible] = useState(0); // 키워드 등장 수
   const [phase, setPhase] = useState<"chart" | "keywords" | "done">("chart");
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
 
   useEffect(() => {
     if (step === 0) return;
@@ -2129,6 +2147,12 @@ const ProductPageDemoModal = ({ onClose }: { onClose: () => void }) => {
   const [progress, setProgress] = useState(0);
   const [count, setCount] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState(0);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
 
   const startGeneration = () => {
     setPhase("generating");
@@ -2404,6 +2428,12 @@ const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => voi
   const [typing, setTyping] = useState(false);
 
   useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  useEffect(() => {
     if (visible >= messages.length) return;
     const next = messages[visible];
     const delay = next.role === "ai" ? 900 : 500;
@@ -2521,7 +2551,7 @@ const ChatDemoModal = ({ card, onClose }: { card: ResultCard; onClose: () => voi
 const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => void }) => (
   <AnimatePresence>
     <motion.div
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[200] flex items-end sm:items-center sm:p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -2529,7 +2559,7 @@ const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => v
     >
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       <motion.div
-        className="relative z-10 w-full max-h-[88dvh] overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.12)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[28px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
+        className="relative z-10 flex w-full max-h-[88dvh] flex-col overflow-hidden rounded-t-[24px] bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.12)] sm:max-h-[90vh] sm:max-w-2xl sm:rounded-[28px] sm:shadow-[0_32px_80px_rgba(0,0,0,0.2)]"
         initial={{ y: "60%" }}
         animate={{ y: 0 }}
         exit={{ y: "60%", opacity: 0 }}
@@ -2557,7 +2587,7 @@ const CaseDetailModal = ({ card, onClose }: { card: ResultCard; onClose: () => v
           </button>
         </div>
 
-        <div className="space-y-5 overflow-y-auto p-6" style={{ maxHeight: "65vh" }}>
+        <div className="flex-1 space-y-5 overflow-y-auto p-6">
           {/* Stats */}
           <div className="grid grid-cols-2 gap-3">
             {[
