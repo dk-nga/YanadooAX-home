@@ -5,6 +5,25 @@ import type { Database } from "@/lib/supabase/types";
 
 type Translator = (key: string) => string;
 
+export const PERSONAL_EMAIL_DOMAINS = [
+  "gmail.com", "googlemail.com",
+  "naver.com", "me.com",
+  "daum.net", "hanmail.net",
+  "kakao.com",
+  "hotmail.com", "hotmail.co.kr",
+  "yahoo.com", "yahoo.co.kr", "yahoo.co.jp",
+  "nate.com",
+  "icloud.com",
+  "outlook.com", "live.com",
+  "msn.com",
+  "qq.com",
+];
+
+function isCompanyEmail(email: string): boolean {
+  const domain = email.split("@")[1]?.toLowerCase();
+  return !!domain && !PERSONAL_EMAIL_DOMAINS.includes(domain);
+}
+
 export const companyTypeOptions = [
   { value: "대기업", labelKey: "form.contact.companyType.large" },
   { value: "중견기업", labelKey: "form.contact.companyType.mid" },
@@ -41,7 +60,11 @@ export const getFullContactSchema = (t: Translator) =>
     phone: z.string().min(1, t("form.validation.phone")).max(20),
     department: z.string().min(1, t("form.validation.department")).max(50),
     position: z.string().min(1, t("form.validation.position")).max(50),
-    email: z.string().email(t("form.validation.email")).max(255),
+    email: z
+      .string()
+      .email(t("form.validation.email"))
+      .max(255)
+      .refine(isCompanyEmail, t("form.validation.companyEmail")),
     topic: z.string().min(1, t("form.validation.topic")),
     visitPath: z.string().min(1, t("form.validation.visitPath")),
     message: z.string().max(2000).optional(),
@@ -56,7 +79,11 @@ export const getCompactContactSchema = (t: Translator) =>
     company: z.string().min(1, t("form.validation.company")).max(100),
     name: z.string().min(1, t("form.validation.name")).max(50),
     phone: z.string().min(1, t("form.validation.phone")).max(20),
-    email: z.string().email(t("form.validation.email")).max(255),
+    email: z
+      .string()
+      .email(t("form.validation.email"))
+      .max(255)
+      .refine(isCompanyEmail, t("form.validation.companyEmail")),
     topic: z.string().min(1, t("form.validation.topic")),
     message: z.string().max(2000).optional(),
     privacyAgree: z.boolean().refine((value) => value === true, {
