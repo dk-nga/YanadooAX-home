@@ -2,6 +2,7 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight, BarChart3, Building2, ChevronLeft, ChevronRight, Clock3, Compass, PenTool, TrendingUp, Users } from "lucide-react";
 import { HeroMetricsMarquee } from "@/components/HeroMetricsMarquee";
 import { InteractiveDemoSection } from "@/components/InteractiveDemoSection";
@@ -2852,14 +2853,16 @@ const VerifiedResultsSection = ({
         ))}
       </div>
 
-      {featuredOpen && <TrafficGrowthDemoModal onClose={() => setFeaturedOpen(false)} />}
+      {featuredOpen && createPortal(<TrafficGrowthDemoModal onClose={() => setFeaturedOpen(false)} />, document.body)}
       {selectedCard && (() => {
         const d = selectedCard.detail as Record<string, boolean> | undefined;
-        if (d?.productDemo)  return <ProductPageDemoModal onClose={() => setSelectedCard(null)} />;
-        if (d?.chatMode)     return <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />;
-        if (d?.financeDemo)  return <FinanceDashboardDemoModal onClose={() => setSelectedCard(null)} />;
-        if (d?.contractDemo) return <ContractAutoDemoModal onClose={() => setSelectedCard(null)} />;
-        return <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />;
+        let modal = null;
+        if (d?.productDemo)  modal = <ProductPageDemoModal onClose={() => setSelectedCard(null)} />;
+        else if (d?.chatMode)     modal = <ChatDemoModal card={selectedCard} onClose={() => setSelectedCard(null)} />;
+        else if (d?.financeDemo)  modal = <FinanceDashboardDemoModal onClose={() => setSelectedCard(null)} />;
+        else if (d?.contractDemo) modal = <ContractAutoDemoModal onClose={() => setSelectedCard(null)} />;
+        else modal = <CaseDetailModal card={selectedCard} onClose={() => setSelectedCard(null)} />;
+        return createPortal(modal, document.body);
       })()}
     </motion.div>
   );
