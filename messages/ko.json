@@ -9,7 +9,17 @@
     "about": "회사소개",
     "blog": "블로그",
     "contact": "무료 진단받기",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "problems": "해결 가능한 문제",
+    "demo": "AX 체험",
+    "results": "실제사례",
+    "industry": "업종별",
+    "role": "직무별",
+    "problemsSub": "이런 문제를 해결합니다",
+    "demoSub": "직접 실행해보세요",
+    "resultsSub": "실제 도입성과",
+    "industrySub": "업종별 사례",
+    "roleSub": "직무별 사례"
   },
   "hero": {
     "title1": "AI는 더 이상",
@@ -34,6 +44,9 @@
     "highlight": "\"실제로 쓰이는 AI\"",
     "title": " 를 만드는 팀",
     "cta": "도입문의"
+  },
+  "clientLogos": {
+    "title": "도입 기업"
   },
   "news": {
     "title1": "Yanadoo AX",
@@ -361,7 +374,7 @@
     "verifiedResults": {
       "badge": "VERIFIED RESULTS",
       "title": "실제 도입 성과",
-      "subtitle": "우리 회사가 이렇게 바뀐다",
+      "subtitle": "우리 회사가 이렇게 바뀝니다.",
       "featured": {
         "eyebrow": "실제 검증 사례",
         "tag": "SA · 마케팅 AX",
@@ -700,18 +713,13 @@
     }
   },
   "footer": {
-    "desc": "AI Experience를 혁신하는 Yanadoo AX입니다.\n기업의 AI 도입부터 활용까지 전 과정을 함께합니다.",
-    "company": "(주) Yanadoo AX",
-    "bizno": "사업자번호 : 557-86-03716",
-    "ceo": "대표이사 : 강민서, 김도경",
-    "address": "주소 : 서울시 영등포구 양산로91 리드원센터 914호",
-    "services": "서비스",
-    "consulting": "AI 컨설팅",
-    "education": "AI 교육",
-    "solutions": "AI 솔루션",
-    "companyMenu": "회사",
-    "aboutUs": "회사소개",
-    "blog": "블로그",
+    "company": "주식회사 야나두 (야나두 원격평생교육원)",
+    "bizno": "사업자등록번호: 129-86-23477 · 통신판매업: 신고번호 제2018-서울강남-02139호",
+    "ceo": "대표: 김정수, 김민철 · 개인정보보호 책임자: 이정훈",
+    "address": "주소: 서울시 강남구 봉은사로 619 JBK Tower 4,5층",
+    "eduReg": "원격 평생교육 시설신고: 서울특별시 강남 서초교육지원청 (제 원516호)",
+    "customerCenter": "야나두 고객센터: 1600-0563 (유료)",
+    "hours": "평일 09:00~18:00 (12:00~13:00 점심시간)",
     "copyright": "© Copyrights by Yanadoo AX. All Rights Reserved.",
     "privacy": "개인정보 처리방침",
     "terms": "이용약관"
@@ -1665,6 +1673,11 @@
     "badge": "FAQ",
     "title": "자주 묻는 질문",
     "subtitle": "도입 전 가장 많이 오는 질문들을 모았습니다.",
+    "cta": {
+      "text1": "더 궁금한 게 있으신가요?",
+      "text2": "30분 무료 진단으로 직접 확인해보세요",
+      "button": "무료 진단 신청하기 →"
+    },
     "items": [
       {
         "q": "1:1 무료 진단은 어떻게 진행되나요?",

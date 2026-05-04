@@ -170,11 +170,11 @@ export function Header() {
 
   // 항상 표시되는 섹션 스크롤 메뉴
   const sectionItems = [
-    { id: "problems", name: "해결 가능한 문제" },
-    { id: "interactive-demo", name: "AX 체험" },
-    { id: "results", name: "실제사례" },
-    { id: "industry", name: "업종별" },
-    { id: "role", name: "직무별" },
+    { id: "problems", name: t("nav.problems") },
+    { id: "interactive-demo", name: t("nav.demo") },
+    { id: "results", name: t("nav.results") },
+    { id: "industry", name: t("nav.industry") },
+    { id: "role", name: t("nav.role") },
   ];
 
   // Admin에서 ON/OFF하는 추가 메뉴

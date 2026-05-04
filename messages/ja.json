@@ -9,15 +9,28 @@
     "about": "会社紹介",
     "blog": "ブログ",
     "contact": "無料診断を受ける",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "problems": "解決できる課題",
+    "demo": "AX体験",
+    "results": "導入事例",
+    "industry": "業種別",
+    "role": "職種別",
+    "problemsSub": "こんな課題を解決します",
+    "demoSub": "直接実行してみてください",
+    "resultsSub": "実際の導入成果",
+    "industrySub": "業種別の事例",
+    "roleSub": "職種別の事例"
   },
   "hero": {
-    "title1": "AIはもはや選択ではありません。",
-    "title2": "生存戦略です。",
+    "title1": "AIはもはや",
+    "title2": "選択ではありません。",
+    "title3": "生存戦略です",
     "subtitle1": "時間を減らす企業ではなく、",
     "subtitle2": "時間を生産量に変える企業が生き残ります",
-    "cta1": "AX導入のお問い合わせ",
-    "cta2": "AI事例集を受け取る",
+    "body": "相談・運営・コンテンツ・レポート業務まで\n実際の現場に根ざしたAI自動化設計を行います。",
+    "tag": "教育・コマース・営業組織を中心 · 実際の運営課題に基づくAI自動化ソリューション",
+    "cta1": "無料診断を受ける →",
+    "cta2": "導入事例を見る",
     "scroll": "Scroll Down",
     "clickToTalk": "クリックして会話",
     "preparing": "準備中...",
@@ -31,6 +44,9 @@
     "highlight": "\"実際に使われるAI\"",
     "title": " を作るチーム",
     "cta": "導入相談"
+  },
+  "clientLogos": {
+    "title": "導入企業"
   },
   "news": {
     "title1": "Yanadoo AX",
@@ -358,7 +374,7 @@
     "verifiedResults": {
       "badge": "VERIFIED RESULTS",
       "title": "実際の導入成果",
-      "subtitle": "私たちの会社はこう変わる",
+      "subtitle": "御社もこう変わります。",
       "featured": {
         "eyebrow": "実証済み事例",
         "tag": "SA · マーケティング AX",
@@ -626,18 +642,13 @@
     }
   },
   "footer": {
-    "desc": "AI Experienceを革新するYanadoo AXです。\n企業のAI導入から活用まで全過程を共にします。",
-    "company": "株式会社 Yanadoo AX",
-    "bizno": "事業者番号：557-86-03716",
-    "ceo": "代表取締役：カン・ミンソ、キム・ドギョン",
-    "address": "住所：ソウル市永登浦区陽山路91 リードワンセンター914号",
-    "services": "サービス",
-    "consulting": "AIコンサルティング",
-    "education": "AI教育",
-    "solutions": "AIソリューション",
-    "companyMenu": "会社",
-    "aboutUs": "会社紹介",
-    "blog": "ブログ",
+    "company": "주식회사 야나두 (야나두 원격평생교육원)",
+    "bizno": "사업자등록번호: 129-86-23477 · 통신판매업: 신고번호 제2018-서울강남-02139호",
+    "ceo": "대표: 김정수, 김민철 · 개인정보보호 책임자: 이정훈",
+    "address": "주소: 서울시 강남구 봉은사로 619 JBK Tower 4,5층",
+    "eduReg": "원격 평생교육 시설신고: 서울특별시 강남 서초교육지원청 (제 원516호)",
+    "customerCenter": "Yanadooカスタマーセンター: 1600-0563（有料）",
+    "hours": "平日 09:00〜18:00（12:00〜13:00 昼休み）",
     "copyright": "© Copyrights by Yanadoo AX. All Rights Reserved.",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約"
@@ -1591,6 +1602,11 @@
     "badge": "FAQ",
     "title": "よくある質問",
     "subtitle": "導入前によくいただく質問をまとめました。",
+    "cta": {
+      "text1": "他にご質問はありますか？",
+      "text2": "30分の無料診断で直接確認してみましょう",
+      "button": "無料診断を申し込む →"
+    },
     "items": [
       {
         "q": "1対1の無料診断はどのように進みますか？",

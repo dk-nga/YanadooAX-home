@@ -111,15 +111,15 @@ export function FAQSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-10 rounded-2xl border border-[#C400FF]/15 bg-gradient-to-br from-[#282640] to-[#3a2060] p-6 text-center text-white md:p-8"
         >
-          <p className="text-sm font-semibold text-white/60">더 궁금한 게 있으신가요?</p>
+          <p className="text-sm font-semibold text-white/60">{t("faq.cta.text1")}</p>
           <p className="mt-2 text-lg font-black md:text-xl">
-            30분 무료 진단으로 직접 확인해보세요
+            {t("faq.cta.text2")}
           </p>
           <button
             onClick={openContactWidget}
             className="mt-5 rounded-xl bg-gradient-to-r from-[#F8B529] to-[#C400FF] px-8 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
           >
-            무료 진단 신청하기 →
+            {t("faq.cta.button")}
           </button>
         </motion.div>
       </div>

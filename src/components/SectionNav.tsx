@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useScrollContainer } from "@/contexts/ScrollContainerContext";
-
-const SECTIONS = [
-  { id: "problems", label: "해결가능한 문제", sublabel: "이런 문제를 해결합니다" },
-  { id: "interactive-demo", label: "AX 체험", sublabel: "직접 실행해보세요" },
-  { id: "results", label: "실제사례", sublabel: "실제 도입성과" },
-  { id: "industry", label: "업종별", sublabel: "업종별 사례" },
-  { id: "role", label: "직무별 사례", sublabel: "직무별 사례" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Header (announcement banner ~40px + nav ~72px) + a bit of buffer
 const HEADER_OFFSET = 120;
@@ -17,6 +10,15 @@ const HEADER_OFFSET = 120;
 export function SectionNav() {
   const [activeSection, setActiveSection] = useState<string>("");
   const containerRef = useScrollContainer();
+  const { t } = useLanguage();
+
+  const SECTIONS = useMemo(() => [
+    { id: "problems", label: t("nav.problems"), sublabel: t("nav.problemsSub") },
+    { id: "interactive-demo", label: t("nav.demo"), sublabel: t("nav.demoSub") },
+    { id: "results", label: t("nav.results"), sublabel: t("nav.resultsSub") },
+    { id: "industry", label: t("nav.industry"), sublabel: t("nav.industrySub") },
+    { id: "role", label: t("nav.role"), sublabel: t("nav.roleSub") },
+  ], [t]);
 
   useEffect(() => {
     const container = containerRef?.current;
@@ -42,7 +44,7 @@ export function SectionNav() {
     container.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => container.removeEventListener("scroll", handleScroll);
-  }, [containerRef]);
+  }, [containerRef, SECTIONS]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);

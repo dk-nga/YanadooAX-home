@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useScrollContainer } from "@/contexts/ScrollContainerContext";
-
-const TABS = [
-  { id: "problems",         label: "해결 문제" },
-  { id: "interactive-demo", label: "AX 체험" },
-  { id: "results",          label: "실제사례" },
-  { id: "industry",         label: "업종별" },
-  { id: "role",             label: "직무별" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // 헤더(~112px) + 서브nav(~38px) 합계
 const TOP_OFFSET = 155;
@@ -17,6 +10,15 @@ const TOP_OFFSET = 155;
 export function MobileBottomNav() {
   const [active, setActive] = useState("");
   const containerRef = useScrollContainer();
+  const { t } = useLanguage();
+
+  const TABS = useMemo(() => [
+    { id: "problems",         label: t("nav.problems") },
+    { id: "interactive-demo", label: t("nav.demo") },
+    { id: "results",          label: t("nav.results") },
+    { id: "industry",         label: t("nav.industry") },
+    { id: "role",             label: t("nav.role") },
+  ], [t]);
 
   useEffect(() => {
     const container = containerRef?.current;
@@ -38,7 +40,7 @@ export function MobileBottomNav() {
     container.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => container.removeEventListener("scroll", handleScroll);
-  }, [containerRef]);
+  }, [containerRef, TABS]);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);

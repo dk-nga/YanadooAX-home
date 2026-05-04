@@ -1,5 +1,7 @@
 "use client";
 
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const STORAGE_URL = "https://rsigybhusvrnkllhurhv.supabase.co/storage/v1/object/public/client-logos";
 
 const clients = [
@@ -18,10 +20,12 @@ const clients = [
 const marqueeClients = [...clients, ...clients, ...clients];
 
 export function ClientLogosSection() {
+  const { t } = useLanguage();
+
   return (
     <div className="relative border-y border-black/6 bg-white py-4">
       <p className="mb-3 text-center text-xs font-semibold tracking-[0.22em] text-black/30 uppercase">
-        도입 기업
+        {t("clientLogos.title")}
       </p>
 
       {/* fade edges */}

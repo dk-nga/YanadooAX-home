@@ -639,7 +639,7 @@ export function InteractiveDemoSection() {
             onClick={runScenario}
             disabled={isRunning}
             className={cn(
-              "rounded-xl bg-[linear-gradient(135deg,#282640,#C400FF)] text-white shadow-[0_8px_18px_rgba(95,63,156,0.24)] hover:opacity-95",
+              "cursor-pointer rounded-xl bg-[linear-gradient(135deg,#282640,#C400FF)] text-white shadow-[0_8px_18px_rgba(95,63,156,0.24)] hover:opacity-95",
               compact ? "h-8 px-3 text-xs" : "h-9 px-4"
             )}
           >
