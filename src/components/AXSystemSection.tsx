@@ -1958,7 +1958,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
               </span>
               {phase === "done" && (
                 <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold text-[#F8B529]">
-                  +440.5% 달성 ✓
+                  +440% 달성 ✓
                 </motion.span>
               )}
             </div>
@@ -2000,7 +2000,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
                     {show && (
                       <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} className="text-center">
                         <p className="text-[11px] font-black text-[#F8B529]">
-                          {i === 2 ? "+440.5%" : `+${m.traffic - 100}%`}
+                          {i === 2 ? "+440%" : `+${m.traffic - 100}%`}
                         </p>
                         <p className="text-[10px] text-white/40">{m.month} {m.label}</p>
                       </motion.div>
@@ -2024,7 +2024,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
                 className="mb-6 grid grid-cols-4 gap-2"
               >
                 {[
-                  { v: "+440.5%", l: "전체 트래픽", c: "#F8B529" },
+                  { v: "+440%", l: "전체 트래픽", c: "#F8B529" },
                   { v: "+2,580.7%", l: "Threads", c: "#C400FF" },
                   { v: "×12", l: "매출 J-Curve", c: "#4ade80" },
                   { v: "50%↓", l: "제작시간", c: "#60a5fa" },
@@ -2089,7 +2089,7 @@ const TrafficGrowthDemoModal = ({ onClose }: { onClose: () => void }) => {
                 className="mt-4 rounded-xl border border-[#F8B529]/20 bg-[#F8B529]/8 px-4 py-3 text-center"
               >
                 <p className="text-sm font-bold text-[#F8B529]">✓ AI 콘텐츠 자동화 파이프라인 구축 완료</p>
-                <p className="mt-1 text-xs text-white/45">콘텐츠 제작 50%↓ · 트래픽 440.5%↑ · 매출 J-Curve ×12</p>
+                <p className="mt-1 text-xs text-white/45">콘텐츠 제작 50%↓ · 트래픽 440%↑ · 매출 J-Curve ×12</p>
               </motion.div>
             )}
           </div>
@@ -2738,7 +2738,7 @@ const VerifiedResultsSection = ({
             <div className="mt-auto grid grid-cols-3 gap-1.5 sm:gap-2">
               {results.featured.stats.map((stat) => (
                 <div key={stat.label} className="rounded-lg border border-white/8 bg-white/[0.045] px-1.5 py-2 sm:rounded-xl sm:p-3 lg:p-3">
-                  <p className="text-[12px] font-black leading-none text-[#F8B529] sm:text-[1.1rem] lg:text-[1.35rem]">{stat.value}</p>
+                  <p className="whitespace-nowrap text-[12px] font-black leading-none text-[#F8B529] sm:text-[1.1rem] lg:text-[1.35rem]">{stat.value}</p>
                   <p className="mt-1 text-[9px] text-white/55 sm:text-[10px]">{stat.label}</p>
                 </div>
               ))}

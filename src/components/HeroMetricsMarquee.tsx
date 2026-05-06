@@ -10,7 +10,7 @@ type MetricItem = {
 
 const metricsByLanguage: Record<"ko" | "ja", MetricItem[]> = {
   ko: [
-    { value: "+440.5%", label: "S사 전체 트래픽 성장 (3개월)" },
+    { value: "+440%", label: "S사 전체 트래픽 성장 (3개월)" },
     { value: "+2,580.7%", label: "Threads 단일 채널 성장" },
     { value: "×12", label: "SNS 경유 매출 J-Curve" },
     { value: "50%↓", label: "콘텐츠 제작시간 단축" },
@@ -19,7 +19,7 @@ const metricsByLanguage: Record<"ko" | "ja", MetricItem[]> = {
     { value: "8h→40분", label: "주간 보고서 작성 시간" },
   ],
   ja: [
-    { value: "+440.5%", label: "S社 全体トラフィック成長（3か月）" },
+    { value: "+440%", label: "S社 全体トラフィック成長（3か月）" },
     { value: "+2,580.7%", label: "Threads単一チャネル成長" },
     { value: "×12", label: "SNS経由売上 J-Curve" },
     { value: "50%↓", label: "コンテンツ制作時間短縮" },
