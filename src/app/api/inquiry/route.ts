@@ -104,7 +104,7 @@ export async function POST(req: NextRequest) {
 
     // 2. 내부 알림 이메일
     await resend.emails.send({
-      from: "Yanadoo AX <noreply@nextgenai.kr>",
+      from: "NextGenAI <noreply@admin.nextgenai.kr>",
       to: NOTIFY_EMAILS,
       subject: `[YanadooAX] 새 ${type} - ${body.company} ${body.name}`,
       html: buildNotifyHtml(body),
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
     // 3. 소개서 다운로드 요청 시 신청자에게 회신
     if (body.inquiry_type === "download" && body.email) {
       await resend.emails.send({
-        from: "Yanadoo AX <noreply@nextgenai.kr>",
+        from: "NextGenAI <noreply@admin.nextgenai.kr>",
         to: [body.email],
         subject: "[Yanadoo AX] 서비스 소개서를 보내드립니다",
         html: buildBrochureHtml(body),
